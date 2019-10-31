@@ -69,6 +69,11 @@ file_setup()
     ln -sf "${CONFIG_BASE_PATH}/config/.bashrc" $HOME/.bashrc
     ln -sf "${CONFIG_BASE_PATH}/config/.profile" $HOME/.profile
 
+    # remove possible available .bash_profile which blocks .profile
+    if [ -f $HOME/.bash_profile ]; then
+        rm -rf $HOME/.bash_profile
+    fi
+
     printf "command script import %s/config/lldb/settings.py\n" "${CONFIG_BASE_PATH}" \
         > $HOME/.lldbinit
 
