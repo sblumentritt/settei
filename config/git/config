@@ -1,0 +1,69 @@
+[user]
+    name = Sebastian Blumentritt
+    email = blumentritt.sebastian@gmail.com
+[rerere]
+	enable = true
+	autoupdate = true
+[push]
+    default = simple
+[fetch]
+    prune = true
+[pull]
+    rebase = true
+[commit]
+    verbose = true
+[status]
+    branch = true
+    showStash = true
+    submoduleSummary = true
+[stash]
+    showPatch = true
+[log]
+    decorate = short
+    abbrevCommit = true
+[core]
+    editor = nvim
+    pager = less --tabs=4 -RFX
+[pager]
+    diff = /usr/share/git/diff-highlight/diff-highlight | less --tabs=4 -RFX
+[interactive]
+    diffFilter = /usr/share/git/diff-highlight/diff-highlight
+[color "diff-highlight"]
+    oldNormal = red
+    oldHighlight = red bold black
+    newNormal = green
+    newHighlight = green bold black
+[diff]
+    algorithm = patience
+[merge]
+    tool = vim_mergetool
+    conflictstyle = diff3
+[mergetool]
+    keepBackup = false
+[mergetool "vim_mergetool"]
+    trustExitCode = true
+    cmd = nvim -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+[alias]
+    ci = commit
+    co = checkout
+    cm = commit -m
+    ss = status -s
+    br = branch -vv
+    st = status -uall
+    cob = checkout -b
+    mnff = merge --no-ff
+    unstage = restore --staged
+    meld = mergetool --tool=meld
+    last = log --pretty=fuller -1 HEAD
+    logf = log --topo-order --pretty=fuller
+    llog = log --topo-order --pretty=full --graph --stat
+    llogs = log --topo-order --graph --cherry-pick --stat --oneline
+    logs = log --topo-order --graph --cherry-pick --pretty=format:'%C(auto)%h %s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
+    contributor = shortlog --summary --numbered --no-merges
+[gui]
+    tabsize = 4
+    maxrecentrepo = 7
+    spellingdictionary = none
+    geometry = 1271x790+2238+141 274 312
+    fontui = -family Lato -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family \"Source Code Pro\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0

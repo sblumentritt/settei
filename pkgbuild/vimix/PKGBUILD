@@ -1,0 +1,53 @@
+# --------------------------------------
+# PKGBUILD for vimix dark laptop themes
+# --------------------------------------
+pkgname_=vimix
+pkgname=vimix-dark-laptop-themes
+
+pkgdesc="A flat Material Design theme for GTK 3 / GTK 2 / Qt5"
+url="https://github.com/vinceliuice"
+
+pkgver=92d0564.0b832b4
+pkgrel=1
+
+arch=('x86_64')
+license=('GPL3')
+
+depends=('gtk3' 'gtk-engine-murrine' 'gtk-engines' 'kvantum-qt5')
+makedepends=('git' 'patch')
+
+source=("git+${url}/${pkgname_}-gtk-themes.git"
+        "git+${url}/${pkgname_}-kde.git")
+
+sha512sums=('SKIP'
+            'SKIP')
+
+# configure options to decrease build time
+options=('!strip' '!zipman' 'libtool' 'staticlibs')
+
+pkgver()
+{
+    cd "${srcdir}/${pkgname_}-gtk-themes"
+    gtk_rev="$(git rev-parse --short HEAD)"
+
+    cd "${srcdir}/${pkgname_}-kde"
+    kde_rev="$(git rev-parse --short HEAD)"
+
+    printf "%s.%s" "$gtk_rev" "$kde_rev"
+}
+
+package()
+{
+    install -m755 -d "${pkgdir}/usr/share/themes"
+    install -m755 -d "${pkgdir}/usr/share/Kvantum"
+
+    # install gtk theme
+    cd "${srcdir}/${pkgname_}-gtk-themes"
+    ./Install -d "${pkgdir}/usr/share/themes" -s laptop -c dark
+
+    # remove unwanted gtk themes
+    rm -rdf "${pkgdir}/usr/share/themes/vimix-dark-laptop-"*
+
+    # install kvantum theme
+    cp -r "${srcdir}/${pkgname_}-kde/Kvantum/Vimix-Dark" "${pkgdir}/usr/share/Kvantum/"
+}

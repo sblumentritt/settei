@@ -1,0 +1,1 @@
+SUBSYSTEM=="usb", DRIVER=="usb", ATTR{idProduct}=="1019", ATTR{idVendor}=="1e68", GROUP="developer", MODE="0660"

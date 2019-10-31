@@ -1,0 +1,187 @@
+# --------------------------------------
+# sway configuration
+# --------------------------------------
+# modifier key [Mod1 = Alt | Mod4 = Win]
+set $mod Mod4
+
+# terminal emulator
+set $terminal alacritty
+
+# web browser
+set $web_browser chromium
+
+# launcher
+set $launcher_exe alacritty --class "launcher" -d 40 7 -e launcher.sh -e
+set $launcher_doc alacritty --class "launcher" -d 90 7 -e launcher.sh -d
+
+# special rule let the launcher float
+for_window [app_id="launcher"] floating enable
+
+# screen locker
+set $screen_locker swaylock
+
+# define workspaces names
+set $init_workspace_monitor_one "1: 一 "
+set $init_workspace_monitor_two "2: 一 "
+set $init_workspace_monitor_three "3: 一 "
+
+# font related
+set $font Source Code Pro
+set $font_size 10
+
+# border related
+set $border_size 6
+
+# colors
+set $background   #222222
+set $foreground   #ebd8bb
+set $dark_gray    #3e3e3e
+set $red          #e96b56
+set $green        #c8bc61
+set $orange       #ff9c5c
+set $blue         #91c1ae
+set $magenta      #cf90a1
+set $cyan         #a6ca99
+set $bright_white #ebdfcc
+set $gray         #998e82
+set $yellow       #fcb866
+
+# font used for title and bar
+font pango:$font $font_size
+
+# configure input devices
+input *
+{
+    xkb_layout us,de
+    xkb_options grp:ctrls_toggle,caps:backspace,shift:both_capslock_cancel
+}
+
+seat *
+{
+    hide_cursor 2000
+}
+
+# gaps used around applications
+gaps
+{
+    outer 0
+    inner 20
+}
+
+# border style
+default_border pixel $border_size
+default_floating_border pixel $border_size
+
+# mouse related
+focus_follows_mouse yes
+
+# csd:                  border      background  text        indicator   child_border
+client.focused          $dark_gray  $dark_gray  $foreground $dark_gray  $dark_gray
+client.focused_inactive $gray       $gray       $foreground $gray       $gray
+client.unfocused        $gray       $gray       $foreground $gray       $gray
+client.urgent           $orange     $orange     $foreground $orange     $orange
+
+# status bar configuration
+bar
+{
+    height 35
+    position top
+
+    wrap_scroll no
+    tray_output none
+
+    strip_workspace_name no
+    strip_workspace_numbers yes
+
+    status_padding 0
+    status_edge_padding 0
+    status_command exec statusinfo.sh
+
+    colors
+    {
+        separator $gray
+        statusline $foreground
+        background $background
+
+        active_workspace $gray $gray $background
+        inactive_workspace $gray $gray $background
+
+        focused_workspace $green $green $background
+        urgent_workspace $yellow $yellow $background
+    }
+}
+
+# modifier to move/resize floating windows
+floating_modifier $mod normal
+
+bindsym
+{
+    # applications
+    $mod+F2 exec $web_browser
+    $mod+Return exec $terminal
+    $mod+9 exec $screen_locker
+
+    $mod+d exec $launcher_exe
+    $mod+Shift+d exec $launcher_doc
+
+    # kill focused window
+    $mod+Shift+q kill
+
+    # reload the configuration file
+    $mod+Shift+r reload
+
+    # exit sway
+    $mod+Shift+c exit
+
+    # move focus around
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    # move focused window around
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+
+    # switch to workspace
+    $mod+1 exec workspace_handler.sh -s -w 1
+    $mod+2 exec workspace_handler.sh -s -w 2
+    $mod+3 exec workspace_handler.sh -s -w 3
+    $mod+4 exec workspace_handler.sh -s -w 4
+
+    # move focused container to workspace
+    $mod+Shift+1 exec workspace_handler.sh -m -w 1
+    $mod+Shift+2 exec workspace_handler.sh -m -w 2
+    $mod+Shift+3 exec workspace_handler.sh -m -w 3
+    $mod+Shift+4 exec workspace_handler.sh -m -w 4
+
+    # split the current focused window
+    $mod+h splith
+    $mod+v splitv
+
+    # switch the current container between different layout styles
+    $mod+s layout stacking
+    $mod+t layout tabbed
+    $mod+e layout toggle split
+
+    # make the current focus fullscreen
+    $mod+Shift+f fullscreen
+
+    # toggle the current focus between tiling and floating mode
+    $mod+f floating toggle
+
+    # swap focus between the tiling area and the floating area
+    $mod+space focus mode_toggle
+}
+
+# include separate files
+include output.conf
+include wallpaper.conf
+
+# start notification daemon
+exec mako &
+
+# start auto-mounter
+exec udiskie &

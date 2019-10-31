@@ -1,0 +1,33 @@
+# --------------------------------------
+# mako configuration
+# --------------------------------------
+font=Source Code Pro 9
+
+background-color=#222222
+text-color=#ebd8bb
+
+width=270
+height=500
+
+margin=20
+padding=15
+
+border-size=6
+border-color=#3e3e3e
+
+icons=0
+markup=1
+actions=0
+format=[%a]\n<b>%s</b>\n%b
+
+default-timeout=10000
+
+[urgency=low]
+text-color=#c8bc61
+
+[urgency=normal]
+text-color=#ebd8bb
+
+[urgency=high]
+text-color=#ff9c5c
+default-timeout=0

@@ -1,0 +1,31 @@
+# --------------------------------------
+# PKGBUILD for shellcheck
+# --------------------------------------
+pkgname_=shellcheck
+pkgname=shellcheck-stable
+
+pkgdesc="A static analysis tool for shell scripts"
+url="https://www.shellcheck.net/"
+
+pkgver=0.7.0
+pkgrel=1
+
+arch=('x86_64')
+license=('GPL3')
+
+provides=("${pkgname_}")
+conflicts=("${pkgname_}" "${pkgname_}-git" "${pkgname_}-static")
+
+depends=('gmp')
+
+source=("https://storage.googleapis.com/${pkgname_}/${pkgname_}-v${pkgver}.linux.x86_64.tar.xz")
+sha512sums=('84e06bee3c8b8c25f46906350fb32708f4b661636c04e55bd19cdd1071265112d84906055372149678d37f09a1667019488c62a0561b81fe6a6b45ad4fae4ac0')
+
+package()
+{
+    install -m755 -D "${srcdir}/${pkgname_}-v${pkgver}/${pkgname_}" \
+    	"${pkgdir}/usr/bin/${pkgname_}"
+
+    install -m644 -D "${srcdir}/${pkgname_}-v${pkgver}/LICENSE.txt" \
+    	"${pkgdir}/usr/share/licenses/${pkgname_}/LICENSE"
+}

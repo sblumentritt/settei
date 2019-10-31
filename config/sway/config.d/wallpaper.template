@@ -1,0 +1,8 @@
+# --------------------------------------
+# wallpaper template
+# --------------------------------------
+# copy file to ~/.config/sway/wallpaper.conf
+output
+{
+    # <output> background <file> fit
+}

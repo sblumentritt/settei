@@ -1,0 +1,40 @@
+diff --git a/src/completion/index.ts b/src/completion/index.ts
+index 50266f7d..7d1b2c46 100644
+--- a/src/completion/index.ts
++++ b/src/completion/index.ts
+@@ -230,7 +230,8 @@ export class Completion implements Disposable {
+           if (disableMenuShortcut && key == 'menu') {
+             obj[key] = item[key].replace(/\[\w+\]$/, '')
+           } else if (key == 'abbr' && item[key].length > labelMaxLength) {
+-            obj[key] = item[key].slice(0, labelMaxLength)
++            obj[key] = item[key].slice(0, labelMaxLength - 3)
++            obj[key] += "..."
+           } else {
+             obj[key] = item[key]
+           }
+diff --git a/src/language-client/client.ts b/src/language-client/client.ts
+index 320236a0..64b792cc 100644
+--- a/src/language-client/client.ts
++++ b/src/language-client/client.ts
+@@ -1772,7 +1772,7 @@ class CompletionItemFeature extends TextDocumentFeature<
+     let languageIds = cv.asLanguageIds(options.documentSelector!)
+     return languages.registerCompletionItemProvider(
+       this._client.id,
+-      'LS',
++      'lsp',
+       languageIds,
+       {
+         provideCompletionItems: (
+diff --git a/src/languages.ts b/src/languages.ts
+index b0015a67..08ab433c 100644
+--- a/src/languages.ts
++++ b/src/languages.ts
+@@ -742,7 +742,7 @@ class Languages {
+       let detail = item.detail.replace(/\n\s*/g, ' ')
+       if (byteLength(detail) < detailMaxLength) {
+         if (detailField == 'menu') {
+-          obj.menu = `${detail} ${obj.menu}`
++          obj.menu = `${obj.menu} ${detail}`
+         } else if (detailField == 'abbr') {
+           obj.abbr = `${obj.abbr} - ${detail}`
+         }

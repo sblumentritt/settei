@@ -1,0 +1,43 @@
+# --------------------------------------
+# improved PKGBUILD for cppcheck
+# --------------------------------------
+pkgname_=cppcheck
+pkgname=cppcheck-cli
+
+pkgdesc="A tool for static C/C++ code analysis"
+url="https://github.com/danmar/cppcheck"
+
+pkgver=1.89
+pkgrel=1
+
+arch=('x86_64')
+license=('GPL')
+
+provides=("${pkgname_}")
+conflicts=("${pkgname_}")
+
+makedepends=('clang' 'cmake')
+
+source=("${pkgname_}.tar.gz::https://github.com/danmar/${pkgname_}/archive/${pkgver}.tar.gz")
+sha512sums=('0e8f7ae6fe70261f69954ec830c20faff37126ec41a7fdc59ce91db99313a1c99e1850656efeb7182a37fb78fbf8402b71d72a11d6189a5bede2819bdde69b9b')
+
+build()
+{
+    cmake -S ${pkgname_}-${pkgver} -B ${pkgname_}-${pkgver}/build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_COMPILER=clang++ \
+          -DUSE_CLANG=ON \
+          -DHAVE_RULES=ON
+
+    cmake --build ${pkgname_}-${pkgver}/build
+}
+
+package()
+{
+    DESTDIR="${pkgdir}" \
+        CFGDIR=/usr/share/Cppcheck \
+        HAVE_RULES=yes \
+        cmake --install ${pkgname_}-${pkgver}/build
+}

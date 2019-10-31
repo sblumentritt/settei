@@ -1,0 +1,127 @@
+# --------------------------------------
+# settings
+# --------------------------------------
+set mouse = true
+set tab-size = 4
+set history-size = 0
+set git-colors = false
+set ignore-case = true
+set split-view-height = 45%
+set reference-format = [branch] <tag>
+
+set main-view-date = custom
+set main-view-date-format = "%Y-%m-%d %I:%M %p"
+set main-view-author = email-user
+set main-view-id = yes
+
+set blame-view-date = custom
+set blame-view-date-format = "%Y-%m-%d %I:%M %p"
+set blame-view-author = email-user
+
+# --------------------------------------
+# custom keybindings
+# --------------------------------------
+bind main w !?git push
+bind main ! !?git revert %(commit)
+
+bind status w !?git push
+bind status a !?git commit --amend
+
+# --------------------------------------
+# colors predefined sections
+# --------------------------------------
+color default               default default     normal
+color cursor                15      0           bold
+color status                3       default
+color delimiter             5       default
+color date                  8       default
+color mode                  6       default
+color id                    6       default
+color overflow              1       default
+color header                3       default
+color section               6       default
+color directory             3       default
+color file                  default default
+color grep.file             4       default
+color file-size             default default
+color line-number           8       default
+color title-blur            default       0
+color title-focus           default       0
+color main-commit           default default
+color main-tag              1       default     bold
+color main-local-tag        5       default
+color main-remote           3       default
+color main-replace          6       default
+color main-tracked          3       default     bold
+color main-ref              6       default
+color main-head             6       default     bold
+color stat-none             default default
+color stat-staged           2       default
+color stat-unstaged         3       default
+color stat-untracked        1       default
+color help-group            4       default
+color help-action           3       default
+color diff-stat             5       default
+color diff-add-highlight    2       default     standout
+color diff-del-highlight    1       default     standout
+color palette-0             4       default
+color palette-1             3       default
+color palette-2             6       default
+color palette-3             2       default
+color palette-4             5       default
+color palette-5             7       default
+color palette-6             1       default
+color palette-7             5       default     bold
+color palette-8             3       default     bold
+color palette-9             6       default     bold
+color palette-10            2       default     bold
+color palette-11            5       default     bold
+color palette-12            7       default     bold
+color palette-13            1       default     bold
+color graph-commit          4       default
+color search-result         3       default     underline bold
+
+# --------------------------------------
+# colors special strings
+# --------------------------------------
+color "---"                 8       default
+color "diff --"             7       default     bold
+color "--- "                1       default
+color "+++ "                2       default
+color "@@"                  6       default
+color "+"                   2       default
+color " +"                  2       default
+color "-"                   1       default
+color " -"                  1       default
+color "index "              default default     bold
+color "old file mode "      default default     bold
+color "new file mode "      default default     bold
+color "deleted file mode "  default default     bold
+color "copy from "          3       default
+color "copy to "            3       default
+color "rename from "        3       default
+color "rename to "          3       default
+color "similarity "         3       default     bold
+color "dissimilarity "      3       default     bold
+color "diff-tree "          4       default
+color "Author: "            default default
+color "Commit: "            default default
+color "Tagger: "            5       default
+color "Merge: "             4       default
+color "Date: "              default default
+color "AuthorDate: "        default default
+color "CommitDate: "        default default
+color "TaggerDate: "        3       default
+color "Refs: "              default default
+color "Reflog: "            1       default
+color "Reflog message: "    3       default
+color "stash@{"             5       default
+color "commit "             11      default
+color "parent "             4       default
+color "tree "               4       default
+color "author "             2       default
+color "committer "          5       default
+color "    Signed-off-by"   3       default
+color "    Acked-by"        3       default
+color "    Tested-by"       3       default
+color "    Reviewed-by"     3       default

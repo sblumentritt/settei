@@ -1,0 +1,51 @@
+# --------------------------------------
+# improved PKGBUILD for ccls
+# --------------------------------------
+pkgname=ccls
+pkgdesc="C/C++ language server"
+url="https://github.com/MaskRay/ccls"
+
+pkgver=r1885.eeda2882
+pkgrel=1
+
+arch=('x86_64')
+license=('Apache')
+
+conflicts=("${pkgname}-git")
+
+depends=('clang')
+makedepends=('git' 'cmake' 'llvm')
+
+source=("git+https://github.com/MaskRay/${pkgname}.git")
+sha512sums=('SKIP')
+
+pkgver()
+{
+    cd "${srcdir}/${pkgname}"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare()
+{
+    # get submodules
+    cd "${srcdir}/${pkgname}"
+    git submodule update --init
+}
+
+build()
+{
+    cmake -S ${pkgname} -B ${pkgname}/build \
+          -DCMAKE_CXX_COMPILER=clang++ \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_INSTALL_PREFIX=/usr
+
+    cmake --build ${pkgname}/build
+}
+
+package()
+{
+    DESTDIR="${pkgdir}" cmake --install ${pkgname}/build
+
+    install -m644 -D "${srcdir}/${pkgname}/LICENSE" \
+        "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
