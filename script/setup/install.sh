@@ -4,6 +4,13 @@
 #       make sure to use the most recent ISO. Otherwise
 #       keyring issues could occur.
 
+# NOTE: if ethernet is not available for broadcom card
+#       1. disconnect ethernet cable
+#       2. run: modprobe -r tg3
+#       3. run: modprobe broadcom
+#       4. run: modprobe tg3
+#       5. connect ethernet cable
+
 main()
 {
     # script should be run as root
