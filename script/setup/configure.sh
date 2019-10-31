@@ -146,6 +146,9 @@ file_setup()
 
 package_installation()
 {
+    # always install archlinux-keyring to get updated database (needed after fresh install)
+    sudo pacman -S --noconfirm archlinux-keyring
+
     # define packages for installation
     # --------------------------------------
     local packages=""
