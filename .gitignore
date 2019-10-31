@@ -1,0 +1,18 @@
+# packages
+*.tar
+*.tar.*
+*.jar
+*.zip
+*.tgz
+*.log
+*.log.*
+*.sig
+
+# python byte-compiled
+__pycache__/
+*.pyc
+
+# misc
+pkg/
+src/
+*~
