@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# NOTE: before installing a new clean arch linux system
+#       make sure to use the most recent ISO. Otherwise
+#       keyring issues could occur.
+
 main()
 {
     # script should be run as root
