@@ -132,8 +132,8 @@ install()
     local packages=""
 
     # base
-    packages="${packages} pacman coreutils systemd systemd-sysvcompat bash"
     packages="${packages} linux linux-firmware intel-ucode grub"
+    packages="${packages} coreutils systemd systemd-sysvcompat bash"
 
     # network
     packages="${packages} networkmanager iproute2 iputils"
