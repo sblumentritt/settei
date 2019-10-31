@@ -41,7 +41,7 @@ dir_setup()
     local wanted_folder=""
 
     # create directories
-    wanted_folder="development,documents,downloads,music,pictures,videos,.ssh"
+    wanted_folder="development,documents,downloads,music,pictures,videos,.ssh,.cache"
     for folder in $wanted_folder; do
         mkdir -p "$HOME/$folder"
     done
