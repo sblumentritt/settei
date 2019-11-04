@@ -23,6 +23,12 @@ nnoremap <left> <nop>
 nnoremap <down> <nop>
 nnoremap <right> <nop>
 
+" disable arrow keys in visual mode
+vnoremap <up> <nop>
+vnoremap <left> <nop>
+vnoremap <down> <nop>
+vnoremap <right> <nop>
+
 " faster saving
 nnoremap <leader>w :w<CR>
 vnoremap <leader>w :w<CR>
