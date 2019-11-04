@@ -52,8 +52,12 @@ font pango:$font $font_size
 # configure input devices
 input *
 {
+    # for keyboards
     xkb_layout us,de
     xkb_options grp:ctrls_toggle,caps:backspace,shift:both_capslock_cancel
+
+    # for touchpad
+    tap enabled
 }
 
 seat *
