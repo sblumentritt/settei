@@ -52,6 +52,7 @@
     st = status -uall
     cob = checkout -b
     mnff = merge --no-ff
+    ce = commit --allow-empty
     unstage = restore --staged
     meld = mergetool --tool=meld
     last = log --pretty=fuller -1 HEAD
