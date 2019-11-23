@@ -146,12 +146,12 @@ call s:highlight('WildMenu', s:colors.orange)
 
 " for custom statusline
 " --------------------------------------
-call s:highlight('ModeNormalMode', s:colors.dark_gray, s:colors.blue)
-call s:highlight('ModeInsertMode', s:colors.dark_gray, s:colors.green)
-call s:highlight('ModeVisualMode', s:colors.dark_gray, s:colors.orange)
-call s:highlight('ModeReplaceMode', s:colors.dark_gray, s:colors.cyan)
-call s:highlight('ModeCommandMode', s:colors.dark_gray, s:colors.gray)
-call s:highlight('ModeTerminalMode', s:colors.dark_gray, s:colors.magenta)
+call s:highlight('ModeStatusNormal', s:colors.bg, s:colors.blue)
+call s:highlight('ModeStatusInsert', s:colors.bg, s:colors.green)
+call s:highlight('ModeStatusVisual', s:colors.bg, s:colors.orange)
+call s:highlight('ModeStatusReplace', s:colors.bg, s:colors.cyan)
+call s:highlight('ModeStatusCommand', s:colors.bg, s:colors.gray)
+call s:highlight('ModeStatusTerminal', s:colors.bg, s:colors.magenta)
 
 call s:highlight('StatusLayerOne', s:colors.white, s:colors.dark_gray)
 call s:highlight('StatusLayerTwo', s:colors.white)

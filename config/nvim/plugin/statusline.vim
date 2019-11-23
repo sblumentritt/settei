@@ -67,12 +67,12 @@ function! ModeStatus()
                 \ }
 
     let l:mode_colors = {
-                \ 'n': '%#ModeNormalMode#',
-                \ 'i': '%#ModeInsertMode#',
-                \ 'v': '%#ModeVisualMode#',
-                \ 'c': '%#ModeCommandMode#',
-                \ 'r': '%#ModeReplaceMode#',
-                \ 't': '%#ModeTerminalMode#',
+                \ 'n': '%#ModeStatusNormal#',
+                \ 'i': '%#ModeStatusInsert#',
+                \ 'v': '%#ModeStatusVisual#',
+                \ 'c': '%#ModeStatusCommand#',
+                \ 'r': '%#ModeStatusReplace#',
+                \ 't': '%#ModeStatusTerminal#',
                 \ '': '',
                 \ }
 
