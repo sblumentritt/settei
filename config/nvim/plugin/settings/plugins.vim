@@ -70,7 +70,7 @@ nnoremap gb :Bdelete<CR>
 " --------------------------------------
 if isdirectory($neovim_plugin_dir . '/nvim-colorizer.lua')
     " disable auto highlight and configure options
-    lua require 'colorizer'.setup({'!*';}, {RRGGBBAA = true; css = true;})
+    lua require('colorizer').setup({'!*';}, {RRGGBBAA = true; css = true;})
 
     " mapping to toggle color highlighting in current buffer
     nnoremap <buffer> <leader>tc :call <SID>toggle_color_highlight()<CR>
@@ -83,10 +83,10 @@ if isdirectory($neovim_plugin_dir . '/nvim-colorizer.lua')
         endif
 
         if b:enable_color_highlight == 1
-            lua require'colorizer'.attach_to_buffer(0)
+            lua require('colorizer').attach_to_buffer(0)
             echomsg 'nvim-colorizer: highlighting [enabled]'
         else
-            lua require'colorizer'.detach_from_buffer(0)
+            lua require('colorizer').detach_from_buffer(0)
             echomsg 'nvim-colorizer: highlighting [disabled]'
         endif
     endfunction
