@@ -13,7 +13,7 @@ set cpoptions&vim
 
 " update options
 " --------------------------------------
-setlocal textwidth=120
+setlocal textwidth=100
 setlocal cinoptions+=L0
 setlocal cinoptions+=:0
 setlocal cinoptions+=b1
