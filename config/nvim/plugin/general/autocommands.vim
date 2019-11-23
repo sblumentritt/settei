@@ -29,7 +29,7 @@ augroup update_filetypes
     autocmd BufRead,BufNewFile config set filetype=config
     autocmd BufRead,BufNewFile *.{conf,config} set filetype=config
 
-    autocmd Filetype yaml,xml,html,css,scss,less,javascript set
+    autocmd Filetype markdown,yaml,xml,html,css,scss,less,javascript set
                 \ tabstop=2
                 \ shiftwidth=2
                 \ softtabstop=2
