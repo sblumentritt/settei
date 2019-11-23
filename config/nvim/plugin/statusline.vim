@@ -39,7 +39,7 @@ function! CustomStatusline(current)
             \ . '%{GitChanges()}'
             \ . '%{GitBranch()}'
             \ . (a:current ? '%#StatusLayerOne#' : '%#StatusLayerOneInactive#')
-            \ . ' %{DiagnosticStatus()} '
+            \ . DiagnosticStatus()
 endfunction
 
 function! ModeStatus()
@@ -116,7 +116,15 @@ function! DiagnosticStatus() abort
 
     let l:total_count = l:lsp_error_count + l:lsp_warning_count
 
-    return l:total_count == 0 ? ' OK ' : printf(' %dW %dE ', l:lsp_error_count, l:lsp_warning_count)
+    let l:diagnostic_error_color = '%#DiagnosticStatusError#'
+    let l:diagnostic_warning_color = '%#DiagnosticStatusWarning#'
+
+    return l:total_count == 0 ? '  OK  ' :
+                \ printf('%s %dW %s %dE ',
+                \        l:diagnostic_warning_color,
+                \        l:lsp_warning_count,
+                \        l:diagnostic_error_color,
+                \        l:lsp_error_count)
 endfunction
 
 " cleanup

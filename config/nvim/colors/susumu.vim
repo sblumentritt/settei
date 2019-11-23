@@ -153,6 +153,9 @@ call s:highlight('ModeStatusReplace', s:colors.bg, s:colors.cyan)
 call s:highlight('ModeStatusCommand', s:colors.bg, s:colors.gray)
 call s:highlight('ModeStatusTerminal', s:colors.bg, s:colors.magenta)
 
+call s:highlight('DiagnosticStatusError', s:colors.bg, s:colors.red)
+call s:highlight('DiagnosticStatusWarning', s:colors.bg, s:colors.orange)
+
 call s:highlight('StatusLayerOne', s:colors.white, s:colors.dark_gray)
 call s:highlight('StatusLayerTwo', s:colors.white)
 
