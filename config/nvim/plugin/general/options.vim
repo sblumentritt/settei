@@ -20,8 +20,8 @@ set backspace=indent,eol,start
 set nowrap
 " on bracket insert briefly jump to the matching one
 set showmatch
-" disable maximum width of a text
-set textwidth=0
+" set maximum width of a text
+set textwidth=100
 " define the minimal width of a window
 set winminwidth=20
 
