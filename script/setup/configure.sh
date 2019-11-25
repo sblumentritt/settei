@@ -237,9 +237,17 @@ package_installation()
         # download old aarch64 gcc version
         # --------------------------------------
         cd /tmp || return
-        local aarch64_gcc_package_name="aarch64_gcc.pkg.tar.xz"
-        curl https://archive.archlinux.org/packages/a/aarch64-linux-gnu-gcc/aarch64-linux-gnu-gcc-8.3.0-1-x86_64.pkg.tar.xz -o $aarch64_gcc_package_name
-        sudo pacman -U --needed --noconfirm $aarch64_gcc_package_name
+        local arch_archive="https://archive.archlinux.org/packages"
+        local aarch64_gcc_package="aarch64-linux-gnu-gcc"
+        local package_extension="pkg.tar.xz"
+        local output_name="$aarch64_gcc_package.$package_extension"
+
+        # use -L option to follow redirects like HTTP 301/302/303
+        curl -L \
+           $arch_archive/a/$aarch64_gcc_package/$aarch64_gcc_package-8.3.0-1-x86_64.$package_extension \
+            -o $output_name
+
+        sudo pacman -U --needed --noconfirm $output_name
         cd - || return
 
         # ignore package updates
