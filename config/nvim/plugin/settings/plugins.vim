@@ -73,7 +73,7 @@ if isdirectory($neovim_plugin_dir . '/nvim-colorizer.lua')
     lua require('colorizer').setup({'!*';}, {RRGGBBAA = true; css = true;})
 
     " mapping to toggle color highlighting in current buffer
-    nnoremap <buffer> <leader>tc :call <SID>toggle_color_highlight()<CR>
+    nnoremap <leader>tc :call <SID>toggle_color_highlight()<CR>
 
     function! s:toggle_color_highlight()
         if !exists('b:enable_color_highlight')
