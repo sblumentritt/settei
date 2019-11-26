@@ -10,10 +10,12 @@ syntax keyword cppSpecifier inline virtual explicit export override
 
 syntax region cppAttribute start=+\[\[+ end=+\]\]+
 
-syntax match cppCustomClass "\<\u\w\+"
+" classes should follow 'CamelCase'
+syntax match cppCustomClass "\<\u\(\l\|\u\l\)\+\>"
 
 syntax match cppCustomScope "::" contained
-syntax match cppScopeEnd "::\w\+" contains=cppCustomScope
+syntax match cppScopeEnd "::\w\+"
+            \ contains=cppCustomScope,cCustomEnumerator,cType
             \ containedin=cppCustomClass
 syntax match cppScopeFront "\w\+\ze::" contains=cppCustomScope
             \ containedin=cppCustomClass
