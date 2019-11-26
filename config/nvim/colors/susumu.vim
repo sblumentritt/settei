@@ -175,6 +175,7 @@ call s:highlight('cFormat', s:colors.orange)
 call s:highlight('cSpecial', s:colors.white)
 call s:highlight('cStatement', s:colors.red)
 call s:highlight('cCustomDoxyElement', s:colors.gray, s:colors.none, 'bold')
+call s:highlight('cCustomGlobalVariable', s:colors.white, s:colors.none, 'italic')
 
 " define better colors for cmake
 " --------------------------------------
