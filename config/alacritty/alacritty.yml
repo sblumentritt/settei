@@ -38,9 +38,6 @@ scrolling:
   # number of lines the viewport will move
   multiplier: 3
 
-  # specifying '0' will disable faux scrolling
-  faux_multiplier: 0
-
   # scroll to the bottom when new text is written to the terminal
   auto_scroll: false
 
