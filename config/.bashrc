@@ -69,6 +69,7 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 export AUR="https://aur.archlinux.org/"
 export GIT="git@git.sr.ht:~sblumentritt"
+export GIT_RO="https://git.sr.ht/~sblumentritt"
 
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
 export XDG_CACHE_HOME="$HOME/.cache"
