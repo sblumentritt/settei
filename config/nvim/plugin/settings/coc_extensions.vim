@@ -144,7 +144,6 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                         \   '-clang-analyzer-*',
                         \   '-clang-diagnostic-*',
                         \   '-readability-magic-numbers',
-                        \   '-modernize-use-trailing-return-type',
                         \   '-readability-convert-member-functions-to-static',
                         \ ]
 
