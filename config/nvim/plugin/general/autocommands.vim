@@ -29,10 +29,17 @@ augroup update_filetypes
     autocmd BufRead,BufNewFile config set filetype=config
     autocmd BufRead,BufNewFile *.{conf,config} set filetype=config
 
-    autocmd Filetype markdown,yaml,xml,html,css,scss,less,javascript set
+    autocmd Filetype yaml,xml,html,css,scss,less,javascript set
                 \ tabstop=2
                 \ shiftwidth=2
                 \ softtabstop=2
+
+    autocmd Filetype markdown set
+                \ tabstop=2
+                \ shiftwidth=2
+                \ softtabstop=2
+                \ textwidth=80
+                \ colorcolumn=80
 augroup END
 
 " remove trailing whitespace
