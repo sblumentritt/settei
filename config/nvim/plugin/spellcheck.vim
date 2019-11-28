@@ -27,6 +27,14 @@ if !exists(':ToggleSpellcheck')
     command -nargs=0 ToggleSpellcheck :call <SID>toggle_spellcheck()
 endif
 
+" autocommands
+" --------------------------------------
+augroup spellcheck_related
+    autocmd!
+    " auto enable spellcheck for git commits
+    autocmd Filetype gitcommit :ToggleSpellcheck
+augroup END
+
 " helper functions
 " --------------------------------------
 " toggle spellcheck for the current buffer
