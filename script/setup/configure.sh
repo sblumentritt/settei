@@ -85,6 +85,7 @@ file_setup()
     ln -sf "${CONFIG_BASE_PATH}/config/nvim" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/tmux" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/mako" $HOME/.config/
+    ln -sf "${CONFIG_BASE_PATH}/config/iwyu" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/qt5ct" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/Kvantum" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/gtk-3.0" $HOME/.config/
@@ -268,7 +269,7 @@ external_packages()
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="ccls,cppcheck,shellcheck,vimix"
+    local external_packages="ccls,cppcheck,shellcheck,vimix,iwyu"
 
     for package in $external_packages; do
         cp -r "${CONFIG_BASE_PATH}/pkgbuild/${package}" "./${package}"
