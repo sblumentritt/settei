@@ -64,7 +64,7 @@ Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
 Plug 'https://github.com/vim-scripts/DoxygenToolkit.vim', {'on': 'Dox'}
 
 " other filetype specific plugins
-Plug 'https://github.com/tpope/vim-markdown'
+Plug 'https://github.com/tpope/vim-markdown', {'commit': '8a76c84'}
 Plug 'https://git.sr.ht/~sblumentritt/cmake.vim'
 Plug 'https://github.com/MTDL9/vim-log-highlighting'
 Plug 'https://git.sr.ht/~sblumentritt/bitbake.vim', {'branch': 'thud'}
