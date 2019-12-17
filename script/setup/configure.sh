@@ -198,12 +198,12 @@ package_installation()
 
     if [ -f /etc/profile.d/work.sh ]; then
         # work extras
-        packages="${packages} xf86-video-amdgpu socat tk wireshark-qt nload"
+        packages="${packages} xf86-video-amdgpu wireshark-qt nload"
         # work cross development
         packages="${packages} minicom cpio docker"
 
         # old packages:
-        # gdb strace valgrind nmap meld tftp-hpa
+        # gdb strace valgrind nmap meld socat tftp-hpa tk
     fi
 
     # install packages
