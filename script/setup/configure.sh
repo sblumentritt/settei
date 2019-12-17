@@ -212,6 +212,18 @@ package_installation()
 
     # configuration for installed packages
     # --------------------------------------
+    # set rustup profile to minimal (installs rustc/rust-std/cargo)
+    rustup set profile minimal
+
+    # set default rust toolchain (also downloads)
+    rustup default stable
+
+    # add development related rust components (also downloads)
+    rustup component add rls rust-analysis rust-src rust-docs rustfmt clippy
+
+    # check for updates e.g. if previously installed
+    rustup update
+
     if [ -f /etc/profile.d/work.sh ]; then
         # add required groups to current user
         # --------------------------------------
