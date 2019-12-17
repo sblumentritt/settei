@@ -172,7 +172,7 @@ package_installation()
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git cmake doxygen graphviz"
+    packages="${packages} git rustup cmake doxygen graphviz"
 
     # music
     packages="${packages} mpd mpc"
