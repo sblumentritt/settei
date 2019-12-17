@@ -8,7 +8,7 @@ set $mod Mod4
 set $terminal alacritty
 
 # web browser
-set $web_browser chromium
+set $web_browser firefox
 
 # launcher
 set $launcher_exe alacritty --class "launcher" -d 40 7 -e launcher.sh -e
