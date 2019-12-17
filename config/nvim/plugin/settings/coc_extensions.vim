@@ -26,8 +26,22 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
     function! s:coc_extensions_config() abort
         " coc extensions
         " --------------------------------------
+        call coc#add_extension('coc-rls')
         call coc#add_extension('coc-vimlsp')
         call coc#add_extension('coc-diagnostic')
+
+        " config for coc-rls extension
+        call coc#config('rust-client',
+                    \ {
+                    \   'disableRustup': v:true,
+                    \   'updateOnStartup': v:false,
+                    \ })
+
+        call coc#config('rust',
+                    \ {
+                    \   'full_docs': v:true,
+                    \   'clippy_preference': 'on',
+                    \ })
 
         " config for coc-diagnostic extension
         call coc#config('diagnostic-languageserver.filetypes',
