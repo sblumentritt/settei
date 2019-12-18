@@ -61,7 +61,6 @@ Plug 'https://github.com/samoshkin/vim-mergetool'
 " c++ related
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
-Plug 'https://github.com/vim-scripts/DoxygenToolkit.vim', {'on': 'Dox'}
 
 " other filetype specific plugins
 Plug 'https://github.com/cespare/vim-toml'
