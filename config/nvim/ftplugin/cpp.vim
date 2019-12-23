@@ -26,28 +26,28 @@ endif
 if !exists('*s:class_skeleton')
     function s:class_skeleton()
         if expand('%:e') ==# 'h' || expand('%:e') ==# 'hpp'
-            let class = input('Enter class name: ', '')
-            if !empty(class)
+            let l:class = input('Enter class name: ', '')
+            if !empty(l:class)
                 let class_skeleton =
                             \[
                             \ '',
                             \ '/// TODO: document the class',
-                            \ 'class ' . class . ' {',
+                            \ 'class ' . l:class . ' {',
                             \ 'public:',
                             \ '    /// Constructor.',
-                            \ '    ' . class . '();',
+                            \ '    ' . l:class . '() = default;',
                             \ '    /// Destructor.',
-                            \ '    ~' . class . '() noexcept = default;',
+                            \ '    ~' . l:class . '() noexcept = default;',
                             \ '',
                             \ '    /// Copy constructor.',
-                            \ '    ' . class . '(' . class . ' const& other) = default;',
+                            \ '    ' . l:class . '(' . l:class . ' const& other) = default;',
                             \ '    /// Copy assignment.',
-                            \ '    ' . class . '& operator=(' . class . ' const& other) = default;',
+                            \ '    auto operator=(' . l:class . ' const& other) -> ' . l:class . '& = default;',
                             \ '',
                             \ '    /// Move constructor.',
-                            \ '    ' . class . '(' . class . '&& other) noexcept = default;',
+                            \ '    ' . l:class . '(' . l:class . '&& other) noexcept = default;',
                             \ '    /// Move assignment.',
-                            \ '    ' . class . '& operator=(' . class . '&& other) noexcept = default;',
+                            \ '    auto operator=(' . l:class . '&& other) noexcept -> ' . l:class . '& = default;',
                             \ '};',
                             \]
                 call append(line('.'), class_skeleton)
