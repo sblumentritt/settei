@@ -194,7 +194,7 @@ package_installation()
     packages="${packages} ttf-lato adobe-source-code-pro-fonts adobe-source-han-sans-jp-fonts"
 
     # other
-    packages="${packages} firefox transmission-qt mpv imv mupdf android-file-transfer"
+    packages="${packages} chromium transmission-qt mpv imv mupdf android-file-transfer"
 
     if [ -f /etc/profile.d/work.sh ]; then
         # work extras
