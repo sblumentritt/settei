@@ -93,28 +93,28 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '0x222222'
-    foreground: '0xebd8bb'
+    background: '0x1d2021'
+    foreground: '0xebdcc5'
 
   normal:
-    black:   '0x3e3e3e'
-    red:     '0xe96b56'
-    green:   '0xc8bc61'
-    yellow:  '0xff9c5c'
-    blue:    '0x91c1ae'
-    magenta: '0xcf90a1'
-    cyan:    '0xa6ca99'
-    white:   '0xebdfcc'
+    black:   '0x2e3334'
+    red:     '0xef6851'
+    green:   '0xc8bb5b'
+    yellow:  '0xff9959'
+    blue:    '0x82c1a8'
+    magenta: '0xcf8397'
+    cyan:    '0x9fca8f'
+    white:   '0xebe2d3'
 
   bright:
-    black:   '0x998e82'
-    red:     '0xe96b56'
-    green:   '0xc8bc61'
-    yellow:  '0xfcb866'
-    blue:    '0x91c1ae'
-    magenta: '0xcf90a1'
-    cyan:    '0xa6ca99'
-    white:   '0xebd8bb'
+    black:   '0x95918d'
+    red:     '0xef6851'
+    green:   '0xc8bb5b'
+    yellow:  '0xfcb55e'
+    blue:    '0x82c1a8'
+    magenta: '0xcf8397'
+    cyan:    '0x9fca8f'
+    white:   '0xebdcc5'
 
   # indexed colors include all colors from 16 to 256
   indexed_colors: []
@@ -122,13 +122,13 @@ colors:
   # selection colors
   selection:
     # text: '0xf0ebdc'
-    background: '0x3e3e3e'
+    background: '0x2e3334'
 
 # specifying a 'duration' of '0' will disable the visual bell
 visual_bell:
   animation: EaseOutExpo
   duration: 0
-  color: '0xebdfcc'
+  color: '0xebe2d3'
 
 # '0.0' is completely transparent and '1.0' is opaque
 background_opacity: 1.0

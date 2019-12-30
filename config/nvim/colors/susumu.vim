@@ -15,20 +15,20 @@ let g:colors_name='susumu'
 " --------------------------------------
 let s:colors = {}
 
-let s:colors.dark_gray = ['#3e3e3e', '0']
-let s:colors.red       = ['#e96b56', '1']
-let s:colors.green     = ['#c8bc61', '2']
-let s:colors.orange    = ['#ff9c5c', '3']
-let s:colors.blue      = ['#91c1ae', '4']
-let s:colors.magenta   = ['#cf90a1', '5']
-let s:colors.cyan      = ['#a6ca99', '6']
-let s:colors.bwhite    = ['#ebdfcc', '7']
+let s:colors.dark_gray = ['#2e3334', '0']
+let s:colors.red       = ['#ef6851', '1']
+let s:colors.green     = ['#c8bb5b', '2']
+let s:colors.orange    = ['#ff9959', '3']
+let s:colors.blue      = ['#82c1a8', '4']
+let s:colors.magenta   = ['#cf8397', '5']
+let s:colors.cyan      = ['#9fca8f', '6']
+let s:colors.bwhite    = ['#ebe2d3', '7']
 
-let s:colors.gray        = ['#998e82', '8']
-let s:colors.yellow      = ['#fcb866', '11']
-let s:colors.white       = ['#ebd8bb', '15']
+let s:colors.gray        = ['#95918d', '8']
+let s:colors.yellow      = ['#fcb55e', '11']
+let s:colors.white       = ['#ebdcc5', '15']
 
-let s:colors.bg   = ['#222222', '0']
+let s:colors.bg   = ['#1d2021', '0']
 let s:colors.none = ['none', 'none']
 
 " helper function

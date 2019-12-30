@@ -3,8 +3,8 @@
 # --------------------------------------
 font=Source Code Pro 9
 
-background-color=#222222
-text-color=#ebd8bb
+background-color=#1d2021
+text-color=#ebdcc5
 
 width=270
 height=500
@@ -13,7 +13,7 @@ margin=20
 padding=15
 
 border-size=6
-border-color=#3e3e3e
+border-color=#2e3334
 
 icons=0
 markup=1
@@ -23,11 +23,11 @@ format=[%a]\n<b>%s</b>\n%b
 default-timeout=10000
 
 [urgency=low]
-text-color=#c8bc61
+text-color=#c8bb5b
 
 [urgency=normal]
-text-color=#ebd8bb
+text-color=#ebdcc5
 
 [urgency=high]
-text-color=#ff9c5c
+text-color=#ff9959
 default-timeout=0

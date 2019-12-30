@@ -2,7 +2,7 @@
 # imv configuration
 # --------------------------------------
 [options]
-background = #222222
+background = #1d2021
 
 # return to first image after last one
 loop_input = true
