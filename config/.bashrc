@@ -165,7 +165,7 @@ alias uumount="sudo udiskie-umount --detach"
 alias pulsemixer="PULSEMIXER_BAR_STYLE='┌╶┐-└┘■- ──' pulsemixer"
 
 if [ -f /etc/profile.d/work.sh ]; then
-    alias cdw='cd $HOME/development/__work'
+    alias cdw='cd $HOME/development/work'
 fi
 
 # --------------------------------------
