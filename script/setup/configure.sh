@@ -212,6 +212,9 @@ package_installation()
 
     # configuration for installed packages
     # --------------------------------------
+    # define installation location for 'rustup'
+    export RUSTUP_HOME="$HOME/.local/share/rustup"
+
     # set rustup profile to minimal (installs rustc/rust-std/cargo)
     rustup set profile minimal
 
