@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # global variable
-CONFIG_BASE_PATH="$HOME/development/settei"
+CONFIG_BASE_PATH="$HOME/development/unspecified/settei"
 
 main()
 {
