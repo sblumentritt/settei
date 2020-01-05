@@ -52,7 +52,7 @@ dir_setup()
     done
 
     if [ -f /etc/profile.d/work.sh ]; then
-        mkdir -p $HOME/development/__work
+        mkdir -p $HOME/development/work
     else
         mkdir -p $HOME/downloads/torrents
     fi
