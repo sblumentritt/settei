@@ -109,7 +109,7 @@ file_setup()
 
     if [ -f /etc/profile.d/work.sh ]; then
         cp "${CONFIG_BASE_PATH}/config/git/config" $HOME/.config/git/config
-        nano $HOME/.config/git/config
+        nvim $HOME/.config/git/config
     else
         ln -sf "${CONFIG_BASE_PATH}/config/git/config" $HOME/.config/git/config
     fi
