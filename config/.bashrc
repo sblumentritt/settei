@@ -101,6 +101,9 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 [ -r /usr/share/git/completion/git-completion.bash ] && \
     . /usr/share/git/completion/git-completion.bash
 
+[ -r $RUSTUP_HOME/toolchains/stable-x86_64-unknown-linux-gnu/etc/bash_completion.d/cargo ] && \
+    . $RUSTUP_HOME/toolchains/stable-x86_64-unknown-linux-gnu/etc/bash_completion.d/cargo
+
 # --------------------------------------
 # aliases
 # --------------------------------------
