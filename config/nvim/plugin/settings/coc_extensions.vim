@@ -26,9 +26,16 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
     function! s:coc_extensions_config() abort
         " coc extensions
         " --------------------------------------
-        call coc#add_extension('coc-rls')
+        " call coc#add_extension('coc-rls')
         call coc#add_extension('coc-vimlsp')
         call coc#add_extension('coc-diagnostic')
+        call coc#add_extension('coc-rust-analyzer')
+
+        " config for coc-rust-analyzer extension
+        call coc#config('rust-analyzer',
+                    \ {
+                    \   'raLspServerPath': $CARGO_HOME . '/bin/ra_lsp_server',
+                    \ })
 
         " config for coc-rls extension
         call coc#config('rust-client',
