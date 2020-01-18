@@ -235,8 +235,9 @@ iwyu_log()
     elif [ -z "$2" ]; then
         printf "%s\n" "$usage"
     else
-        if [ -f "$1/compile_commands.json" ]; then
-            iwyu-tool -j 8 -p ./build/compile_commands.json -o iwyu -- \
+        compile_commands="$1/compile_commands.json"
+        if [ -f "$compile_commands" ]; then
+            iwyu-tool -j 8 -p "$compile_commands" -o iwyu -- \
                 -Xiwyu --no_default_mappings \
                 -Xiwyu --mapping_file=$XDG_CONFIG_HOME/iwyu/custom.imp \
                 -Xiwyu --cxx17ns \
