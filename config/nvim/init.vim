@@ -72,7 +72,7 @@ Plug 'https://git.sr.ht/~sblumentritt/bitbake.vim', {'branch': 'thud'}
 
 " utilities
 Plug 'https://github.com/moll/vim-bbye'
-Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/lotabout/skim.vim'
 Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
 
 " high-performance color highlighter

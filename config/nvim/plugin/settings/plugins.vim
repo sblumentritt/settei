@@ -106,10 +106,10 @@ let g:mkdp_auto_close = 0
 let g:mkdp_refresh_slow = 1
 let g:mkdp_page_title = '[ ${name} ]'
 
-" fzf configurations
+" skim configurations
 " --------------------------------------
-let g:fzf_buffers_jump = 1
-let g:fzf_layout = {'down': '~25%'}
+let g:skim_buffers_jump = 1
+let g:skim_layout = {'down': '~25%'}
 
 " override default Rg implementation to include hidden files
 command! -bang -nargs=* Rg
@@ -120,14 +120,14 @@ command! -bang -nargs=* Rg
             \   1, <bang>0
             \ )
 
-" hide statusline in fzf buffer
-augroup hide_fzf_statusline
-    autocmd! FileType fzf
-    autocmd FileType fzf set laststatus=0 noshowmode noruler
+" hide statusline in skim buffer
+augroup hide_skim_statusline
+    autocmd! FileType skim
+    autocmd FileType skim set laststatus=0 noshowmode noruler
                 \ | autocmd BufLeave <buffer> set laststatus=2 ruler
 augroup END
 
-" custom keybindings for fzf
+" custom keybindings for skim
 nnoremap <silent> <F2> :Files<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
 nnoremap <silent> <leader><F2> :Buffers<CR>

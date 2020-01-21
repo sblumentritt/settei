@@ -179,12 +179,11 @@ package_installation()
 
     # cmdl
     packages="${packages} alacritty neovim yarn tmux ranger tig htop"
-    packages="${packages} fzf ripgrep fd exa jq"
+    packages="${packages} skim ripgrep fd exa jq"
 
     # packages which might be interesting:
     # tokei - displays statistics about source code
     # hexyl - hex viewer with colors
-    # skim - fzf alternative (current version (v0.6.9) has bad ranking algorithm)
     # hyperfine - command-line benchmarking tool
     # ncdu - ncurses disk usage analyzer
 
