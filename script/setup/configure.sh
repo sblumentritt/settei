@@ -286,7 +286,7 @@ external_packages()
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="ccls,cppcheck,shellcheck,vimix,iwyu"
+    local external_packages="ccls,cppcheck,shellcheck,pop-4-gtk-theme,iwyu"
 
     for package in $external_packages; do
         cp -r "${CONFIG_BASE_PATH}/pkgbuild/${package}" "./${package}"
