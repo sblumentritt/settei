@@ -307,7 +307,7 @@ __skim_gen_default_command()
 __skim_gen_default_opts()
 {
     local general="--height=40% --layout=reverse --tabstop=4 --no-multi"
-    local search="--tiebreak=score,-begin,-end"
+    local search="--tiebreak=score"
 
     local base_color="fg:8,bg:-1,fg+:-1,bg+:-1,hl:2,hl+:2,matched_bg:-1,current_match_bg:-1"
     local extra_color="info:6,prompt:8,pointer:2,marker:5,spinner:6,header:4"
