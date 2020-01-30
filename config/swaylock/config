@@ -15,16 +15,16 @@ separator-color=00000000
 
 ring-color=c8bb5b
 ring-ver-color=82c1a8
-ring-clear-color=ff9959
+ring-clear-color=faa055
 ring-wrong-color=ef6851
 
 text-ver-color=82c1a8
-text-clear-color=ff9959
+text-clear-color=faa055
 text-wrong-color=ef6851
 text-caps-lock-color=c8bb5b
 
 layout-bg-color=1d2021
-layout-text-color=95918d
+layout-text-color=9d8f81
 layout-border-color=1d2021
 
 indicator-radius=65

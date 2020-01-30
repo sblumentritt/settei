@@ -34,17 +34,17 @@ set $border_size 6
 
 # colors
 set $background   #1d2021
-set $foreground   #ebdcc5
-set $dark_gray    #2e3334
+set $foreground   #f2e7c5
+set $dark_gray    #3c3a3a
 set $red          #ef6851
 set $green        #c8bb5b
-set $orange       #ff9959
+set $orange       #faa055
 set $blue         #82c1a8
-set $magenta      #cf8397
+set $magenta      #d3879c
 set $cyan         #9fca8f
 set $bright_white #ebe2d3
-set $gray         #95918d
-set $yellow       #fcb55e
+set $gray         #9d8f81
+set $yellow       #fcbd5e
 
 # font used for title and bar
 font pango:$font $font_size

@@ -94,27 +94,27 @@ draw_bold_text_with_bright_colors: false
 colors:
   primary:
     background: '0x1d2021'
-    foreground: '0xebdcc5'
+    foreground: '0xf2e7c5'
 
   normal:
-    black:   '0x2e3334'
+    black:   '0x3c3a3a'
     red:     '0xef6851'
     green:   '0xc8bb5b'
-    yellow:  '0xff9959'
+    yellow:  '0xfaa055'
     blue:    '0x82c1a8'
-    magenta: '0xcf8397'
+    magenta: '0xd3879c'
     cyan:    '0x9fca8f'
     white:   '0xebe2d3'
 
   bright:
-    black:   '0x95918d'
+    black:   '0x9d8f81'
     red:     '0xef6851'
     green:   '0xc8bb5b'
-    yellow:  '0xfcb55e'
+    yellow:  '0xfcbd5e'
     blue:    '0x82c1a8'
-    magenta: '0xcf8397'
+    magenta: '0xd3879c'
     cyan:    '0x9fca8f'
-    white:   '0xebdcc5'
+    white:   '0xf2e7c5'
 
   # indexed colors include all colors from 16 to 256
   indexed_colors: []
@@ -122,7 +122,7 @@ colors:
   # selection colors
   selection:
     # text: '0xf0ebdc'
-    background: '0x2e3334'
+    background: '0x3c3a3a'
 
 # specifying a 'duration' of '0' will disable the visual bell
 visual_bell:

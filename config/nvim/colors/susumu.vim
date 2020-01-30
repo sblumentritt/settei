@@ -15,18 +15,18 @@ let g:colors_name='susumu'
 " --------------------------------------
 let s:colors = {}
 
-let s:colors.dark_gray = ['#2e3334', '0']
+let s:colors.dark_gray = ['#3c3a3a', '0']
 let s:colors.red       = ['#ef6851', '1']
 let s:colors.green     = ['#c8bb5b', '2']
-let s:colors.orange    = ['#ff9959', '3']
+let s:colors.orange    = ['#faa055', '3']
 let s:colors.blue      = ['#82c1a8', '4']
-let s:colors.magenta   = ['#cf8397', '5']
+let s:colors.magenta   = ['#d3879c', '5']
 let s:colors.cyan      = ['#9fca8f', '6']
 let s:colors.bwhite    = ['#ebe2d3', '7']
 
-let s:colors.gray        = ['#95918d', '8']
-let s:colors.yellow      = ['#fcb55e', '11']
-let s:colors.white       = ['#ebdcc5', '15']
+let s:colors.gray      = ['#9d8f81', '8']
+let s:colors.yellow    = ['#fcbd5e', '11']
+let s:colors.white     = ['#f2e7c5', '15']
 
 let s:colors.bg   = ['#1d2021', '0']
 let s:colors.none = ['none', 'none']
@@ -146,13 +146,14 @@ call s:highlight('WildMenu', s:colors.orange)
 
 " for custom statusline
 " --------------------------------------
-call s:highlight('ModeStatusNormal', s:colors.bg, s:colors.blue)
-call s:highlight('ModeStatusInsert', s:colors.bg, s:colors.green)
+call s:highlight('ModeStatusNormal', s:colors.bg, s:colors.gray)
+call s:highlight('ModeStatusInsert', s:colors.bg, s:colors.blue)
 call s:highlight('ModeStatusVisual', s:colors.bg, s:colors.orange)
 call s:highlight('ModeStatusReplace', s:colors.bg, s:colors.cyan)
-call s:highlight('ModeStatusCommand', s:colors.bg, s:colors.gray)
+call s:highlight('ModeStatusCommand', s:colors.bg, s:colors.yellow)
 call s:highlight('ModeStatusTerminal', s:colors.bg, s:colors.magenta)
 
+call s:highlight('DiagnosticStatusOk', s:colors.bg, s:colors.gray)
 call s:highlight('DiagnosticStatusError', s:colors.bg, s:colors.red)
 call s:highlight('DiagnosticStatusWarning', s:colors.bg, s:colors.orange)
 

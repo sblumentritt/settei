@@ -4,7 +4,7 @@
 font=Source Code Pro 9
 
 background-color=#1d2021
-text-color=#ebdcc5
+text-color=#f2e7c5
 
 width=270
 height=500
@@ -13,7 +13,7 @@ margin=20
 padding=15
 
 border-size=6
-border-color=#2e3334
+border-color=#3c3a3a
 
 icons=0
 markup=1
@@ -26,8 +26,8 @@ default-timeout=10000
 text-color=#c8bb5b
 
 [urgency=normal]
-text-color=#ebdcc5
+text-color=#f2e7c5
 
 [urgency=high]
-text-color=#ff9959
+text-color=#faa055
 default-timeout=0

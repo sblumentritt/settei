@@ -116,10 +116,11 @@ function! DiagnosticStatus() abort
 
     let l:total_count = l:lsp_error_count + l:lsp_warning_count
 
+    let l:diagnostic_ok_color = '%#DiagnosticStatusOk#'
     let l:diagnostic_error_color = '%#DiagnosticStatusError#'
     let l:diagnostic_warning_color = '%#DiagnosticStatusWarning#'
 
-    return l:total_count == 0 ? '  OK  ' :
+    return l:total_count == 0 ? printf('%s  OK  ', l:diagnostic_ok_color) :
                 \ printf('%s %dW %s %dE ',
                 \        l:diagnostic_warning_color,
                 \        l:lsp_warning_count,
