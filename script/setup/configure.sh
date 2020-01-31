@@ -221,7 +221,7 @@ package_installation()
     rustup default stable
 
     # add development related rust components (also downloads)
-    rustup component add rls rust-analysis rust-src rust-docs rustfmt clippy
+    rustup component add rust-src rust-docs rustfmt clippy
 
     # check for updates e.g. if previously installed
     rustup update
