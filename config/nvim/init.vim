@@ -44,6 +44,13 @@ function! PatchCoc(info) abort
     endif
 endfunction
 
+function! PatchSkim(info) abort
+    if a:info.status !=# 'unchanged'
+        let l:patch = stdpath('config') . '/patches/remove_color_option_on_grep.patch'
+        execute '!patch -p1 -i ' . l:patch
+    endif
+endfunction
+
 " define plugins
 " --------------------------------------
 call plug#begin('$neovim_plugin_dir')
@@ -72,8 +79,12 @@ Plug 'https://git.sr.ht/~sblumentritt/bitbake.vim', {'branch': 'thud'}
 
 " utilities
 Plug 'https://github.com/moll/vim-bbye'
-Plug 'https://github.com/lotabout/skim.vim'
 Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
+
+Plug 'https://github.com/lotabout/skim.vim', {
+            \ 'commit': '4e9d9a3',
+            \ 'do': function('PatchSkim')
+            \ }
 
 " high-performance color highlighter
 " slower vimscript alternative: https://github.com/lilydjwg/colorizer
