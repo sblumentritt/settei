@@ -72,7 +72,7 @@ function s:save_session()
     endif
 endfunction
 
-" use skim to list and select a session file
+" use fzf to list and select a session file
 function s:load_session()
     if exists('*fzf#run')
         if isdirectory(g:session_directory)

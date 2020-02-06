@@ -179,7 +179,7 @@ package_installation()
 
     # cmdl
     packages="${packages} alacritty neovim yarn tmux ranger tig htop"
-    packages="${packages} skim ripgrep fd exa jq"
+    packages="${packages} fzf ripgrep fd exa jq"
 
     # packages which might be interesting:
     # tokei - displays statistics about source code

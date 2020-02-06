@@ -94,10 +94,10 @@ export MANPATH="$RUSTUP_HOME/toolchains/stable-x86_64-unknown-linux-gnu/share/ma
 [ -r /usr/share/bash-completion/bash_completion ] && \
     . /usr/share/bash-completion/bash_completion
 
-[ -r /usr/share/skim/completion.bash ] && \
-    . /usr/share/skim/completion.bash
-[ -r /usr/share/skim/key-bindings.bash ] && \
-    . /usr/share/skim/key-bindings.bash
+[ -r /usr/share/fzf/completion.bash ] && \
+    . /usr/share/fzf/completion.bash
+[ -r /usr/share/fzf/key-bindings.bash ] && \
+    . /usr/share/fzf/key-bindings.bash
 
 [ -r /usr/share/git/completion/git-prompt.sh ] && \
     . /usr/share/git/completion/git-prompt.sh
@@ -270,7 +270,7 @@ csnap()
 # fuzzy search files and open selected files with $EDITOR
 fe()
 {
-    local file=$(sk -q "$1" -1 -0)
+    local file=$(fzf -q "$1" -1 -0)
     [ -n "$file" ] && ${EDITOR} "${file}"
 }
 
@@ -278,7 +278,7 @@ fe()
 fkill()
 {
     local pid
-    pid=$(ps -o pid -o ppid -o stime -o time -o cmd -x --no-headers | sk -m | awk '{print $1}')
+    pid=$(ps -o pid -o ppid -o stime -o time -o cmd -x --no-headers | fzf -m | awk '{print $1}')
 
     if [ "x$pid" != "x" ]; then
         printf "%s\n" $pid | xargs kill -${1:-9}
@@ -288,7 +288,7 @@ fkill()
 # list local git branches with a removed remote and delete selected ones
 fdb()
 {
-    local branches=$(git branch -vv | rg ": gone]" | sk -m | awk '{print $1}')
+    local branches=$(git branch -vv | rg ": gone]" | fzf -m | awk '{print $1}')
 
     for branch in ${branches}; do
         git branch -D ${branch}
@@ -298,21 +298,23 @@ fdb()
 # --------------------------------------
 # functions to generate exports
 # --------------------------------------
-__skim_gen_default_command()
+__fzf_gen_default_command()
 {
-    local filter="--exclude \"{.git,target,build,output,dependency}\""
-    export SKIM_DEFAULT_COMMAND="fd --type file --hidden --follow --color=never ${filter}"
+    local filter="--exclude \"{.git,target,build,output,node_modules}\""
+    filter="${filter} --exclude \"dependency/*/\""
+
+    export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=never ${filter}"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 }
 
-__skim_gen_default_opts()
+__fzf_gen_default_opts()
 {
-    local general="--height=40% --layout=reverse --tabstop=4 --no-multi"
-    local search="--tiebreak=score"
+    local general="--height 40% --layout=reverse --tabstop=4"
 
-    local base_color="fg:8,bg:-1,fg+:-1,bg+:-1,hl:2,hl+:2,matched_bg:-1,current_match_bg:-1"
-    local extra_color="info:6,prompt:8,pointer:2,marker:5,spinner:6,header:4"
+    local base_color="--color fg:8,bg:-1,fg+:-1,bg+:-1,hl:2,hl+:2"
+    local extra_color="--color info:6,prompt:8,pointer:2,marker:5,spinner:6,header:4"
 
-    export SKIM_DEFAULT_OPTIONS="--color=${base_color},${extra_color} ${general} ${search}"
+    export FZF_DEFAULT_OPTS="${base_color} ${extra_color} ${general}"
 }
 
 __exa_gen_colors()
@@ -326,21 +328,21 @@ __exa_gen_colors()
 }
 
 # call functions by default
-__skim_gen_default_command
-__skim_gen_default_opts
+__fzf_gen_default_command
+__fzf_gen_default_opts
 __exa_gen_colors
 
 # --------------------------------------
-# skim configurations
+# fzf configurations
 # --------------------------------------
 # command for listing path candidates
-_skim_compgen_path()
+_fzf_compgen_path()
 {
     fd --hidden --follow --color=never --exclude ".git" . "${1}"
 }
 
 # command for listing directory completion
-_skim_compgen_dir()
+_fzf_compgen_dir()
 {
     fd --type directory --hidden --follow --color=never --exclude ".git" . "${1}"
 }
