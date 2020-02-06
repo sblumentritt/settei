@@ -73,11 +73,8 @@ Plug 'https://git.sr.ht/~sblumentritt/bitbake.vim', {'branch': 'thud'}
 " utilities
 Plug 'https://github.com/moll/vim-bbye'
 Plug 'https://github.com/junegunn/fzf.vim'
-Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
-
-" high-performance color highlighter
-" slower vimscript alternative: https://github.com/lilydjwg/colorizer
 Plug 'https://github.com/norcalli/nvim-colorizer.lua'
+Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
 
 call plug#end()
 filetype plugin indent on
