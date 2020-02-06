@@ -156,8 +156,8 @@ alias vim="nvim"
 alias nivm="nvim" # wrapper if misspelling nvim
 
 # cmake related
-alias cbuild="cmake --build"
 alias cinstall="cmake --install"
+alias cbuild="cmake --build . --parallel"
 alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 
 # development related
