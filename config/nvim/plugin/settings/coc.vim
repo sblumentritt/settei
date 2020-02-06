@@ -179,6 +179,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     \ {
                     \   'messageTarget': 'echo',
                     \   'refreshOnInsertMode': v:true,
+                    \   'enableHighlightLineNumber': v:false,
                     \
                     \   'infoSign': '●',
                     \   'hintSign': '●',
