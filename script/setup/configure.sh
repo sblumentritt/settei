@@ -3,8 +3,7 @@
 # global variable
 CONFIG_BASE_PATH="$HOME/development/unspecified/settei"
 
-main()
-{
+main() {
     printf "\nSetup directories? [y/n] "
     read -r dir_flag
 
@@ -34,8 +33,7 @@ main()
     fi
 }
 
-dir_setup()
-{
+dir_setup() {
     # define character at which a string should be split
     local IFS=','
     local wanted_folder=""
@@ -62,8 +60,7 @@ dir_setup()
     mkdir -p "$HOME/.local/share/bash"
 }
 
-file_setup()
-{
+file_setup() {
     # link/copy dotfiles
     # --------------------------------------
     ln -sf "${CONFIG_BASE_PATH}/config/.bashrc" $HOME/.bashrc
@@ -145,8 +142,7 @@ file_setup()
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
-package_installation()
-{
+package_installation() {
     # always install archlinux-keyring to get updated database (needed after fresh install)
     sudo pacman -S --noconfirm archlinux-keyring
 
@@ -273,8 +269,7 @@ package_installation()
     fi
 }
 
-external_packages()
-{
+external_packages() {
     mkdir -p /tmp/external_packages
     cd /tmp/external_packages || exit
 

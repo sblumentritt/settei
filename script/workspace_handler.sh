@@ -1,7 +1,6 @@
 #!/bin/sh
 
-usage()
-{
+usage() {
     printf "Usage: %s [ -s | -m ] -w <1-4>
 
 where:

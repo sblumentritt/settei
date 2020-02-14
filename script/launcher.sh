@@ -1,7 +1,6 @@
 #!/bin/sh
 
-usage()
-{
+usage() {
     printf "Usage: %s [ -e | -d ]
 
 where:
@@ -11,8 +10,7 @@ where:
     exit 1
 }
 
-list_executables()
-{
+list_executables() {
     local tmp="/tmp/efl_exe_list"
     [ -f "$tmp" ] && printf "" > "$tmp"
 

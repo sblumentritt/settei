@@ -1,7 +1,6 @@
 #!/bin/sh
 
-music_info()
-{
+music_info() {
     local symbol=""
     local song=""
 
@@ -25,21 +24,18 @@ music_info()
     printf "%s%s" "${symbol}" "${song}"
 }
 
-update_info()
-{
+update_info() {
 	printf "%s" "$(checkupdates | wc -l)"
 }
 
-memory_info()
-{
+memory_info() {
     local used=$(free -m | awk 'NR==2{printf $3}')
     local total=$(free -m | awk 'NR==2{printf $2}')
 
 	printf "%s MB/%s MB" "${used}" "${total}"
 }
 
-network_info()
-{
+network_info() {
     local net_card=$(awk '$2 == 00000000 {printf $1}' /proc/net/route)
     local ip_addr=$(ip addr show ${net_card} | grep "inet\\b" | awk '{printf $2}' | cut -d/ -f1)
 
@@ -50,8 +46,7 @@ network_info()
 	printf "%s" "${ip_addr}"
 }
 
-clock_info()
-{
+clock_info() {
     # show date and time in japanese
     local locale="ja_JP.UTF-8"
     local current_time=$(LC_ALL=${locale} date "+%I:%M %p")
@@ -59,13 +54,11 @@ clock_info()
     printf "%s" "${current_time}"
 }
 
-spacer()
-{
+spacer() {
     printf " :: "
 }
 
-main()
-{
+main() {
     # to not check for updates every second
     local loop_counter=0
     local update_count="0"

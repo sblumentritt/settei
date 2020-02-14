@@ -177,22 +177,19 @@ fi
 # custom functions
 # --------------------------------------
 # set local git config to default
-glocal()
-{
+glocal() {
     git config user.name "Sebastian Blumentritt"
     git config user.email "blumentritt.sebastian@gmail.com"
 }
 
 # reload the history
-rhistory()
-{
+rhistory() {
     history -c
     history -r
 }
 
 # set hardware clock with the help of network time
-uclock()
-{
+uclock() {
     local date_utc=$(curl -H "Cache-Control: no-cache" -sD - google.com \
         | grep "^Date:" | cut -d" " -f3-6)
     if [ -n "$date_utc" ]; then
@@ -202,8 +199,7 @@ uclock()
 }
 
 # similar to -C option but with offset in decimal format
-dhex()
-{
+dhex() {
     command hexdump \
         -e '"%010_Ad\n"' \
         -e '"%010_ad  " 8/1 "%02x " "  " 8/1 "%02x "' \
@@ -212,8 +208,7 @@ dhex()
 }
 
 # helper to convert between hex and decimal format
-nconvert()
-{
+nconvert() {
     if [ "$#" -ne 2 ]; then
         printf "Usage: nconvert [ -x | -d ] NUM\n"
     else
@@ -226,14 +221,12 @@ nconvert()
 }
 
 # helper to easily build with CMake
-cbuild()
-{
+cbuild() {
     cmake --build . --parallel "$@" -- -s
 }
 
 # helper to for include-what-you-use
-iwyu_log()
-{
+iwyu_log() {
     usage="Usage: iwyu_log PATH_TO_BUILD_DIR LOG_FILE_NAME"
     if [ -z "$1" ]; then
         printf "%s\n" "$usage"
@@ -259,8 +252,7 @@ iwyu_log()
 }
 
 # helper to create btrfs snapshots
-csnap()
-{
+csnap() {
     local snapshot_date=$(date "+%Y_%m_%d")
 
     if [ "$1" = "-r" ]; then
@@ -273,15 +265,13 @@ csnap()
 }
 
 # fuzzy search files and open selected files with $EDITOR
-fe()
-{
+fe() {
     local file=$(fzf -q "$1" -1 -0)
     [ -n "$file" ] && ${EDITOR} "${file}"
 }
 
 # kill processes - list only the ones which can be killed from user
-fkill()
-{
+fkill() {
     local pid
     pid=$(ps -o pid -o ppid -o stime -o time -o cmd -x --no-headers | fzf -m | awk '{print $1}')
 
@@ -291,8 +281,7 @@ fkill()
 }
 
 # list local git branches with a removed remote and delete selected ones
-fdb()
-{
+fdb() {
     local branches=$(git branch -vv | rg ": gone]" | fzf -m | awk '{print $1}')
 
     for branch in ${branches}; do
@@ -303,8 +292,7 @@ fdb()
 # --------------------------------------
 # functions to generate exports
 # --------------------------------------
-__fzf_gen_default_command()
-{
+__fzf_gen_default_command() {
     local filter="--exclude \"{.git,target,build,output,node_modules}\""
     filter="${filter} --exclude \"dependency/*/\""
 
@@ -312,8 +300,7 @@ __fzf_gen_default_command()
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 }
 
-__fzf_gen_default_opts()
-{
+__fzf_gen_default_opts() {
     local general="--height 40% --layout=reverse --tabstop=4"
 
     local base_color="--color fg:8,bg:-1,fg+:-1,bg+:-1,hl:2,hl+:2"
@@ -322,8 +309,7 @@ __fzf_gen_default_opts()
     export FZF_DEFAULT_OPTS="${base_color} ${extra_color} ${general}"
 }
 
-__exa_gen_colors()
-{
+__exa_gen_colors() {
     local general="reset:xx=38;5;8;1:da=38;5;8:sn=36:sb=36:lp=0"
     local user_group="uu=32:gu=32:ue=0:un=32;1:gn=32;1"
     local permission="ur=0:uw=0:ux=0:gr=0:gw=0:gx=0:tr=0:tw=0:tx=0"
@@ -341,14 +327,12 @@ __exa_gen_colors
 # fzf configurations
 # --------------------------------------
 # command for listing path candidates
-_fzf_compgen_path()
-{
+_fzf_compgen_path() {
     fd --hidden --follow --color=never --exclude ".git" . "${1}"
 }
 
 # command for listing directory completion
-_fzf_compgen_dir()
-{
+_fzf_compgen_dir() {
     fd --type directory --hidden --follow --color=never --exclude ".git" . "${1}"
 }
 
@@ -357,8 +341,7 @@ _fzf_compgen_dir()
 # --------------------------------------
 PROMPT_COMMAND=__prompt_command
 
-__prompt_command()
-{
+__prompt_command() {
     # get last status code
     local exit_status="$?"
 

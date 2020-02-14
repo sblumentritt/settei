@@ -11,8 +11,7 @@
 #       4. run: modprobe tg3
 #       5. connect ethernet cable
 
-main()
-{
+main() {
     # script should be run as root
     if [ "$(id -u)" -ne 0 ]; then
         printf "Please run as root!\n" 1>&2
@@ -62,8 +61,7 @@ main()
     fi
 }
 
-partition()
-{
+partition() {
     (
     printf "%s\n" "g" # create a new empty GPT partition table
     printf "%s\n" "n" # add a new partition
@@ -86,8 +84,7 @@ partition()
     sleep 2s
 }
 
-format_and_mount()
-{
+format_and_mount() {
     # define local variables
     local _BOOT_PARTITION="${1}2"
     local _ROOT_PARTITION="${1}3"
@@ -127,8 +124,7 @@ format_and_mount()
     mount -o "${_MOUNT_OPTIONS},compress=zstd,subvol=__var" ${_ROOT_PARTITION} ${_MOUNT_POINT}/var
 }
 
-install()
-{
+install() {
     local packages=""
 
     # base
@@ -159,8 +155,7 @@ install()
     pacstrap -i $1 $packages
 }
 
-configure()
-{
+configure() {
     local _MOUNT_POINT=$1
     local _DISK_PATH=$2
     local _HOST=$3
@@ -178,8 +173,7 @@ configure()
     cat > ${_MOUNT_POINT}/rootfs_configure.sh << EOF
 #!/bin/sh
 
-main()
-{
+main() {
     localization
     date_time
     network
@@ -187,8 +181,7 @@ main()
     misc
 }
 
-localization()
-{
+localization() {
     printf "${_COLOR}-- enable locales in /etc/locale.gen${_COLOR_RESET}\\n"
     sed -i -E 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
     sed -i -E 's/#en_US ISO-8859-1/en_US ISO-8859-1/g' /etc/locale.gen
@@ -205,8 +198,7 @@ localization()
     locale-gen
 }
 
-date_time()
-{
+date_time() {
     printf "${_COLOR}-- link zoneinfo to /etc/localtime${_COLOR_RESET}\\n"
     ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
@@ -214,8 +206,7 @@ date_time()
     hwclock -w
 }
 
-network()
-{
+network() {
     printf "${_COLOR}-- write hostname into /etc/hostname${_COLOR_RESET}\\n"
     printf "${_HOST}\\n" > /etc/hostname
 
@@ -234,8 +225,7 @@ network()
     systemctl enable NetworkManager.service
 }
 
-user()
-{
+user() {
     printf "${_COLOR}-- add new group${_COLOR_RESET}\\n"
     groupadd ${_CUSTOM_GROUP}
 
@@ -256,8 +246,7 @@ user()
     } >> /etc/sudoers
 }
 
-misc()
-{
+misc() {
     printf "${_COLOR}-- enable options in /etc/pacman.conf${_COLOR_RESET}\\n"
     sed -i -E 's/#Color/Color\\nILoveCandy/g' /etc/pacman.conf
     sed -i -E 's/#TotalDownload/TotalDownload/g' /etc/pacman.conf
