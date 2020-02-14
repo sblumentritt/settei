@@ -157,7 +157,6 @@ alias nivm="nvim" # wrapper if misspelling nvim
 
 # cmake related
 alias cinstall="cmake --install"
-alias cbuild="cmake --build . --parallel -- -s"
 alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
 
 # development related
@@ -224,6 +223,12 @@ nconvert()
             printf "%d -> 0x%x\n" "$2" "$2"
         fi
     fi
+}
+
+# helper to easily build with CMake
+cbuild()
+{
+    cmake --build . --parallel "$@" -- -s
 }
 
 # helper to for include-what-you-use
