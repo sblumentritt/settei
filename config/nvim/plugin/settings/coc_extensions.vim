@@ -33,7 +33,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         " config for coc-rust-analyzer extension
         call coc#config('rust-analyzer',
                     \ {
-                    \   'raLspServerPath': $CARGO_HOME . '/bin/rust-analyzer',
+                    \   'serverPath': $CARGO_HOME . '/bin/rust-analyzer',
                     \ })
 
         " config for coc-diagnostic extension
