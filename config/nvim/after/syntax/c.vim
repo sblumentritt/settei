@@ -11,12 +11,6 @@ syntax keyword cConstant TRUE FALSE
 
 syntax match cCustomInternal "\<__\w\+"
 
-" enumerators following personal naming convention
-syntax match cCustomEnumerator "\<e_[a-zA-Z0-9_]\+\>"
-
-" global variables following personal naming convention
-syntax match cCustomGlobalVariable "\<g_[a-zA-Z0-9_]\+\>"
-
 " bad naming style used for defines/typedefs/etc.
 syntax match cCustomBadName "\<[A-Z][a-zA-Z0-9_]\+\>"
 
@@ -54,6 +48,3 @@ highlight default link cCustomMacro      Macro
 highlight default link cCustomDefine     Define
 highlight default link cCustomBadName    Macro
 highlight default link cCustomDefineFunc Define
-
-highlight default link cCustomEnumerator     Type
-highlight default link cCustomGlobalVariable Delimiter
