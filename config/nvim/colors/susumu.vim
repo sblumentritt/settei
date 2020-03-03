@@ -265,6 +265,7 @@ call s:highlight('rustTypedef', s:colors.yellow)
 call s:highlight('rustModPathSep', s:colors.white)
 call s:highlight('rustStructure', s:colors.orange)
 call s:highlight('rustEnumVariant', s:colors.orange)
+call s:highlight('rustLifetime', s:colors.red, s:colors.none, 'bold')
 
 " git-messenger
 " --------------------------------------
