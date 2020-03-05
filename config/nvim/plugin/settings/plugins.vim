@@ -161,25 +161,6 @@ let g:lens#height_resize_max = 25
 
 let g:lens#disabled_filetypes = ['fzf']
 
-" doxygentoolkit configurations
-" --------------------------------------
-let g:DoxygenToolkit_compactDoc = 'no'
-let g:DoxygenToolkit_commentType = 'C++'
-let g:DoxygenToolkit_compactOneLineDoc = 'yes'
-
-" change tag style to latex instead of javadoc
-let g:DoxygenToolkit_briefTag_pre = ''
-let g:DoxygenToolkit_fileTag = '\file '
-let g:DoxygenToolkit_dateTag = '\date '
-let g:DoxygenToolkit_blockTag = '\name '
-let g:DoxygenToolkit_classTag = '\class '
-let g:DoxygenToolkit_authorTag = '\author '
-let g:DoxygenToolkit_returnTag = '\returns '
-let g:DoxygenToolkit_versionTag = '\version '
-let g:DoxygenToolkit_paramTag_pre = '\param '
-let g:DoxygenToolkit_throwTag_pre = '\throw '
-let g:DoxygenToolkit_templateParamTag_pre = '\tparam '
-
 " restore old value of cpoptions
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
