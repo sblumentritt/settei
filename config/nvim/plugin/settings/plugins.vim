@@ -151,6 +151,16 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 15
 let g:undotree_SetFocusWhenToggle = 1
 
+" lens.vim configurations
+" --------------------------------------
+let g:lens#animate = 0
+
+let g:lens#width_resize_min = 20
+let g:lens#width_resize_max = 150
+let g:lens#height_resize_max = 25
+
+let g:lens#disabled_filetypes = ['fzf']
+
 " doxygentoolkit configurations
 " --------------------------------------
 let g:DoxygenToolkit_compactDoc = 'no'

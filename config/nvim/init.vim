@@ -73,6 +73,7 @@ Plug 'https://git.sr.ht/~sblumentritt/bitbake.vim', {'branch': 'thud'}
 " utilities
 Plug 'https://github.com/moll/vim-bbye'
 Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/camspiers/lens.vim'
 Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
 
