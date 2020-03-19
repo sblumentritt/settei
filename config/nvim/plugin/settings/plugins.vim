@@ -109,6 +109,7 @@ let g:mkdp_page_title = '[ ${name} ]'
 " fzf configurations
 " --------------------------------------
 let g:fzf_buffers_jump = 1
+let g:fzf_preview_window = ''
 let g:fzf_layout = {'down': '~25%'}
 
 " override default Rg implementation to include hidden files
