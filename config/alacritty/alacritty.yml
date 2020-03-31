@@ -38,12 +38,6 @@ scrolling:
   # number of lines the viewport will move
   multiplier: 3
 
-  # scroll to the bottom when new text is written to the terminal
-  auto_scroll: false
-
-# change the 'it' value in terminfo when altering this setting
-tabspaces: 8
-
 font:
   normal:
     family: Source Code Pro
