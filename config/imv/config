@@ -33,7 +33,7 @@ p = previous
 # go to first image
 gg = select_abs 0
 # go to last image
-<Shift+g> = select_abs -1
+<Shift+G> = select_abs -1
 
 # Panning
 j = pan 0 -50
