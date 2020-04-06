@@ -44,6 +44,14 @@ augroup update_filetypes
                 \ colorcolumn=80
 augroup END
 
+" update todo keywords
+augroup update_todo_keywords
+    autocmd!
+    autocmd Syntax *
+                \ call matchadd('Todo', '\W\zs\(TODO\|FIXME\|FIX\|BUG\|HACK\|ERROR\)') |
+                \ call matchadd('Todo', '\W\zs\(NOTE\|INFO\|NOTICE\|DEBUG\)') |
+augroup END
+
 " remove trailing whitespace
 augroup remove_trailing_whitespaces
     autocmd!
