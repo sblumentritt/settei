@@ -50,6 +50,11 @@ nnoremap <C-Left> b
 nnoremap <C-Right> w
 
 " move lines up/down
+nnoremap <silent> <C-j> :m .+<CR>==
+nnoremap <silent> <C-k> :m .-2<CR>==
+vnoremap <silent> <C-j> :m '>+1<CR>gv=gv
+vnoremap <silent> <C-k> :m '<-2<CR>gv=gv
+
 nnoremap <silent> <C-Down> :m .+<CR>==
 nnoremap <silent> <C-Up> :m .-2<CR>==
 vnoremap <silent> <C-Down> :m '>+1<CR>gv=gv
