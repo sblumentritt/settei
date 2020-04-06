@@ -37,7 +37,10 @@ vnoremap <leader>w :w<CR>
 noremap <silent> <F8> :nohl<CR>
 
 " substitute all occurrences of word under cursor
-nnoremap <leader>sw :%s/\<<C-r><C-w>\>/
+nnoremap <leader>sw :%s/\<<C-r><C-w>\>//g<left><left>
+" substitute all occurrences of the current selection
+" NOTE: copies selection to clipboard
+vnoremap <leader>sw y:%s/<C-r>"//g<left><left>
 
 " stay at search position
 nnoremap * m`:keepjumps normal! *``<cr>
