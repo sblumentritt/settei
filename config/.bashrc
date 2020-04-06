@@ -157,7 +157,7 @@ alias nivm="nvim" # wrapper if misspelling nvim
 
 # cmake related
 alias cinstall="cmake --install"
-alias ccmake="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+alias cmake="CMAKE_EXPORT_COMPILE_COMMANDS=1 cmake"
 
 # development related
 alias make="make -j8"
