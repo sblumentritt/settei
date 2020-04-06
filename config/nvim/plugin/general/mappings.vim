@@ -60,10 +60,10 @@ vnoremap < <gv
 vnoremap > >gv
 
 " movement between splits
-nnoremap <C-j> <C-W><C-J>
-nnoremap <C-k> <C-W><C-K>
-nnoremap <C-l> <C-W><C-L>
-nnoremap <C-h> <C-W><C-H>
+nnoremap <A-j> <C-w><C-j>
+nnoremap <A-k> <C-w><C-k>
+nnoremap <A-l> <C-w><C-l>
+nnoremap <A-h> <C-w><C-h>
 
 " close split
 nnoremap <silent> cs :close<CR>
