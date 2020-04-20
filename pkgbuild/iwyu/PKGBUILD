@@ -2,49 +2,62 @@
 # improved PKGBUILD for iwyu
 # --------------------------------------
 pkgname=iwyu
-pkgname_long_=include-what-you-use
+pkgname_long=include-what-you-use
 
 pkgdesc="A tool for use with clang to analyze #includes in C and C++ source files"
 url="https://include-what-you-use.org"
 
-pkgver=0.13
+pkgver=r910.a40a287
 pkgrel=1
 
 arch=('x86_64')
 license=('custom:LLVM')
 
-provides=("${pkgname_long_}")
-conflicts=("${pkgname_long_}" "${pkgname_long_}-git")
+provides=("${pkgname_long}")
+conflicts=("${pkgname_long}" "${pkgname_long}-git")
 
 depends=('clang' 'python2')
 makedepends=('clang' 'llvm')
 
-source=("https://github.com/${pkgname_long_}/${pkgname_long_}/archive/${pkgver}.tar.gz")
-sha512sums=('40f65b4c89bdbee64ca5fe066bd2d3e0fd582d20e4e3c58b49f5e3019db97a3bc98bf2b1fd44167f068a2632b2ca2b4e014488ec0f9c9e8c63bdd1d5d10fc81a')
+source=("git+https://github.com/${pkgname_long}/${pkgname_long}.git")
+sha512sums=('SKIP')
+
+pkgver()
+{
+    cd "${srcdir}/${pkgname_long}"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare()
+{
+    cd "${srcdir}/${pkgname_long}"
+    git checkout clang_10
+}
 
 build()
 {
-    cmake -S ${pkgname_long_}-${pkgver} -B ${pkgname_long_}-${pkgver}/build \
+    cmake -S ${pkgname_long} -B ${pkgname_long}/build \
           -DCMAKE_BUILD_TYPE=Release \
           -DCMAKE_INSTALL_PREFIX:PATH=/usr \
           -DCMAKE_PREFIX_PATH=/usr/lib \
           -DCMAKE_C_COMPILER=clang \
-          -DCMAKE_CXX_COMPILER=clang++
+          -DCMAKE_CXX_COMPILER=clang++ \
+          -Wno-dev
 
-    cmake --build ${pkgname_long_}-${pkgver}/build
+    cmake --build ${pkgname_long}/build
 }
 
 package()
 {
-    DESTDIR="${pkgdir}" cmake --install ${pkgname_long_}-${pkgver}/build
+    DESTDIR="${pkgdir}" cmake --install ${pkgname_long}/build
 
-    install -D -m644 ${pkgname_long_}-${pkgver}/LICENSE.TXT \
+    install -D -m644 ${pkgname_long}/LICENSE.TXT \
         "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
-    install -D -m755 ${pkgname_long_}-${pkgver}/fix_includes.py \
+    install -D -m755 ${pkgname_long}/fix_includes.py \
         "${pkgdir}/usr/bin/iwyu-fix-includes"
 
-    install -D -m755 ${pkgname_long_}-${pkgver}/iwyu_tool.py \
+    install -D -m755 ${pkgname_long}/iwyu_tool.py \
         "${pkgdir}/usr/bin/iwyu-tool"
 
     # remove files which are installed under a different name
