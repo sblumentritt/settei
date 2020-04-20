@@ -7,7 +7,7 @@ pkgname_=ccls
 pkgdesc="C/C++ language server"
 url="https://github.com/MaskRay/ccls"
 
-pkgver=r1895.41e7d6a7
+pkgver=r1898.24dd3bd4
 pkgrel=1
 
 arch=('x86_64')
@@ -38,6 +38,7 @@ build()
 {
     cmake -S ${pkgname_} -B ${pkgname_}/build \
           -DCMAKE_CXX_COMPILER=clang++ \
+          -DCLANG_LINK_CLANG_DYLIB=1 \
           -DCMAKE_BUILD_TYPE=Release \
           -DCMAKE_INSTALL_PREFIX=/usr
 
