@@ -2750,7 +2750,7 @@
   <g
      id="g458"
      transform="translate(-4.1306152e-7,-208.00012)"
-     style="color:#000000;fill:#e4e7ea;fill-rule:evenodd;stroke:none">
+     style="color:#000000;fill:#3f3b39;fill-rule:evenodd;stroke:none">
     <path
        id="menu-normal-left"
        d="m 107.4994,801.99979 4.9999,3e-4 0,48 -4.9999,-3e-4 z" />
@@ -2812,27 +2812,27 @@
   <path
      id="menu-normal-top"
      d="m 160.49965,588.99988 -3e-4,4.9999 -48,0 3e-4,-4.9999 z"
-     style="fill:#e4e7ea;fill-rule:evenodd;stroke:none" />
+     style="fill:#3f3b39;fill-rule:evenodd;stroke:none" />
   <path
      id="menu-normal-topright"
      d="m 165.4994,593.99998 -3e-4,-4.9989 -5,-10e-4 0,4.9999 z"
-     style="fill:#e4e7ea;fill-rule:evenodd;stroke:none" />
+     style="fill:#3f3b39;fill-rule:evenodd;stroke:none" />
   <path
      id="menu-normal-right"
      d="m 165.49925,593.99994 -4.9999,3e-4 0,48 4.9999,-3e-4 z"
-     style="fill:#e4e7ea;fill-rule:evenodd;stroke:none" />
+     style="fill:#3f3b39;fill-rule:evenodd;stroke:none" />
   <path
      id="menu-normal-bottomright"
      d="m 160.4992,647.00068 4.9989,-3e-4 0.001,-5 -4.9999,0 z"
-     style="fill:#e4e7ea;fill-rule:evenodd;stroke:none" />
+     style="fill:#3f3b39;fill-rule:evenodd;stroke:none" />
   <path
      id="menu-normal-bottom"
      d="m 112.50015,646.99988 3e-4,-4.9999 48,0 -3e-4,4.9999 z"
-     style="fill:#e4e7ea;fill-rule:evenodd;stroke:none" />
+     style="fill:#3f3b39;fill-rule:evenodd;stroke:none" />
   <path
      id="menu-normal-bottomleft"
      d="m 107.4998,641.99988 3e-4,4.9989 5,10e-4 0,-4.9999 z"
-     style="fill:#e4e7ea;fill-rule:evenodd;stroke:none" />
+     style="fill:#3f3b39;fill-rule:evenodd;stroke:none" />
   <rect
      id="menu-normal"
      width="48"
