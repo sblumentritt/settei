@@ -130,6 +130,23 @@ bindsym
     $mod+d exec $launcher_exe
     $mod+Shift+d exec $launcher_doc
 
+    # screenshot utilities
+    # select output and take a screenshot
+    $mod+F12 exec swaymsg -t get_outputs | \
+        jq -r '.[] | select(.active) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | \
+        slurp | \
+        grim -t png -g - /tmp/$(date '+%Y%m%d_%H%M%S_grim.png')
+
+    # draw selection and take a screenshot
+    $mod+Shift+F12 exec slurp | \
+        grim -t png -g - /tmp/$(date '+%Y%m%d_%H%M%S_grim.png')
+
+    # select windows and take a screenshot
+    $mod+Control+F12 exec swaymsg -t get_tree | \
+        jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | \
+        slurp | \
+        grim -t png -g - /tmp/$(date '+%Y%m%d_%H%M%S_grim.png')
+
     # kill focused window
     $mod+Shift+q kill
 
@@ -163,7 +180,7 @@ bindsym
     $mod+Shift+3 exec workspace_handler.sh -m -w 3
     $mod+Shift+4 exec workspace_handler.sh -m -w 4
 
-    # split the current focused window
+    # define were a new split should happen
     $mod+h splith
     $mod+v splitv
 
