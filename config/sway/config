@@ -21,9 +21,11 @@ for_window [app_id="launcher"] floating enable
 set $screen_locker swaylock
 
 # define workspaces names
-set $init_workspace_monitor_one "1: 一 "
-set $init_workspace_monitor_two "2: 一 "
-set $init_workspace_monitor_three "3: 一 "
+# - first character: describes the monitor number
+# - second character: describes the workspace id
+set $init_workspace_monitor_one "11: 一 "
+set $init_workspace_monitor_two "21: 一 "
+set $init_workspace_monitor_three "31: 一 "
 
 # font related
 set $font Source Code Pro

@@ -43,20 +43,20 @@ fi
 
 monitor_num=$(swaymsg -t get_outputs | \
     jq -r '.[] | select(.focused) | .current_workspace' | \
-    cut -f 1 -d ':')
+    cut -c 1)
 
 case "${workspace_id}" in
     *1*)
-        message_base="workspace '$monitor_num: 一 '"
+        message_base="workspace '${monitor_num}${workspace_id}: 一 '"
         ;;
     *2*)
-        message_base="workspace '$monitor_num: 二 '"
+        message_base="workspace '${monitor_num}${workspace_id}: 二 '"
         ;;
     *3*)
-        message_base="workspace '$monitor_num: 三 '"
+        message_base="workspace '${monitor_num}${workspace_id}: 三 '"
         ;;
     *4*)
-        message_base="workspace '$monitor_num: 四 '"
+        message_base="workspace '${monitor_num}${workspace_id}: 四 '"
         ;;
     *)
         usage
