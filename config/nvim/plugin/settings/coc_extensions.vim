@@ -137,21 +137,28 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                         \ [
                         \   '-*',
                         \
-                        \   'bugprone-*',
-                        \   'cppcoreguidelines-narrowing-conversions',
+                        \   'cppcoreguidelines-avoid-goto',
+                        \   'cppcoreguidelines-init-variables',
+                        \   'cppcoreguidelines-no-malloc',
+                        \   'cppcoreguidelines-pro-type-const-cast',
                         \   'cppcoreguidelines-pro-type-cstyle-cast',
                         \   'cppcoreguidelines-pro-type-member-init',
                         \   'cppcoreguidelines-pro-type-static-cast-downcast',
                         \   'cppcoreguidelines-special-member-functions',
+                        \   'cppcoreguidelines-narrowing-conversions',
+                        \   'cppcoreguidelines-macro-usage',
+                        \   'hicpp-exception-baseclass',
+                        \   'llvm-namespace-comment',
+                        \   'bugprone-*',
                         \   'misc-*',
                         \   'modernize-*',
                         \   'performance-*',
                         \   'readability-*',
+                        \   '-readability-magic-numbers',
+                        \   '-readability-convert-member-functions-to-static',
                         \
                         \   '-clang-analyzer-*',
                         \   '-clang-diagnostic-*',
-                        \   '-readability-magic-numbers',
-                        \   '-readability-convert-member-functions-to-static',
                         \ ]
 
 
