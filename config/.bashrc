@@ -20,9 +20,6 @@ set +H
 # --------------------------------------
 # start/attach to tmux
 # --------------------------------------
-# required here at the top to use it in the next section
-alias tmux='tmux -f "$XDG_CONFIG_HOME"/tmux/config'
-
 if [ $WAYLAND_DISPLAY ]; then
     if [ -z "$TMUX" ]; then
         ID="$(tmux ls | grep -vm1 attached | cut -d: -f1)"
