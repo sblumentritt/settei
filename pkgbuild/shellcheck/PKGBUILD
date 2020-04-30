@@ -7,7 +7,7 @@ pkgname=shellcheck-stable
 pkgdesc="A static analysis tool for shell scripts"
 url="https://www.shellcheck.net/"
 
-pkgver=0.7.0
+pkgver=0.7.1
 pkgrel=1
 
 arch=('x86_64')
@@ -19,7 +19,7 @@ conflicts=("${pkgname_}" "${pkgname_}-git" "${pkgname_}-static")
 depends=('gmp')
 
 source=("https://storage.googleapis.com/${pkgname_}/${pkgname_}-v${pkgver}.linux.x86_64.tar.xz")
-sha512sums=('84e06bee3c8b8c25f46906350fb32708f4b661636c04e55bd19cdd1071265112d84906055372149678d37f09a1667019488c62a0561b81fe6a6b45ad4fae4ac0')
+sha512sums=('19b0f7e0bdaa0860a0543986796cd954e351234320325c43ab39366c35b389ccef4ef4b7c8ba6d9132fcf155844a12ff84bcce3d0ca7662a071b3af7f375b004')
 
 package()
 {
