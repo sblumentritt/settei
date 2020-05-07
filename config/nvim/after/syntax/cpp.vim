@@ -20,6 +20,10 @@ syntax match cppScopeEnd "::\w\+"
 syntax match cppScopeFront "\w\+\ze::" contains=cppCustomScope
             \ containedin=cppCustomClass
 
+" standard template function naming style (lowercase start and mixed)
+syntax match cppCustomTemplateFunc "\<[a-z][a-zA-Z0-9_]\+\ze<.*>("
+            \ containedin=cppScopeEnd,cppCustomClass
+
 " define highlight links
 " --------------------------------------
 highlight default link cppBool        Identifier
@@ -36,3 +40,5 @@ highlight default link cppScopeFront  Identifier
 
 highlight default link cppCustomScope Operator
 highlight default link cppCustomClass Identifier
+
+highlight default link cppCustomTemplateFunc Function
