@@ -281,6 +281,7 @@ call s:highlight('LspCxxHlSkippedRegionBeginEnd', s:colors.magenta)
 
 call s:highlight('LspCxxHlSymEnum', s:colors.blue)
 call s:highlight('LspCxxHlSymEnumMember', s:colors.yellow)
+call s:highlight('LspCxxHlSymEnumConstant', s:colors.yellow)
 call s:highlight('LspCxxHlSymEnumEnumMember', s:colors.yellow)
 
 call s:highlight('LspCxxHlSymClass', s:colors.blue)
