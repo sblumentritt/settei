@@ -308,9 +308,9 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                         \ }
         endif
 
-        if !empty(l:languageservers)
-            call coc#config('languageserver', l:languageservers)
-        endif
+        " if !empty(l:languageservers)
+        "     call coc#config('languageserver', l:languageservers)
+        " endif
     endfunction
 endif
 

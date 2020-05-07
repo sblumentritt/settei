@@ -26,6 +26,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
     function! s:coc_extensions_config() abort
         " coc extensions
         " --------------------------------------
+        call coc#add_extension('coc-clangd')
         call coc#add_extension('coc-vimlsp')
         call coc#add_extension('coc-diagnostic')
         call coc#add_extension('coc-rust-analyzer')
@@ -34,6 +35,26 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         call coc#config('rust-analyzer',
                     \ {
                     \   'serverPath': $CARGO_HOME . '/bin/rust-analyzer',
+                    \ })
+
+        " config for coc-clangd extension
+        call coc#config('clangd',
+                    \ {
+                    \   'arguments':
+                    \   [
+                    \       '--background-index',
+                    \       '--clang-tidy=false',
+                    \       '--completion-style=bundled',
+                    \       '--function-arg-placeholders=false',
+                    \       '--header-insertion=iwyu',
+                    \       '--header-insertion-decorators',
+                    \       '--pch-storage=memory',
+                    \       '--suggest-missing-includes',
+                    \
+                    \       '--log=error',
+                    \   ],
+                    \
+                    \   'semanticHighlighting': v:true,
                     \ })
 
         " config for coc-diagnostic extension
