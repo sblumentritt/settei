@@ -19,6 +19,10 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         autocmd!
         " configure coc extensions on vim enter if it is loaded
         autocmd VimEnter * if exists('g:did_coc_loaded') | call s:coc_extensions_config() | endif
+
+        " switch between header and source files
+        autocmd FileType c,cpp
+                    \ nnoremap <buffer><silent> <F4> :CocCommand clangd.switchSourceHeader<CR>
     augroup END
 
     " functions
