@@ -21,6 +21,13 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                 \ <SID>check_back_space() ? '<TAB>' :
                 \ coc#refresh()
 
+    " use <CR> to confirm completion (<C-g>u means break undo chain at current position)
+    if exists('*complete_info')
+      inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    else
+      inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    endif
+
     " trigger completion
     inoremap <silent><expr> <C-space> coc#refresh()
 
