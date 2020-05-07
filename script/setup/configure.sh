@@ -111,6 +111,8 @@ file_setup() {
         ln -sf "${CONFIG_BASE_PATH}/config/git/config" $HOME/.config/git/config
     fi
 
+    ln -sf "${CONFIG_BASE_PATH}/config/git/ignore" $HOME/.config/git/ignore
+
     sudo cp "${CONFIG_BASE_PATH}/config/udev/"* /etc/udev/rules.d/
 
     # link/copy scripts
