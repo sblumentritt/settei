@@ -291,7 +291,7 @@ fdb() {
 # functions to generate exports
 # --------------------------------------
 __fzf_gen_default_command() {
-    local filter="--exclude \"{.git,target,build,output,node_modules}\""
+    local filter="--exclude \"{.git,.clangd,target,build,output,node_modules}\""
     filter="${filter} --exclude \"dependency/*/\""
 
     export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --color=never ${filter}"
