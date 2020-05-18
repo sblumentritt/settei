@@ -153,6 +153,9 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     \
                     \   'snippetIndicator': '',
                     \   'fixInsertedWord': v:false,
+                    \
+                    \   'asciiCharactersOnly': v:true,
+                    \   'removeDuplicateItems': v:true,
                     \ })
 
         call coc#config('suggest.completionItemKindLabels',
@@ -199,6 +202,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     \   'virtualText': v:true,
                     \   'virtualTextLines': 1,
                     \   'virtualTextPrefix': '> ',
+                    \   'virtualTextCurrentLineOnly': v:false,
                     \ })
 
         call coc#config('signature',
@@ -206,6 +210,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     \   'floatMaxWidth': 100,
                     \   'maxWindowHeight': 10,
                     \   'triggerSignatureWait': 200,
+                    \   'preferShownAbove': v:false,
                     \ })
 
         call coc#config('codeLens',
