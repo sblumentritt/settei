@@ -70,6 +70,9 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         autocmd!
         " update signature help on jump placeholder
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+        " call signature help on cursor hold in insert mode which is
+        " useful when parenthesis are inserted automatically e.g. on pressing <CR>
+        autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
         " configure coc on vim enter if it is loaded
         autocmd VimEnter * if exists('g:did_coc_loaded') | call s:coc_config() | endif
     augroup END
