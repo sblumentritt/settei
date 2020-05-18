@@ -23,9 +23,9 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
 
     " use <CR> to confirm completion (<C-g>u means break undo chain at current position)
     if exists('*complete_info')
-      inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+      inoremap <expr> <CR> complete_info()['selected'] != '-1' ? '<C-y>' : '<C-g>u<CR>'
     else
-      inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+      inoremap <expr> <CR> pumvisible() ? '<C-y>' : '<C-g>u<CR>'
     endif
 
     " trigger completion
