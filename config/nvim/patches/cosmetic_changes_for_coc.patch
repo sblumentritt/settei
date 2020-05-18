@@ -1,8 +1,8 @@
 diff --git a/src/completion/index.ts b/src/completion/index.ts
-index c88a3661..c090f993 100644
+index 205b08df..1accfe34 100644
 --- a/src/completion/index.ts
 +++ b/src/completion/index.ts
-@@ -231,7 +231,8 @@ export class Completion implements Disposable {
+@@ -251,7 +251,8 @@ export class Completion implements Disposable {
            if (disableMenuShortcut && key == 'menu') {
              obj[key] = item[key].replace(/\[\w+\]$/, '')
            } else if (key == 'abbr' && item[key].length > labelMaxLength) {
@@ -13,7 +13,7 @@ index c88a3661..c090f993 100644
              obj[key] = item[key]
            }
 diff --git a/src/language-client/client.ts b/src/language-client/client.ts
-index f36faf38..b3446d83 100644
+index dde3ce67..278ca0fc 100644
 --- a/src/language-client/client.ts
 +++ b/src/language-client/client.ts
 @@ -1895,7 +1895,7 @@ class CompletionItemFeature extends TextDocumentFeature<CompletionOptions, Compl
@@ -26,10 +26,23 @@ index f36faf38..b3446d83 100644
        provider,
        triggerCharacters,
 diff --git a/src/languages.ts b/src/languages.ts
-index c667dce4..e7219f83 100644
+index ce6a3b62..bd5c695a 100644
 --- a/src/languages.ts
 +++ b/src/languages.ts
-@@ -736,7 +736,7 @@ class Languages {
+@@ -121,7 +121,11 @@ class Languages {
+         event.waitUntil(willSaveWaitUntil())
+       }
+     }, null, 'languageserver')
+-    this.loadCompleteConfig()
++    workspace.ready.then(() => {
++      this.loadCompleteConfig()
++    }, _e => {
++      // noop
++    })
+     workspace.onDidChangeConfiguration(this.loadCompleteConfig, this)
+   }
+ 
+@@ -787,7 +791,7 @@ class Languages {
        let detail = item.detail.replace(/\n\s*/g, ' ')
        if (byteLength(detail) < detailMaxLength) {
          if (detailField == 'menu') {
