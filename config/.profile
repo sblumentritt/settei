@@ -36,7 +36,7 @@ fi
 #    e.g. for chromium
 # --------------------------------------
 gnome_interface_schema="org.gnome.desktop.interface"
-gsettings set ${gnome_interface_schema} gtk-theme "Pop-4-slim-dark"
+gsettings set ${gnome_interface_schema} gtk-theme "Pop-dark"
 gsettings set ${gnome_interface_schema} icon-theme "Papirus-Dark"
 gsettings set ${gnome_interface_schema} font-name "Lato 10"
 gsettings set ${gnome_interface_schema} monospace-font-name "Source Code Pro 10"
