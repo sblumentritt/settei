@@ -170,7 +170,7 @@ package_installation() {
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git rustup cmake doxygen graphviz"
+    packages="${packages} git rustup cmake cppcheck doxygen graphviz"
 
     # music
     packages="${packages} mpd mpc"
@@ -283,7 +283,7 @@ external_packages() {
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="cppcheck,iwyu,shellcheck,pop-gtk-theme"
+    local external_packages="iwyu,shellcheck,pop-gtk-theme"
 
     for package in $external_packages; do
         cp -r "${CONFIG_BASE_PATH}/pkgbuild/${package}" "./${package}"
