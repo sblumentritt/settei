@@ -39,6 +39,12 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         call coc#config('rust-analyzer',
                     \ {
                     \   'serverPath': $CARGO_HOME . '/bin/rust-analyzer',
+                    \
+                    \   'completion.addCallParenthesis': v:false,
+                    \   'completion.addCallArgumentSnippets': v:false,
+                    \
+                    \   'lens.enable': v:false,
+                    \   'inlayHints.chainingHints': v:false,
                     \ })
 
         " config for coc-clangd extension
