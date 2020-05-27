@@ -30,10 +30,17 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
     function! s:coc_extensions_config() abort
         " coc extensions
         " --------------------------------------
+        call coc#add_extension('coc-pairs')
         call coc#add_extension('coc-clangd')
         call coc#add_extension('coc-vimlsp')
         call coc#add_extension('coc-diagnostic')
         call coc#add_extension('coc-rust-analyzer')
+
+        " config for coc-pairs extension
+        call coc#config('pairs',
+                    \ {
+                    \   'enableCharacters': ["(", "[", "{", "<"]
+                    \ })
 
         " config for coc-rust-analyzer extension
         call coc#config('rust-analyzer',
