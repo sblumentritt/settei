@@ -72,7 +72,11 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
         " call signature help on cursor hold in insert mode which is
         " useful when parenthesis are inserted automatically e.g. on pressing <CR>
-        autocmd CursorHoldI * call s:call_signature_help()
+        autocmd CursorHoldI * call s:call_signature_help(v:false)
+        " call signature help on cursor move in insert mode when a floating window exists
+        " to prevent floating windows when the source code changed and the signature help
+        " is no longer valid/available
+        autocmd CursorMovedI * call s:call_signature_help(v:true)
         " configure coc on vim enter if it is loaded
         autocmd VimEnter * if exists('g:did_coc_loaded') | call s:coc_config() | endif
     augroup END
@@ -124,12 +128,12 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
         endif
     endfunction
 
-    function! s:call_signature_help()
+    function! s:call_signature_help(on_has_float)
         " check if coc.nvim already created a floating window
         " otherwise calling 'showSignatureHelp' will break scrolling
         " in the floating window as it is always recreated
         let l:ret = coc#util#has_float()
-        if l:ret != v:true
+        if l:ret != v:true || (a:on_has_float == v:true && l:ret == v:true)
             call CocActionAsync('showSignatureHelp')
         endif
     endfunction
