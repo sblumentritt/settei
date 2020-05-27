@@ -118,7 +118,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     autocmd CursorHold * silent call CocActionAsync('highlight')
                 augroup END
             else
-                echomsg 'coc: symbol highlight [enabled]'
+                echomsg 'coc: symbol highlight [disabled]'
                 autocmd! coc_highlight
             endif
         endif
