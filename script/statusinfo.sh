@@ -35,6 +35,13 @@ memory_info() {
 	printf "%s MB/%s MB" "${used}" "${total}"
 }
 
+loadavg_info() {
+    local cpu_count=$(cat /proc/cpuinfo | rg 'model name' | wc -l)
+    local loadavg=$(cat /proc/loadavg | cut -d ' ' -f1,2,3)
+
+    printf "%s (%s)" "${loadavg}" "${cpu_count}"
+}
+
 network_info() {
     local net_card=$(awk '$2 == 00000000 {printf $1}' /proc/net/route)
     local ip_addr=$(ip addr show ${net_card} | grep "inet\\b" | awk '{printf $2}' | cut -d/ -f1)
@@ -76,6 +83,7 @@ main() {
 
         buf="${buf}$(music_info)$(spacer)"
         buf="${buf}${update_count}$(spacer)"
+        buf="${buf}$(loadavg_info)$(spacer)"
         buf="${buf}$(memory_info)$(spacer)"
         buf="${buf}$(network_info)$(spacer)"
         buf="${buf}$(clock_info)"
