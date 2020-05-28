@@ -179,12 +179,6 @@ package_installation() {
     packages="${packages} alacritty neovim yarn tmux ranger tig htop"
     packages="${packages} fzf ripgrep fd exa jq"
 
-    # packages which might be interesting:
-    # tokei - displays statistics about source code
-    # hexyl - hex viewer with colors
-    # hyperfine - command-line benchmarking tool
-    # ncdu - ncurses disk usage analyzer
-
     # style
     packages="${packages} qt5ct kvantum-qt5 papirus-icon-theme"
     # fonts
