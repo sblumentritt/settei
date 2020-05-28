@@ -85,11 +85,11 @@ main() {
         buf="${buf}${update_count}$(spacer)"
         buf="${buf}$(loadavg_info)$(spacer)"
         buf="${buf}$(memory_info)$(spacer)"
-        buf="${buf}$(network_info)$(spacer)"
+        # buf="${buf}$(network_info)$(spacer)"
         buf="${buf}$(clock_info)"
 
 		printf "%s \n" "${buf}"
-        sleep 1
+        sleep 2
     done
 }
 
