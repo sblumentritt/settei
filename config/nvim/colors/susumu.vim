@@ -144,6 +144,12 @@ call s:highlight('TabLineSel', s:colors.orange)
 call s:highlight('Visual', s:colors.none, s:colors.dark_gray)
 call s:highlight('WildMenu', s:colors.orange)
 
+" custom groups
+" --------------------------------------
+call s:highlight('GenericBold', s:colors.none, s:colors.none, 'bold')
+call s:highlight('GenericItalic', s:colors.none, s:colors.none, 'italic')
+call s:highlight('GenericUnderline', s:colors.none, s:colors.none, 'underline')
+
 " for custom statusline
 " --------------------------------------
 call s:highlight('ModeStatusNormal', s:colors.bg, s:colors.gray)
