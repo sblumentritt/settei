@@ -36,6 +36,12 @@ memory_info() {
 }
 
 loadavg_info() {
+    # NOTE: it would be nice to divide the load averages with the CPU count
+    #       which would negate the need for the CPU count in the status info
+    #       and on every system a load average of 1.00 would be 100% load
+    #       without needing to know the CPU count of the system.
+    #
+    #       There is no native way to do floating-point arithmetic in the shell!
     local cpu_count=$(cat /proc/cpuinfo | rg 'model name' | wc -l)
     local loadavg=$(cat /proc/loadavg | cut -d ' ' -f1,2,3)
 
