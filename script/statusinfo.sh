@@ -29,10 +29,31 @@ update_info() {
 }
 
 memory_info() {
-    local used=$(free -m | awk 'NR==2{printf $3}')
-    local total=$(free -m | awk 'NR==2{printf $2}')
+    local meminfo=$(cat /proc/meminfo)
 
-	printf "%s MB/%s MB" "${used}" "${total}"
+    local mem_total=$(printf "${meminfo}" | rg '^MemTotal' \
+        | cut -f 2 -d ":" | sed -e 's/^[[:space:]]*//' | cut -f 1 -d " ")
+    local mem_free=$(printf "${meminfo}" | rg '^MemFree' \
+        | cut -f 2 -d ":" | sed -e 's/^[[:space:]]*//' | cut -f 1 -d " ")
+    local buffers=$(printf "${meminfo}" | rg '^Buffers' \
+        | cut -f 2 -d ":" | sed -e 's/^[[:space:]]*//' | cut -f 1 -d " ")
+    local cached=$(printf "${meminfo}" | rg '^Cached' \
+        | cut -f 2 -d ":" | sed -e 's/^[[:space:]]*//' | cut -f 1 -d " ")
+    local slab=$(printf "${meminfo}" | rg '^Slab' \
+        | cut -f 2 -d ":" | sed -e 's/^[[:space:]]*//' | cut -f 1 -d " ")
+
+    # convert from KB to MB
+    mem_total=$((mem_total / 1024))
+    mem_free=$((mem_free / 1024))
+    buffers=$((buffers / 1024))
+    cached=$((cached / 1024))
+    slab=$((slab / 1024))
+
+    # calculate the memory usage according to:
+    # https://access.redhat.com/solutions/406773
+    local mem_used=$((mem_total - mem_free - buffers - cached - slab))
+
+	printf "%s MB/%s MB" "${mem_used}" "${mem_total}"
 }
 
 loadavg_info() {
