@@ -25,7 +25,7 @@ music_info() {
 }
 
 update_info() {
-	printf "%s" "$(checkupdates | wc -l)"
+    printf "%s" "$(checkupdates | wc -l)"
 }
 
 memory_info() {
@@ -53,7 +53,7 @@ memory_info() {
     # https://access.redhat.com/solutions/406773
     local mem_used=$((mem_total - mem_free - buffers - cached - slab))
 
-	printf "%s MB/%s MB" "${mem_used}" "${mem_total}"
+    printf "%s MB/%s MB" "${mem_used}" "${mem_total}"
 }
 
 loadavg_info() {
@@ -77,7 +77,7 @@ network_info() {
         ip_addr="NOT CONNECTED"
     fi
 
-	printf "%s" "${ip_addr}"
+    printf "%s" "${ip_addr}"
 }
 
 clock_info() {
@@ -115,7 +115,7 @@ main() {
         # buf="${buf}$(network_info)$(spacer)"
         buf="${buf}$(clock_info)"
 
-		printf "%s \n" "${buf}"
+        printf "%s \n" "${buf}"
         sleep 2
     done
 }
