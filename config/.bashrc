@@ -83,7 +83,9 @@ export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 
 # add rust stable toolchain man pages to search path
-export MANPATH="$RUSTUP_HOME/toolchains/stable-x86_64-unknown-linux-gnu/share/man:$MANPATH"
+if [ -d $RUSTUP_HOME/toolchains/stable-x86_64-unknown-linux-gnu/share/man ]; then
+    export MANPATH="$RUSTUP_HOME/toolchains/stable-x86_64-unknown-linux-gnu/share/man:$MANPATH"
+fi
 
 # --------------------------------------
 # source files
