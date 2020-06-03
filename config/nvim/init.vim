@@ -66,9 +66,10 @@ Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
 Plug 'https://github.com/cespare/vim-toml'
 Plug 'https://github.com/rust-lang/rust.vim'
 Plug 'https://github.com/tpope/vim-markdown'
-Plug 'https://git.sr.ht/~sblumentritt/cmake.vim'
 Plug 'https://github.com/MTDL9/vim-log-highlighting'
-Plug 'https://git.sr.ht/~sblumentritt/bitbake.vim', {'branch': 'thud'}
+
+Plug 'https://gitlab.com/s.blumentritt/cmake.vim'
+Plug 'https://gitlab.com/s.blumentritt/bitbake.vim'
 
 " utilities
 Plug 'https://github.com/moll/vim-bbye'
