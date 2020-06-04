@@ -1,7 +1,8 @@
-## settei (設定)
+# settei (設定)
 
 This repository holds configs/dotfiles/scripts for linux.
 
-#### License
+## License
 
-The project is licensed under the MIT license. See [LICENSE](LICENSE) for more information.
+The project is licensed under the MIT license. See [LICENSE](LICENSE) for more
+information.
