@@ -8,7 +8,7 @@ pkgdesc="A static analysis tool for shell scripts"
 url="https://www.shellcheck.net/"
 
 pkgver=0.7.1
-pkgrel=1
+pkgrel=2
 
 arch=('x86_64')
 license=('GPL3')
@@ -16,10 +16,8 @@ license=('GPL3')
 provides=("${pkgname_}")
 conflicts=("${pkgname_}" "${pkgname_}-git" "${pkgname_}-static")
 
-depends=('gmp')
-
-source=("https://storage.googleapis.com/${pkgname_}/${pkgname_}-v${pkgver}.linux.x86_64.tar.xz")
-sha512sums=('19b0f7e0bdaa0860a0543986796cd954e351234320325c43ab39366c35b389ccef4ef4b7c8ba6d9132fcf155844a12ff84bcce3d0ca7662a071b3af7f375b004')
+source=("https://github.com/koalaman/${pkgname_}/releases/download/v${pkgver}/${pkgname_}-v${pkgver}.linux.x86_64.tar.xz")
+sha512sums=('beca3d7819a6bdcfbd044576df4fc284053b48f468b2f03428fe66f4ceb2c05d9b5411357fa15003cb0311406c255084cf7283a3b8fce644c340c2f6aa910b9f')
 
 package() {
     install -m755 -D "${srcdir}/${pkgname_}-v${pkgver}/${pkgname_}" \
