@@ -189,12 +189,12 @@ package_installation() {
 
     if [ -f /etc/profile.d/work.sh ]; then
         # work extras
-        packages="${packages} xf86-video-amdgpu wireshark-qt nload"
+        packages="${packages} xf86-video-amdgpu wireshark-qt nload socat"
         # work cross development
-        packages="${packages} minicom cpio docker"
+        packages="${packages} minicom cpio docker aarch64-linux-gnu-gcc"
 
         # old packages:
-        # gdb strace valgrind nmap meld socat tftp-hpa tk
+        # gdb strace valgrind nmap meld tftp-hpa tk
     fi
 
     # install packages
@@ -238,30 +238,8 @@ package_installation() {
 
         # enable/start services
         # --------------------------------------
-        # sudo systemctl enable tftpd.service
-        # sudo systemctl start tftpd.service
-
         sudo systemctl enable docker.service
         sudo systemctl start docker.service
-
-        # download old aarch64 gcc version
-        # --------------------------------------
-        cd /tmp || return
-        local arch_archive="https://archive.archlinux.org/packages"
-        local aarch64_gcc_package="aarch64-linux-gnu-gcc"
-        local package_extension="pkg.tar.xz"
-        local output_name="$aarch64_gcc_package.$package_extension"
-
-        # use -L option to follow redirects like HTTP 301/302/303
-        curl -L \
-           $arch_archive/a/$aarch64_gcc_package/$aarch64_gcc_package-8.3.0-1-x86_64.$package_extension \
-            -o $output_name
-
-        sudo pacman -U --needed --noconfirm $output_name
-        cd - || return
-
-        # ignore package updates
-        sudo sed -i -E 's/#IgnorePkg   =/IgnorePkg   = aarch64-linux-gnu-gcc/g' /etc/pacman.conf
     fi
 }
 
