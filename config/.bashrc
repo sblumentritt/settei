@@ -182,6 +182,30 @@ glocal() {
     git config user.email "blumentritt.sebastian@gmail.com"
 }
 
+# call 'git pull' for each repo in a max depth of 2 which helps
+# to easily synchronize multiple local repos with the remote
+gpull() {
+    for dir in $(fd --max-depth 2 --type d); do
+
+        # use subshell which removes the need to `cd -` back
+        # as the directory is not changed in the current shell
+        (
+            cd $dir || exit
+            if [ -d ".git/" ]; then
+                printf "\n"
+                printf "calling 'git pull' for '%s'\n" "$dir"
+                printf "===========================================\n"
+
+                git pull
+            else
+                printf "\n"
+                printf "NOTE: '%s' is not a git repository!\n" "$dir"
+                printf ":::::::::::::::::::::::::::::::::::::::::::\n"
+            fi
+        )
+    done
+}
+
 # reload the history
 rhistory() {
     history -c
