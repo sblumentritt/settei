@@ -87,28 +87,28 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '0x1d2021'
-    foreground: '0xf2e7c5'
+    background: '0x303030'
+    foreground: '0xe5e5d4'
 
   normal:
-    black:   '0x3c3a3a'
-    red:     '0xef6851'
-    green:   '0xc8bb5b'
-    yellow:  '0xfaa055'
-    blue:    '0x82c1a8'
-    magenta: '0xd3879c'
-    cyan:    '0x9fca8f'
-    white:   '0xebe2d3'
+    black:   '0x3e3e3e'
+    red:     '0xe37b70'
+    green:   '0xc3c581'
+    yellow:  '0xdfa076'
+    blue:    '0x8fc0c0'
+    magenta: '0xdc9f9f'
+    cyan:    '0x9dc2a4'
+    white:   '0xf2f2e0'
 
   bright:
-    black:   '0x9d8f81'
-    red:     '0xef6851'
-    green:   '0xc8bb5b'
-    yellow:  '0xfcbd5e'
-    blue:    '0x82c1a8'
-    magenta: '0xd3879c'
-    cyan:    '0x9fca8f'
-    white:   '0xf2e7c5'
+    black:   '0x9d9287'
+    red:     '0xe37b70'
+    green:   '0xc3c581'
+    yellow:  '0xecc68f'
+    blue:    '0x8fc0c0'
+    magenta: '0xdc9f9f'
+    cyan:    '0x9dc2a4'
+    white:   '0xe5e5d4'
 
   # indexed colors include all colors from 16 to 256
   indexed_colors: []
