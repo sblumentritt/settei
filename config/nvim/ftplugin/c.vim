@@ -21,6 +21,9 @@ setlocal cinoptions+=g0
 setlocal cinoptions+=N-s
 setlocal commentstring=//\ %s
 
+setlocal comments=s1:/*,mb:*,ex:*/,s0:/*,mb:\ ,ex:*/,:///,://!,://
+setlocal formatoptions-=t formatoptions+=croqnlj
+
 " cleanup
 " --------------------------------------
 "  reset options on filetype change
