@@ -2,6 +2,7 @@
 
 # global variable
 CONFIG_BASE_PATH="$HOME/development/unspecified/settei"
+CARGO_HOME="$HOME/.local/share/cargo"
 
 main() {
     printf "\nSetup directories? [y/n] "
@@ -58,6 +59,7 @@ dir_setup() {
     # required to not pollute the home dir
     mkdir -p "$HOME/.local/share/tig"
     mkdir -p "$HOME/.local/share/bash"
+    mkdir -p "$CARGO_HOME"
 }
 
 file_setup() {
@@ -112,6 +114,7 @@ file_setup() {
     fi
 
     ln -sf "${CONFIG_BASE_PATH}/config/git/ignore" $HOME/.config/git/ignore
+    ln -sf "${CONFIG_BASE_PATH}/config/cargo/config.toml" $CARGO_HOME/config
 
     sudo cp "${CONFIG_BASE_PATH}/config/udev/"* /etc/udev/rules.d/
 
