@@ -49,6 +49,7 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     \
                     \   'completion.addCallParenthesis': v:false,
                     \   'completion.addCallArgumentSnippets': v:false,
+                    \   'completion.postfix.enable': v:false,
                     \
                     \   'lens.enable': v:false,
                     \   'inlayHints.chainingHints': v:false,
