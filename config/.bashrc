@@ -155,7 +155,6 @@ alias vim="nvim"
 alias nivm="nvim" # wrapper if misspelling nvim
 
 # cmake related
-alias cinstall="cmake --install"
 alias cmake="CMAKE_EXPORT_COMPILE_COMMANDS=1 cmake"
 
 # development related
