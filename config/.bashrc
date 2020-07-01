@@ -249,32 +249,6 @@ cbuild() {
     cmake --build . --parallel "$@" -- -s
 }
 
-# helper to for include-what-you-use
-iwyu_log() {
-    usage="Usage: iwyu_log PATH_TO_BUILD_DIR LOG_FILE_NAME"
-    if [ -z "$1" ]; then
-        printf "%s\n" "$usage"
-    elif [ -z "$2" ]; then
-        printf "%s\n" "$usage"
-    else
-        compile_commands="$1/compile_commands.json"
-        if [ -f "$compile_commands" ]; then
-            iwyu-tool -j 8 -p "$compile_commands" -o iwyu -- \
-                -Xiwyu --no_default_mappings \
-                -Xiwyu --mapping_file=$XDG_CONFIG_HOME/iwyu/custom.imp \
-                -Xiwyu --cxx17ns \
-                -Xiwyu --transitive_includes_only \
-                -Xiwyu --quoted_includes_first \
-                | sed '/^The full.*/,/---/{//!d}' \
-                | sed -r 's/^The full.*//g' \
-                | sed 's/^warning:.*//g' \
-                > $2.iwyu
-        else
-            printf "%s does not contain a compile_commands.json file!\n" "$1"
-        fi
-    fi
-}
-
 # helper to create btrfs snapshots
 csnap() {
     local snapshot_date=$(date "+%Y_%m_%d")
