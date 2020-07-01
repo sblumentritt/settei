@@ -173,7 +173,7 @@ package_installation() {
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git rustup cmake cppcheck doxygen graphviz"
+    packages="${packages} git rustup cmake"
 
     # music
     packages="${packages} mpd mpc"
@@ -193,6 +193,8 @@ package_installation() {
     if [ -f /etc/profile.d/work.sh ]; then
         # work extras
         packages="${packages} xf86-video-amdgpu wireshark-qt nload socat"
+        # work development
+        packages="${packages} cppcheck doxygen graphviz"
         # work cross development
         packages="${packages} minicom cpio docker aarch64-linux-gnu-gcc"
 
