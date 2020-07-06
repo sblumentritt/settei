@@ -101,7 +101,7 @@ bar
 
     status_padding 0
     status_edge_padding 0
-    status_command exec statusinfo.sh
+    status_command exec swaystatus 2> /tmp/swaystatus.log
 
     colors
     {
