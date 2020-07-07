@@ -1,10 +1,10 @@
 diff --git a/src/completion/index.ts b/src/completion/index.ts
-index 205b08df..1accfe34 100644
+index f2fb6ca5..75637a9e 100644
 --- a/src/completion/index.ts
 +++ b/src/completion/index.ts
-@@ -251,7 +251,8 @@ export class Completion implements Disposable {
+@@ -211,7 +211,8 @@ export class Completion implements Disposable {
            if (disableMenuShortcut && key == 'menu') {
-             obj[key] = item[key].replace(/\[\w+\]$/, '')
+             obj[key] = item[key].replace(/\[.+\]$/, '')
            } else if (key == 'abbr' && item[key].length > labelMaxLength) {
 -            obj[key] = item[key].slice(0, labelMaxLength)
 +            obj[key] = item[key].slice(0, labelMaxLength - 3)
@@ -13,23 +13,23 @@ index 205b08df..1accfe34 100644
              obj[key] = item[key]
            }
 diff --git a/src/language-client/client.ts b/src/language-client/client.ts
-index dde3ce67..278ca0fc 100644
+index 4d1073fe..130343a2 100644
 --- a/src/language-client/client.ts
 +++ b/src/language-client/client.ts
-@@ -1895,7 +1895,7 @@ class CompletionItemFeature extends TextDocumentFeature<CompletionOptions, Compl
+@@ -1886,7 +1886,7 @@ class CompletionItemFeature extends TextDocumentFeature<CompletionOptions, Compl
      const languageIds = cv.asLanguageIds(options.documentSelector!)
      const disposable = languages.registerCompletionItemProvider(
-       this._client.id,
+       this._client.id + '-' + this.index,
 -      'LS',
 +      'lsp',
        languageIds,
        provider,
        triggerCharacters,
 diff --git a/src/languages.ts b/src/languages.ts
-index ce6a3b62..bd5c695a 100644
+index 55014359..6e6a807f 100644
 --- a/src/languages.ts
 +++ b/src/languages.ts
-@@ -121,7 +121,11 @@ class Languages {
+@@ -118,7 +118,11 @@ class Languages {
          event.waitUntil(willSaveWaitUntil())
        }
      }, null, 'languageserver')
@@ -42,7 +42,7 @@ index ce6a3b62..bd5c695a 100644
      workspace.onDidChangeConfiguration(this.loadCompleteConfig, this)
    }
  
-@@ -787,7 +791,7 @@ class Languages {
+@@ -769,7 +773,7 @@ class Languages {
        let detail = item.detail.replace(/\n\s*/g, ' ')
        if (byteLength(detail) < detailMaxLength) {
          if (detailField == 'menu') {
