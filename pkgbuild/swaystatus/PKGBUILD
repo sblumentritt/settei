@@ -6,14 +6,14 @@ pkgname=swaystatus
 pkgdesc="'Rust' rewrite of my shell script which is used to populate swaybar"
 url="https://gitlab.com/s.blumentritt/swaystatus"
 
-pkgver=0.2.1
+pkgver=0.3.0
 pkgrel=1
 
 arch=('x86_64')
 license=('MIT')
 
-source=("${pkgname}-${pkgver}.zip::https://gitlab.com/s.blumentritt/${pkgname}/-/jobs/artifacts/v${pkgver}/download?job=linux-musl")
-sha512sums=('eff4aa1f33fa4f1587d83a101077baa377222682f82934e8521caf1ff17a75615c16bbd4ac4457754f7b8abc8157d84bc9ecb7e19591c5d76d86a657f2da7e37')
+source=("${pkgname}-${pkgver}.zip::https://gitlab.com/s.blumentritt/${pkgname}/-/jobs/artifacts/v${pkgver}/download?job=build-linux-musl")
+sha512sums=('33c163daa8bd0583dbbf67d095ef0aedb8b7c66ff92bcde9d101aba6f399142886e8b658f75566272ee5802115deca7be813b8bc54c2f8bbd44b69cb6a0bbfa8')
 
 package() {
     install -m755 -D "${srcdir}/target/x86_64-unknown-linux-musl/release/${pkgname}" \
