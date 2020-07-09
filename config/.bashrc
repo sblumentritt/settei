@@ -205,6 +205,25 @@ gpull() {
     done
 }
 
+# modify the timestamp of some core file before running 'cargo clippy'
+# this is needed because clippy does not show the warnings after a rerun
+# nightly fix: https://github.com/rust-lang/rust-clippy/issues/2604#issuecomment-605706436
+rclippy() {
+    local main_file=${PWD}/src/main.rs
+    local lib_file=${PWD}/src/lib.rs
+
+    if [ -f ${main_file} ]; then
+        touch ${main_file}
+    elif [ -f ${lib_file} ]; then
+        touch ${lib_file}
+    else
+        printf "Unable to find required source file!\n"
+        return
+    fi
+
+    cargo clippy
+}
+
 # reload the history
 rhistory() {
     history -c
