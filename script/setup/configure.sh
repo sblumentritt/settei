@@ -92,6 +92,8 @@ file_setup() {
     ln -sf "${CONFIG_BASE_PATH}/config/fontconfig" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/user-dirs.dirs" $HOME/.config/
 
+    ln -sf "${CONFIG_BASE_PATH}/config/cargo/"* $CARGO_HOME/
+
     ln -sf "${CONFIG_BASE_PATH}/config/mpd/"* $HOME/.config/mpd/
     ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* $HOME/.config/ranger/
     ln -sf "${CONFIG_BASE_PATH}/config/gtk-2.0/"* $HOME/.config/gtk-2.0/
@@ -113,7 +115,6 @@ file_setup() {
     fi
 
     ln -sf "${CONFIG_BASE_PATH}/config/git/ignore" $HOME/.config/git/ignore
-    ln -sf "${CONFIG_BASE_PATH}/config/cargo/config.toml" $CARGO_HOME/config
 
     sudo cp "${CONFIG_BASE_PATH}/config/udev/"* /etc/udev/rules.d/
 
