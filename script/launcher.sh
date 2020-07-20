@@ -58,9 +58,9 @@ fi
 if [ "${e_flag}" = 1 ]; then
     list_executables | fzf | (nohup xargs -I{} sh -c '{} &' >/dev/null 2>&1)
 elif [ "${d_flag}" = 1 ]; then
-    documents_base_dir="$HOME/documents/pdfs"
+    documents_base_dir="$HOME/documents"
 
-    fd --type file --follow --color=never -e pdf . $documents_base_dir | \
+    fd -H --type file --follow --color=never -e pdf -e epub . $documents_base_dir | \
         sed -e "s#$documents_base_dir/##g" | \
         fzf | \
         (nohup xargs -I{} sh -c "mupdf $documents_base_dir/{} &" >/dev/null 2>&1)
