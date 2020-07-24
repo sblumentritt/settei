@@ -184,7 +184,7 @@ glocal() {
 # call 'git pull' for each repo in a max depth of 2 which helps
 # to easily synchronize multiple local repos with the remote
 gpull() {
-    for dir in $(fd --max-depth 2 --type d); do
+    for dir in $(fd --max-depth 2 --type d --hidden); do
 
         # use subshell which removes the need to `cd -` back
         # as the directory is not changed in the current shell
