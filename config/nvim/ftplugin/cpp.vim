@@ -17,41 +17,50 @@ set cpoptions&vim
 " user commands
 " --------------------------------------
 if !exists(':ClassSkeleton')
-    command -buffer -nargs=0 ClassSkeleton :call <SID>class_skeleton()
+    command -buffer -nargs=0 ClassSkeleton :call <SID>object_skeleton("class")
+endif
+
+if !exists(':StructSkeleton')
+    command -buffer -nargs=0 StructSkeleton :call <SID>object_skeleton("struct")
 endif
 
 " helper functions
 " --------------------------------------
-" generate a modern c++ class skeleton for header files
-if !exists('*s:class_skeleton')
-    function s:class_skeleton()
-        if expand('%:e') ==# 'h' || expand('%:e') ==# 'hpp'
-            let l:class = input('Enter class name: ', '')
-            if !empty(l:class)
-                let class_skeleton =
-                            \[
-                            \ '',
-                            \ '/// TODO: document the class',
-                            \ 'class ' . l:class . ' {',
-                            \ 'public:',
-                            \ '    /// Constructor.',
-                            \ '    ' . l:class . '() = default;',
-                            \ '    /// Destructor.',
-                            \ '    ~' . l:class . '() noexcept = default;',
-                            \ '',
-                            \ '    /// Copy constructor.',
-                            \ '    ' . l:class . '(' . l:class . ' const& other) = default;',
-                            \ '    /// Copy assignment.',
-                            \ '    auto operator=(' . l:class . ' const& other) -> ' . l:class . '& = default;',
-                            \ '',
-                            \ '    /// Move constructor.',
-                            \ '    ' . l:class . '(' . l:class . '&& other) noexcept = default;',
-                            \ '    /// Move assignment.',
-                            \ '    auto operator=(' . l:class . '&& other) noexcept -> ' . l:class . '& = default;',
-                            \ '};',
-                            \]
-                call append(line('.'), class_skeleton)
+" generate a modern C++ object skeleton
+if !exists('*s:object_skeleton')
+    function s:object_skeleton(base)
+        let l:object = input('Enter object name: ', '')
+        if !empty(l:object)
+            let l:object_skeleton =
+                        \ [
+                        \   '',
+                        \   '/// TODO: document the ' . a:base,
+                        \   a:base . ' ' . l:object . ' {',
+                        \ ]
+
+            if a:base == "class"
+                call add(l:object_skeleton, 'public:')
             endif
+
+            call extend(l:object_skeleton,
+                        \ [
+                        \   '    /// Constructor.',
+                        \   '    ' . l:object . '() = default;',
+                        \   '    /// Destructor.',
+                        \   '    ~' . l:object . '() noexcept = default;',
+                        \   '',
+                        \   '    /// Copy constructor.',
+                        \   '    ' . l:object . '(' . l:object . ' const& other) = default;',
+                        \   '    /// Copy assignment.',
+                        \   '    auto operator=(' . l:object . ' const& other) -> ' . l:object . '& = default;',
+                        \   '',
+                        \   '    /// Move constructor.',
+                        \   '    ' . l:object . '(' . l:object . '&& other) noexcept = default;',
+                        \   '    /// Move assignment.',
+                        \   '    auto operator=(' . l:object . '&& other) noexcept -> ' . l:object . '& = default;',
+                        \   '};',
+                        \ ])
+            call append(line('.'), l:object_skeleton)
         endif
     endfunction
 endif
