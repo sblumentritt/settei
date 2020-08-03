@@ -25,6 +25,9 @@ window:
   # - Fullscreen
   startup_mode: Windowed
 
+  # allow terminal applications to change window title
+  dynamic_title: false
+
   # window title
   title: Alacritty
 
@@ -119,7 +122,7 @@ colors:
     background: '0x3c3a3a'
 
 # specifying a 'duration' of '0' will disable the visual bell
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '0xebe2d3'
@@ -147,9 +150,6 @@ selection:
 
   # when set to 'true', selected text will be copied to the primary clipboard
   save_to_clipboard: true
-
-# allow terminal applications to change window title
-dynamic_title: false
 
 cursor:
   # - ▇ Block
