@@ -8,7 +8,7 @@ syntax keyword cppStructs class typename template namespace
 syntax keyword cppSpecifier constexpr decltype final noexcept
 syntax keyword cppSpecifier inline virtual explicit export override
 
-syntax region cppAttribute start=+\[\[+ end=+\]\]+
+syntax match cppAttribute "\[\[.*\]\]" contains=cString
 
 " classes should follow 'CamelCase'
 syntax match cppCustomClass "\<\u\(\l\|\u\l\)\+\>"
