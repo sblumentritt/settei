@@ -160,7 +160,27 @@ let g:lens#width_resize_min = 20
 let g:lens#width_resize_max = 150
 let g:lens#height_resize_max = 25
 
-let g:lens#disabled_filetypes = ['fzf']
+let g:lens#disabled_filetypes = ['fzf', 'vista', 'vista_kind']
+
+" vista configurations
+" --------------------------------------
+let g:vista_echo_cursor = 0
+let g:vista_stay_on_open = 0
+let g:vista#renderer#enable_icon = 0
+let g:vista_default_executive = 'coc'
+
+let g:vista_blink = [0, 0]
+let g:vista_top_level_blink = [0, 0]
+
+" the g:vista_sidebar_width variable does not seem to work
+augroup force_vista_width
+    autocmd! FileType vista
+    autocmd FileType vista vertical resize 60
+augroup END
+
+" custom keybindings for vista
+nnoremap <silent> <F3> :Vista!!<CR>
+nnoremap <silent> <leader><F3> :Vista finder<CR>
 
 " restore old value of cpoptions
 let &cpoptions = s:save_cpo
