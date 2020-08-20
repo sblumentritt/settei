@@ -93,7 +93,6 @@ colors:
     background: '0x383838'
     foreground: '0xe5dbd0'
 
-  # Normal colors
   normal:
     black:   '0x454545'
     red:     '0xda7c72'
@@ -104,7 +103,6 @@ colors:
     cyan:    '0x9fb193'
     white:   '0xf2e7e0'
 
-  # Bright colors
   bright:
     black:   '0x998f85'
     red:     '0xda7c72'
