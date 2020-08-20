@@ -33,6 +33,9 @@ vnoremap <right> <nop>
 nnoremap <leader>w :w<CR>
 vnoremap <leader>w :w<CR>
 
+" prevent clipboard overwrite on 'put' with the help of the black hole buffer
+vnoremap p "_dP
+
 " disable highlighted search
 noremap <silent> <F8> :nohl<CR>
 
