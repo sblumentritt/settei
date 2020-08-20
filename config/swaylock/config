@@ -1,31 +1,31 @@
 # --------------------------------------
 # swaylock configuration
 # --------------------------------------
-color=303030
+color=383838
 
-inside-color=303030
-inside-ver-color=303030
-inside-clear-color=303030
-inside-wrong-color=303030
-inside-caps-lock-color=303030
+inside-color=383838
+inside-ver-color=383838
+inside-clear-color=383838
+inside-wrong-color=383838
+inside-caps-lock-color=383838
 
 line-uses-ring
-key-hl-color=c3c581
+key-hl-color=b8b48a
 separator-color=00000000
 
-ring-color=c3c581
-ring-ver-color=8fc0c0
-ring-clear-color=dfa076
-ring-wrong-color=e37b70
+ring-color=b8b48a
+ring-ver-color=93b3a3
+ring-clear-color=dfa883
+ring-wrong-color=da7c72
 
-text-ver-color=8fc0c0
-text-clear-color=dfa076
-text-wrong-color=e37b70
-text-caps-lock-color=c3c581
+text-ver-color=93b3a3
+text-clear-color=dfa883
+text-wrong-color=da7c72
+text-caps-lock-color=b8b48a
 
-layout-bg-color=303030
-layout-text-color=9d9287
-layout-border-color=303030
+layout-bg-color=383838
+layout-text-color=998f85
+layout-border-color=383838
 
 indicator-radius=65
 indicator-thickness=5

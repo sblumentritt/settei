@@ -31,14 +31,14 @@ highlight default link cppDelete      Exception
 highlight default link cppThrow       Exception
 highlight default link cppExcept      StorageClass
 highlight default link cppNullptr     Identifier
-highlight default link cppStructs     Identifier
+highlight default link cppStructs     Structure
 highlight default link cppAttribute   Constant
 highlight default link cppSpecifier   StorageClass
 
-highlight default link cppScopeEnd    Identifier
-highlight default link cppScopeFront  Identifier
+highlight default link cppScopeEnd    Statement
+highlight default link cppScopeFront  Statement
 
 highlight default link cppCustomScope Operator
-highlight default link cppCustomClass Identifier
+highlight default link cppCustomClass Typedef
 
 highlight default link cppCustomTemplateFunc Function

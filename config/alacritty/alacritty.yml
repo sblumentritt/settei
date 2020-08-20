@@ -90,28 +90,30 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '0x303030'
-    foreground: '0xe5e5d4'
+    background: '0x383838'
+    foreground: '0xe5dbd0'
 
+  # Normal colors
   normal:
-    black:   '0x3e3e3e'
-    red:     '0xe37b70'
-    green:   '0xc3c581'
-    yellow:  '0xdfa076'
-    blue:    '0x8fc0c0'
-    magenta: '0xdc9f9f'
-    cyan:    '0x9dc2a4'
-    white:   '0xf2f2e0'
+    black:   '0x454545'
+    red:     '0xda7c72'
+    green:   '0xb8b48a'
+    yellow:  '0xdfa883'
+    blue:    '0x93b3a3'
+    magenta: '0xcc9999'
+    cyan:    '0x9fb193'
+    white:   '0xf2e7e0'
 
+  # Bright colors
   bright:
-    black:   '0x9d9287'
-    red:     '0xe37b70'
-    green:   '0xc3c581'
-    yellow:  '0xecc68f'
-    blue:    '0x8fc0c0'
-    magenta: '0xdc9f9f'
-    cyan:    '0x9dc2a4'
-    white:   '0xe5e5d4'
+    black:   '0x998f85'
+    red:     '0xda7c72'
+    green:   '0xb8b48a'
+    yellow:  '0xf7d0a2'
+    blue:    '0x93b3a3'
+    magenta: '0xcc9999'
+    cyan:    '0x9fb193'
+    white:   '0xe5dbd0'
 
   # indexed colors include all colors from 16 to 256
   indexed_colors: []
@@ -119,13 +121,13 @@ colors:
   # selection colors
   selection:
     # text: '0xf0ebdc'
-    background: '0x3c3a3a'
+    background: '0x454545'
 
 # specifying a 'duration' of '0' will disable the visual bell
 bell:
   animation: EaseOutExpo
   duration: 0
-  color: '0xebe2d3'
+  color: '0xdfa883'
 
 # '0.0' is completely transparent and '1.0' is opaque
 background_opacity: 1.0

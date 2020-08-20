@@ -15,21 +15,24 @@ let g:colors_name='susumu'
 " --------------------------------------
 let s:colors = {}
 
-let s:colors.dark_gray = ['#3e3e3e', '0']
-let s:colors.red       = ['#e37b70', '1']
-let s:colors.green     = ['#c3c581', '2']
-let s:colors.orange    = ['#dfa076', '3']
-let s:colors.blue      = ['#8fc0c0', '4']
-let s:colors.magenta   = ['#dc9f9f', '5']
-let s:colors.cyan      = ['#9dc2a4', '6']
-let s:colors.bwhite    = ['#f2f2e0', '7']
+let s:colors.dark_gray = ['#454545', '0']
+let s:colors.red       = ['#da7c72', '1']
+let s:colors.green     = ['#b8b48a', '2']
+let s:colors.orange    = ['#dfa883', '3']
+let s:colors.blue      = ['#93b3a3', '4']
+let s:colors.magenta   = ['#cc9999', '5']
+let s:colors.cyan      = ['#9fb193', '6']
+let s:colors.bwhite    = ['#f2e7e0', '7']
 
-let s:colors.gray      = ['#9d9287', '8']
-let s:colors.yellow    = ['#ecc68f', '11']
-let s:colors.white     = ['#e5e5d4', '15']
+let s:colors.gray      = ['#998f85', '8']
+let s:colors.yellow    = ['#f7d0a2', '11']
+let s:colors.white     = ['#e5dbd0', '15']
 
-let s:colors.bg   = ['#303030', '0']
+let s:colors.bg   = ['#383838', '0']
 let s:colors.none = ['none', 'none']
+
+let s:colors.low_yellow = ['#d6c3a1', '11']
+let s:colors.low_orange = ['#dfb091', '3']
 
 " helper function
 " --------------------------------------
@@ -71,24 +74,24 @@ call s:highlight('Character', s:colors.green)
 call s:highlight('Boolean', s:colors.orange)
 call s:highlight('Identifier', s:colors.blue)
 call s:highlight('Function', s:colors.cyan)
-call s:highlight('Statement', s:colors.blue)
-call s:highlight('Conditional', s:colors.blue)
-call s:highlight('Repeat', s:colors.blue)
+call s:highlight('Statement', s:colors.low_yellow)
+call s:highlight('Conditional', s:colors.low_yellow)
+call s:highlight('Repeat', s:colors.low_yellow)
 call s:highlight('Operator', s:colors.white)
 call s:highlight('Keyword', s:colors.orange)
-call s:highlight('Label', s:colors.blue)
+call s:highlight('Label', s:colors.low_yellow)
 call s:highlight('Exception', s:colors.red)
 call s:highlight('PreProc', s:colors.magenta)
 call s:highlight('Include', s:colors.magenta)
 call s:highlight('Define', s:colors.magenta)
 call s:highlight('Macro', s:colors.magenta)
 call s:highlight('PreCondit', s:colors.magenta)
-call s:highlight('Type', s:colors.yellow)
-call s:highlight('StorageClass', s:colors.orange, s:colors.none, 'italic')
-call s:highlight('Structure', s:colors.orange)
+call s:highlight('Type', s:colors.low_yellow)
+call s:highlight('StorageClass', s:colors.low_yellow, s:colors.none, 'bold')
+call s:highlight('Structure', s:colors.blue)
 call s:highlight('Typedef', s:colors.yellow)
 call s:highlight('Special', s:colors.white)
-call s:highlight('SpecialChar', s:colors.orange)
+call s:highlight('SpecialChar', s:colors.white, s:colors.none, 'bold')
 call s:highlight('SpecialComment', s:colors.gray, s:colors.none, 'italic')
 call s:highlight('Delimiter', s:colors.white, s:colors.none, 'bold')
 call s:highlight('Underlined', s:colors.blue, s:colors.none, 'underline')
@@ -180,17 +183,15 @@ call s:highlight('cppThrow', s:colors.red)
 call s:highlight('cppDelete', s:colors.red)
 call s:highlight('cFormat', s:colors.orange)
 call s:highlight('cSpecial', s:colors.white)
-call s:highlight('cStatement', s:colors.red)
 call s:highlight('cCustomDoxyElement', s:colors.gray, s:colors.none, 'bold')
-call s:highlight('cCustomGlobalVariable', s:colors.white, s:colors.none, 'italic')
 
 " define better colors for cmake
 " --------------------------------------
 call s:highlight('cmakeKWif', s:colors.yellow)
-call s:highlight('cmakeVariable', s:colors.blue)
-call s:highlight('cmakeVariableValue', s:colors.blue)
-call s:highlight('cmakeGeneratorExpression', s:colors.magenta)
-call s:highlight('cmakeGeneratorExpressions', s:colors.orange)
+call s:highlight('cmakeVariable', s:colors.low_yellow)
+call s:highlight('cmakeVariableValue', s:colors.low_yellow)
+call s:highlight('cmakeGeneratorExpression', s:colors.low_orange)
+call s:highlight('cmakeGeneratorExpressions', s:colors.low_orange)
 
 " define better colors for shell
 " --------------------------------------
@@ -200,8 +201,8 @@ call s:highlight('shCommandsSub', s:colors.white)
 
 " define better colors for python
 " --------------------------------------
-call s:highlight('pythonDecorator', s:colors.blue, s:colors.none, 'italic')
-call s:highlight('pythonDecoratorFunc', s:colors.blue, s:colors.none, 'italic')
+call s:highlight('pythonDecorator', s:colors.low_orange, s:colors.none, 'italic')
+call s:highlight('pythonDecoratorFunc', s:colors.low_orange, s:colors.none, 'italic')
 
 " define better colors for diff
 " --------------------------------------
@@ -214,7 +215,7 @@ call s:highlight('diffIndexLine', s:colors.bwhite, s:colors.none, 'bold')
 " define better colors for man pages
 " --------------------------------------
 call s:highlight('manOptionDesc', s:colors.cyan)
-call s:highlight('manReference', s:colors.magenta)
+call s:highlight('manReference', s:colors.blue)
 call s:highlight('manUnderline', s:colors.none, s:colors.none, 'italic')
 
 " define better colors for vim
@@ -232,16 +233,16 @@ call s:highlight('vimCommentTitle', s:colors.gray, s:colors.none, 'bold')
 call s:highlight('markdownError', s:colors.red)
 call s:highlight('markdownItalic', s:colors.white, s:colors.none, 'italic')
 
-call s:highlight('markdownH1', s:colors.magenta, s:colors.none, 'bold')
-call s:highlight('markdownH2', s:colors.magenta, s:colors.none, 'bold')
-call s:highlight('markdownH3', s:colors.magenta, s:colors.none, 'bold')
-call s:highlight('markdownH4', s:colors.magenta, s:colors.none, 'bold')
-call s:highlight('markdownH5', s:colors.magenta)
-call s:highlight('markdownH6', s:colors.magenta)
+call s:highlight('markdownH1', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight('markdownH2', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight('markdownH3', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight('markdownH4', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight('markdownH5', s:colors.yellow)
+call s:highlight('markdownH6', s:colors.yellow)
 call s:highlight('markdownHeadingDelimiter', s:colors.gray)
 
-call s:highlight('markdownCode', s:colors.green)
-call s:highlight('markdownCodeBlock', s:colors.green)
+call s:highlight('markdownCode', s:colors.orange)
+call s:highlight('markdownCodeBlock', s:colors.orange)
 call s:highlight('markdownCodeDelimiter', s:colors.gray)
 
 call s:highlight('markdownBlockquote', s:colors.white, s:colors.none, 'bold')
@@ -257,42 +258,43 @@ call s:highlight('markdownLinkTextDelimiter', s:colors.white)
 call s:highlight('markdownUrl', s:colors.blue)
 call s:highlight('markdownUrlTitleDelimiter', s:colors.green)
 
-call s:highlight('markdownLinkText', s:colors.orange, s:colors.none, 'italic')
-call s:highlight('markdownIdDeclaration', s:colors.yellow, s:colors.none, 'italic')
+call s:highlight('markdownLinkText', s:colors.low_yellow)
+call s:highlight('markdownIdDeclaration', s:colors.low_orange)
 
 " define better colors for rust
 " --------------------------------------
-call s:highlight('rustSelf', s:colors.blue)
+call s:highlight('rustSelf', s:colors.low_yellow)
 call s:highlight('rustPanic', s:colors.red)
 call s:highlight('rustAssert', s:colors.red)
-call s:highlight('rustKeyword', s:colors.blue)
-call s:highlight('rustModPath', s:colors.blue)
-call s:highlight('rustTypedef', s:colors.yellow)
+call s:highlight('rustKeyword', s:colors.low_yellow)
+call s:highlight('rustModPath', s:colors.low_orange)
+call s:highlight('rustTypedef', s:colors.blue)
+call s:highlight('rustIdentifier', s:colors.yellow)
 call s:highlight('rustModPathSep', s:colors.white)
-call s:highlight('rustStructure', s:colors.orange)
+call s:highlight('rustStructure', s:colors.blue)
 call s:highlight('rustEnumVariant', s:colors.orange)
 call s:highlight('rustLifetime', s:colors.red, s:colors.none, 'bold')
 
 " git-messenger
 " --------------------------------------
 call s:highlight('gitmessengerHash', s:colors.cyan)
-call s:highlight('gitmessengerHeader', s:colors.blue)
+call s:highlight('gitmessengerHeader', s:colors.low_yellow, s:colors.none, 'bold')
 call s:highlight('gitmessengerHistory', s:colors.yellow)
 call s:highlight('gitmessengerPopupNormal', s:colors.white, s:colors.dark_gray)
 
 " lsp-cxx-highlight
 " --------------------------------------
-call s:highlight('LspCxxHlSymNamespace', s:colors.blue)
+call s:highlight('LspCxxHlSymNamespace', s:colors.low_orange)
 call s:highlight('LspCxxHlSkippedRegionBeginEnd', s:colors.magenta)
 
-call s:highlight('LspCxxHlSymEnum', s:colors.blue)
-call s:highlight('LspCxxHlSymEnumMember', s:colors.yellow)
-call s:highlight('LspCxxHlSymEnumConstant', s:colors.yellow)
-call s:highlight('LspCxxHlSymEnumEnumMember', s:colors.yellow)
+call s:highlight('LspCxxHlSymEnumMember', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight('LspCxxHlSymEnumConstant', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight('LspCxxHlSymEnumEnumMember', s:colors.yellow, s:colors.none, 'bold')
 
-call s:highlight('LspCxxHlSymClass', s:colors.blue)
-call s:highlight('LspCxxHlSymStruct', s:colors.blue)
-call s:highlight('LspCxxHlSymTypeAlias', s:colors.blue)
+call s:highlight('LspCxxHlSymEnum', s:colors.yellow)
+call s:highlight('LspCxxHlSymClass', s:colors.yellow)
+call s:highlight('LspCxxHlSymStruct', s:colors.yellow)
+call s:highlight('LspCxxHlSymTypeAlias', s:colors.yellow)
 
 call s:highlight('LspCxxHlSymField', s:colors.white)
 call s:highlight('LspCxxHlSymVariableStatic', s:colors.white, s:colors.none, 'italic')
