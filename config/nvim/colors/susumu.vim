@@ -187,11 +187,11 @@ call s:highlight('cCustomDoxyElement', s:colors.gray, s:colors.none, 'bold')
 
 " define better colors for cmake
 " --------------------------------------
-call s:highlight('cmakeKWif', s:colors.yellow)
-call s:highlight('cmakeVariable', s:colors.low_yellow)
-call s:highlight('cmakeVariableValue', s:colors.low_yellow)
-call s:highlight('cmakeGeneratorExpression', s:colors.low_orange)
-call s:highlight('cmakeGeneratorExpressions', s:colors.low_orange)
+call s:highlight('cmakeKWif', s:colors.low_yellow)
+call s:highlight('cmakeVariable', s:colors.yellow)
+call s:highlight('cmakeVariableValue', s:colors.yellow)
+call s:highlight('cmakeGeneratorExpression', s:colors.magenta)
+call s:highlight('cmakeGeneratorExpressions', s:colors.magenta)
 
 " define better colors for shell
 " --------------------------------------
