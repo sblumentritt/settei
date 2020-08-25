@@ -81,3 +81,7 @@ nnoremap <silent> cs :close<CR>
 
 " close terminal buffer
 autocmd TermOpen * nmap <buffer> <ESC> :bdelete!<CR>
+
+" toggle/open all folds
+nnoremap <F9> za
+nnoremap <leader><F9> zR

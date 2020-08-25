@@ -33,6 +33,7 @@ let s:colors.none = ['none', 'none']
 
 let s:colors.low_yellow = ['#d6c3a1', '11']
 let s:colors.low_orange = ['#dfb091', '3']
+let s:colors.darker_gray = ['#414141', '0']
 
 " helper function
 " --------------------------------------
@@ -114,7 +115,7 @@ call s:highlight('DiffText', s:colors.none, s:colors.none, 'bold')
 call s:highlight('ErrorMsg', s:colors.red, s:colors.none, 'bold')
 call s:highlight('WarningMsg', s:colors.orange, s:colors.none, 'bold')
 call s:highlight('VertSplit', s:colors.dark_gray)
-call s:highlight('Folded', s:colors.gray, s:colors.none, 'italic')
+call s:highlight('Folded', s:colors.gray, s:colors.darker_gray)
 call s:highlight('FoldColumn', s:colors.white)
 call s:highlight('SignColumn', s:colors.white)
 call s:highlight('LineNr', s:colors.gray)

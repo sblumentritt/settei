@@ -133,3 +133,32 @@ else
     set grepprg=grep\ -n\ --with-filename\ -I\ -R
     set grepformat=%f:%l:%m
 endif
+
+" use a whitespace as fill character for folds and end-of-buffer indication
+set fillchars=fold:\ ,eob:\ ,diff:-
+
+" fold related options
+set foldlevel=99
+set foldmethod=syntax
+set foldtext=CustomFoldText()
+
+" improved fold text for language which use braces '{}'
+function! CustomFoldText()
+    let l:line_start = getline(v:foldstart)
+    let l:line_end = getline(v:foldend)
+
+    let l:fold_text = l:line_start
+
+    " check if the fold contains braces and handle them differently
+    let l:filtered_start_brace = substitute(l:line_start, '^.*{.*$', '{', 'g')
+    if l:filtered_start_brace == '{'
+        let l:filtered_end_brace = substitute(l:line_end, '^.*}.*$', '}', 'g')
+        if l:filtered_end_brace == '}'
+            let l:fold_text = l:fold_text . substitute(l:line_end, '^.*}\(.*\)$', '...}\1', 'g')
+        endif
+    endif
+
+    let l:fold_count = v:foldend - v:foldstart + 1
+
+    return l:fold_text . ' > ' . l:fold_count
+endfunction
