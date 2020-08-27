@@ -8,6 +8,8 @@ syntax keyword cppStructs class typename template namespace
 syntax keyword cppSpecifier constexpr decltype final noexcept
 syntax keyword cppSpecifier inline virtual explicit export override
 
+syntax keyword cppCustomStaticAssert static_assert
+
 syntax match cppAttribute "\[\[.*\]\]" contains=cString
 
 " classes should follow 'CamelCase'
@@ -42,3 +44,4 @@ highlight default link cppCustomScope Operator
 highlight default link cppCustomClass Typedef
 
 highlight default link cppCustomTemplateFunc Function
+highlight default link cppCustomStaticAssert StorageClass
