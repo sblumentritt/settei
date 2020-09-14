@@ -260,7 +260,7 @@ external_packages() {
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="swaystatus,shellcheck,pop-gtk-theme"
+    local external_packages="shellcheck,pop-gtk-theme"
 
     for package in $external_packages; do
         cp -r "${CONFIG_BASE_PATH}/pkgbuild/${package}" "./${package}"
