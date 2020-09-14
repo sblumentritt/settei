@@ -173,7 +173,7 @@ package_installation() {
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git rustup cmake"
+    packages="${packages} git cmake"
 
     # music
     packages="${packages} mpd mpc"
@@ -208,21 +208,6 @@ package_installation() {
 
     # configuration for installed packages
     # --------------------------------------
-    # define installation location for 'rustup'
-    export RUSTUP_HOME="$HOME/.local/share/rustup"
-
-    # set rustup profile to minimal (installs rustc/rust-std/cargo)
-    rustup set profile minimal
-
-    # set default rust toolchain (also downloads)
-    rustup default stable
-
-    # add development related rust components (also downloads)
-    rustup component add rust-src rust-docs rustfmt clippy
-
-    # check for updates e.g. if previously installed
-    rustup update
-
     if [ -f /etc/profile.d/work.sh ]; then
         # add required groups to current user
         # --------------------------------------

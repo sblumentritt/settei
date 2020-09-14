@@ -143,7 +143,6 @@ if isdirectory($neovim_plugin_dir . '/coc.nvim')
                     \ {
                     \   'extensionUpdateCheck': 'never',
                     \   'snippets.enable': v:false,
-                    \   'formatOnSaveFiletypes': ['rust'],
                     \ })
 
         call coc#config('coc.source',

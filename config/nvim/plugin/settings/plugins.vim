@@ -25,13 +25,6 @@ if executable('rg')
     let g:gitgutter_grep = 'rg --color never --no-line-number'
 endif
 
-" rust.vim configurations
-" --------------------------------------
-let g:rust_fold = 0
-let g:rust_conceal = 0
-let g:rustfmt_autosave = 0
-let g:rust_recommended_style = 1
-
 " lsp-cxx-highlight configurations
 " --------------------------------------
 let g:lsp_cxx_hl_use_nvim_text_props = 0
