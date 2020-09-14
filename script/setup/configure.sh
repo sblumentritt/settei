@@ -2,7 +2,6 @@
 
 # global variable
 CONFIG_BASE_PATH="$HOME/development/unspecified/settei"
-CARGO_HOME="$HOME/.local/share/cargo"
 
 main() {
     printf "\nSetup directories? [y/n] "
@@ -59,7 +58,6 @@ dir_setup() {
     # required to not pollute the home dir
     mkdir -p "$HOME/.local/share/tig"
     mkdir -p "$HOME/.local/share/bash"
-    mkdir -p "$CARGO_HOME"
 }
 
 file_setup() {
@@ -91,8 +89,6 @@ file_setup() {
     ln -sf "${CONFIG_BASE_PATH}/config/alacritty" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/fontconfig" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/user-dirs.dirs" $HOME/.config/
-
-    ln -sf "${CONFIG_BASE_PATH}/config/cargo/"* $CARGO_HOME/
 
     ln -sf "${CONFIG_BASE_PATH}/config/mpd/"* $HOME/.config/mpd/
     ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* $HOME/.config/ranger/
