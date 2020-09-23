@@ -1,5 +1,5 @@
 diff --git a/src/completion/index.ts b/src/completion/index.ts
-index f2fb6ca5..75637a9e 100644
+index 4a90b21b..8a82dff8 100644
 --- a/src/completion/index.ts
 +++ b/src/completion/index.ts
 @@ -211,7 +211,8 @@ export class Completion implements Disposable {
@@ -13,10 +13,10 @@ index f2fb6ca5..75637a9e 100644
              obj[key] = item[key]
            }
 diff --git a/src/language-client/client.ts b/src/language-client/client.ts
-index 4d1073fe..130343a2 100644
+index 8d303c99..90358ec1 100644
 --- a/src/language-client/client.ts
 +++ b/src/language-client/client.ts
-@@ -1886,7 +1886,7 @@ class CompletionItemFeature extends TextDocumentFeature<CompletionOptions, Compl
+@@ -1888,7 +1888,7 @@ class CompletionItemFeature extends TextDocumentFeature<CompletionOptions, Compl
      const languageIds = cv.asLanguageIds(options.documentSelector!)
      const disposable = languages.registerCompletionItemProvider(
        this._client.id + '-' + this.index,
@@ -26,23 +26,23 @@ index 4d1073fe..130343a2 100644
        provider,
        triggerCharacters,
 diff --git a/src/languages.ts b/src/languages.ts
-index 55014359..6e6a807f 100644
+index fc7aee36..663f1934 100644
 --- a/src/languages.ts
 +++ b/src/languages.ts
-@@ -118,7 +118,11 @@ class Languages {
-         event.waitUntil(willSaveWaitUntil())
-       }
-     }, null, 'languageserver')
+@@ -78,7 +78,11 @@ class Languages {
+   private completionItemKindMap: Map<CompletionItemKind, string>
+ 
+   constructor() {
 -    this.loadCompleteConfig()
 +    workspace.ready.then(() => {
 +      this.loadCompleteConfig()
 +    }, _e => {
 +      // noop
 +    })
-     workspace.onDidChangeConfiguration(this.loadCompleteConfig, this)
-   }
- 
-@@ -769,7 +773,7 @@ class Languages {
+     workspace.onDidChangeConfiguration(e => {
+       if (e.affectsConfiguration('suggest')) {
+         this.loadCompleteConfig()
+@@ -695,7 +699,7 @@ class Languages {
        let detail = item.detail.replace(/\n\s*/g, ' ')
        if (byteLength(detail) < detailMaxLength) {
          if (detailField == 'menu') {
