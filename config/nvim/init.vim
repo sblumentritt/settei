@@ -31,26 +31,18 @@ let g:loaded_zipPlugin = 1
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 
-" helper functions for vim-plug
-" --------------------------------------
-function! PatchCoc(info) abort
-    if a:info.status !=# 'unchanged'
-        let l:patch = stdpath('config') . '/patches/cosmetic_changes_for_coc.patch'
-        execute '!patch -p1 -i ' . l:patch
-        execute '!yarn install --frozen-lockfile'
-        " call before 'git reset' else the diff is empty
-        PlugDiff
-        execute '!git reset --hard && git clean -f'
-    endif
-endfunction
-
 " define plugins
 " --------------------------------------
 call plug#begin('$neovim_plugin_dir')
 
-" require yarn/nodejs runtime
-Plug 'https://github.com/neoclide/coc.nvim', {'do': function('PatchCoc')}
-Plug 'https://github.com/iamcco/markdown-preview.nvim', {'do': 'yarn install --frozen-lockfile'}
+" completion related
+Plug 'https://github.com/nvim-lua/completion-nvim'
+Plug 'https://github.com/steelsojka/completion-buffers'
+
+" lsp related
+Plug 'https://github.com/neovim/nvim-lspconfig'
+Plug 'https://github.com/nvim-lua/lsp-status.nvim'
+Plug 'https://github.com/nvim-lua/diagnostic-nvim'
 
 " git related
 Plug 'https://github.com/itchyny/vim-gitbranch'
@@ -60,7 +52,6 @@ Plug 'https://github.com/samoshkin/vim-mergetool'
 
 " c++ related
 Plug 'https://github.com/rhysd/vim-clang-format'
-Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight'
 
 " other filetype specific plugins
 Plug 'https://github.com/cespare/vim-toml'
@@ -74,7 +65,6 @@ Plug 'https://gitlab.com/s.blumentritt/bitbake.vim'
 Plug 'https://github.com/moll/vim-bbye'
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/camspiers/lens.vim'
-Plug 'https://github.com/liuchengxu/vista.vim'
 Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
 

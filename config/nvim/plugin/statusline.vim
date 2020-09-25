@@ -108,10 +108,10 @@ function! DiagnosticStatus() abort
     let l:lsp_error_count = 0
     let l:lsp_warning_count = 0
 
-    let l:coc_diagnostic = get(b:, 'coc_diagnostic_info', {})
-    if !empty(l:coc_diagnostic)
-        let l:lsp_error_count = get(l:coc_diagnostic, 'error', 0)
-        let l:lsp_warning_count = get(l:coc_diagnostic, 'warning', 0)
+    if luaeval('#vim.lsp.buf_get_clients() > 0')
+        let l:lsp_diagnostics = luaeval('require("lsp-status").diagnostics()')
+        let l:lsp_error_count = get(l:lsp_diagnostics, 'errors', 0)
+        let l:lsp_warning_count = get(l:lsp_diagnostics, 'warnings', 0)
     endif
 
     let l:total_count = l:lsp_error_count + l:lsp_warning_count

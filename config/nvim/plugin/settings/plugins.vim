@@ -11,6 +11,23 @@ let g:loaded_plugin_settings = 1
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+" lsp + completion + diagnostic configurations
+" --------------------------------------
+if isdirectory($neovim_plugin_dir . '/nvim-lspconfig')
+    lua require('settings/lsp')
+
+    " TODO: find a way to move this config into the lua file
+    let g:completion_chain_complete_list =
+            \ {
+            \   'c': [{'complete_items': ['lsp']}],
+            \   'cpp': [{'complete_items': ['lsp']}],
+            \   'default':
+            \   [
+            \     {'complete_items': ['lsp', 'path', 'buffers']}
+            \   ]
+            \ }
+endif
+
 " gitgutter configurations
 " --------------------------------------
 let g:gitgutter_map_keys = 0
@@ -24,11 +41,6 @@ let g:gitgutter_sign_removed_first_line = '‾'
 if executable('rg')
     let g:gitgutter_grep = 'rg --color never --no-line-number'
 endif
-
-" lsp-cxx-highlight configurations
-" --------------------------------------
-let g:lsp_cxx_hl_use_nvim_text_props = 0
-let g:lsp_cxx_hl_ft_whitelist = ['c', 'cpp']
 
 " vim-clang-format configurations
 " --------------------------------------
@@ -93,12 +105,6 @@ let g:markdown_fenced_languages = [
             \ 'viml=vim', 'bash=sh'
             \ ]
 
-" markdown-preview configurations
-" --------------------------------------
-let g:mkdp_auto_close = 0
-let g:mkdp_refresh_slow = 1
-let g:mkdp_page_title = '[ ${name} ]'
-
 " fzf configurations
 " --------------------------------------
 let g:fzf_buffers_jump = 1
@@ -153,27 +159,7 @@ let g:lens#width_resize_min = 20
 let g:lens#width_resize_max = 150
 let g:lens#height_resize_max = 25
 
-let g:lens#disabled_filetypes = ['fzf', 'vista', 'vista_kind']
-
-" vista configurations
-" --------------------------------------
-let g:vista_echo_cursor = 0
-let g:vista_stay_on_open = 0
-let g:vista#renderer#enable_icon = 0
-let g:vista_default_executive = 'coc'
-
-let g:vista_blink = [0, 0]
-let g:vista_top_level_blink = [0, 0]
-
-" the g:vista_sidebar_width variable does not seem to work
-augroup force_vista_width
-    autocmd! FileType vista
-    autocmd FileType vista vertical resize 60
-augroup END
-
-" custom keybindings for vista
-nnoremap <silent> <F3> :Vista!!<CR>
-nnoremap <silent> <leader><F3> :Vista finder<CR>
+let g:lens#disabled_filetypes = ['fzf']
 
 " restore old value of cpoptions
 let &cpoptions = s:save_cpo

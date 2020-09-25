@@ -283,56 +283,12 @@ call s:highlight('gitmessengerHeader', s:colors.low_yellow, s:colors.none, 'bold
 call s:highlight('gitmessengerHistory', s:colors.yellow)
 call s:highlight('gitmessengerPopupNormal', s:colors.white, s:colors.dark_gray)
 
-" lsp-cxx-highlight
+" diagnostic-nvim
 " --------------------------------------
-call s:highlight('LspCxxHlSymNamespace', s:colors.low_orange)
-call s:highlight('LspCxxHlSkippedRegionBeginEnd', s:colors.magenta)
-
-call s:highlight('LspCxxHlSymEnumMember', s:colors.yellow, s:colors.none, 'bold')
-call s:highlight('LspCxxHlSymEnumConstant', s:colors.yellow, s:colors.none, 'bold')
-call s:highlight('LspCxxHlSymEnumEnumMember', s:colors.yellow, s:colors.none, 'bold')
-
-call s:highlight('LspCxxHlSymEnum', s:colors.yellow)
-call s:highlight('LspCxxHlSymClass', s:colors.yellow)
-call s:highlight('LspCxxHlSymStruct', s:colors.yellow)
-call s:highlight('LspCxxHlSymTypeAlias', s:colors.yellow)
-
-call s:highlight('LspCxxHlSymField', s:colors.white)
-call s:highlight('LspCxxHlSymVariableStatic', s:colors.white, s:colors.none, 'italic')
-
-call s:highlight('LspCxxHlSymMacro', s:colors.magenta)
-call s:highlight('LspCxxHlSymUnknownEnumMember', s:colors.magenta)
-
-" coc
-" --------------------------------------
-call s:highlight('CocUnderline', s:colors.none, s:colors.none, 'underline')
-
-call s:highlight('CocInfoHighlight', s:colors.none, s:colors.none, 'underline')
-call s:highlight('CocHintHighlight', s:colors.none, s:colors.none, 'underline')
-call s:highlight('CocErrorHighlight', s:colors.none, s:colors.none, 'underline')
-call s:highlight('CocWarningHighlight', s:colors.none, s:colors.none, 'underline')
-
-call s:highlight('CocInfoSign', s:colors.blue, s:colors.none, 'italic')
-call s:highlight('CocHintSign', s:colors.cyan, s:colors.none, 'italic')
-call s:highlight('CocErrorSign', s:colors.red, s:colors.none, 'italic')
-call s:highlight('CocWarningSign', s:colors.orange, s:colors.none, 'italic')
-
-call s:highlight('CocInfoFloat', s:colors.blue, s:colors.none, 'italic')
-call s:highlight('CocHintFloat', s:colors.cyan, s:colors.none, 'italic')
-call s:highlight('CocErrorFloat', s:colors.red, s:colors.none, 'italic')
-call s:highlight('CocWarningFloat', s:colors.orange, s:colors.none, 'italic')
-
-call s:highlight('CocHighlightText', s:colors.white, s:colors.dark_gray)
-call s:highlight('CocHighlightRead', s:colors.green, s:colors.dark_gray)
-call s:highlight('CocHighlightWrite', s:colors.magenta, s:colors.dark_gray)
-
-call s:highlight('CocSelectedText', s:colors.red)
-
-call s:highlight('CocFloating', s:colors.white, s:colors.dark_gray)
-call s:highlight('CocCodeLens', s:colors.gray)
-
-call s:highlight('CocListMode', s:colors.white)
-call s:highlight('CocListPath', s:colors.gray)
+call s:highlight('LspDiagnosticsInformation', s:colors.blue, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsHint', s:colors.cyan, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsError', s:colors.red, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsWarning', s:colors.orange, s:colors.none, 'italic')
 
 " internal neovim terminal colors
 " --------------------------------------
