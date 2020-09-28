@@ -1,0 +1,61 @@
+# --------------------------------------
+# PKGBUILD for neovim
+# --------------------------------------
+pkgname=neovim-nightly
+
+pkgname_=neovim
+pkgver_=nightly
+
+pkgdesc="Vim-fork focused on extensibility and usability"
+url="https://github.com/neovim/neovim"
+
+pkgver=20200928
+pkgrel=1
+
+arch=('x86_64')
+license=('custom:neovim')
+
+provides=("${pkgname_}")
+conflicts=("${pkgname_}" "${pkgname_}-git")
+
+optdepends=('python-pynvim' 'wl-clipboard' 'xclip' 'xsel')
+makedepends=('clang' 'cmake' 'ninja' 'lua51-mpack' 'lua51-lpeg' 'gperf')
+depends=('libtermkey' 'libuv' 'libluv' 'libutf8proc' 'msgpack-c' 'unibilium' 'libvterm' 'luajit')
+
+source=("https://github.com/${pkgname_}/${pkgname_}/archive/${pkgver_}.tar.gz")
+sha256sums=('SKIP')
+
+pkgver()
+{
+    date "+%Y%m%d"
+}
+
+build()
+{
+    cmake -S ${pkgname_}-${pkgver_} -B ${pkgname_}-${pkgver_}/build \
+          -GNinja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_INSTALL_PREFIX=/usr
+
+    cmake --build ${pkgname_}-${pkgver_}/build
+}
+
+check()
+{
+  "${pkgname_}-${pkgver_}/build/bin/nvim" --version
+  "${pkgname_}-${pkgver_}/build/bin/nvim" --headless -u NONE -i NONE -c ':quit'
+}
+
+package()
+{
+    DESTDIR="${pkgdir}" cmake \
+        --build ${pkgname_}-${pkgver_}/build \
+        --target install
+
+    install -m644 -D "${srcdir}/${pkgname_}-${pkgver_}/LICENSE" \
+    	"${pkgdir}/usr/share/licenses/${pkgname_}/LICENSE"
+
+    # required for vim packages install via Arch
+    mkdir -p "${pkgdir}"/usr/share/vim
+    printf "set runtimepath+=/usr/share/vim/vimfiles\n" > "${pkgdir}"/usr/share/nvim/sysinit.vim
+}
