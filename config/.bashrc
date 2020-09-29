@@ -161,6 +161,7 @@ alias cmake="CMAKE_EXPORT_COMPILE_COMMANDS=1 cmake"
 alias make="make -j8"
 alias diff="diff --color --tabsize=4"
 alias lldb="ASAN_OPTIONS=detect_leaks=0 lldb"
+alias sc="shellcheck --exclude=SC1090,SC1094,SC2155,SC2086,SC2032,SC2033 --shell=dash -x"
 
 # other
 alias :q="exit"
