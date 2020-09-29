@@ -175,7 +175,7 @@ package_installation() {
     packages="${packages} mpd mpc"
 
     # cmdl
-    packages="${packages} alacritty yarn tmux ranger tig htop"
+    packages="${packages} alacritty tmux ranger tig htop"
     packages="${packages} fzf ripgrep fd exa jq"
 
     # style
