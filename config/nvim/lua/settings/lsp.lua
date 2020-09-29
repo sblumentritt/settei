@@ -69,6 +69,7 @@ vim.fn.sign_define('LspDiagnosticsHintSign', {
 vim.g.completion_timer_cycle = 200
 vim.g.completion_enable_auto_hover = 0
 vim.g.completion_trigger_on_delete = 1
+vim.g.completion_auto_change_source = 1
 vim.g.completion_word_separator = '[^a-zA-Z0-9_]'
 
 vim.g.completion_items_priority = {

@@ -16,15 +16,29 @@ set cpoptions&vim
 if isdirectory($neovim_plugin_dir . '/nvim-lspconfig')
     lua require('settings/lsp')
 
+    " register custom sources from other plugins
+    lua require('completion').addCompletionSource('cmake', require('cmake').complete_item)
+    lua require('completion').addCompletionSource('bitbake', require('bitbake').complete_item)
+
     " TODO: find a way to move this config into the lua file
     let g:completion_chain_complete_list =
             \ {
             \   'c': [{'complete_items': ['lsp']}],
             \   'cpp': [{'complete_items': ['lsp']}],
+            \   'cmake':
+            \   [
+            \       {'complete_items': ['cmake']},
+            \       {'complete_items': ['buffers', 'path']},
+            \   ],
+            \   'bitbake':
+            \   [
+            \       {'complete_items': ['bitbake']},
+            \       {'complete_items': ['buffers', 'path']},
+            \   ],
             \   'default':
             \   [
             \     {'complete_items': ['lsp', 'path', 'buffers']}
-            \   ]
+            \   ],
             \ }
 endif
 
