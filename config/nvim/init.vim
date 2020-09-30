@@ -57,6 +57,7 @@ Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'https://github.com/cespare/vim-toml'
 Plug 'https://github.com/tpope/vim-markdown'
 Plug 'https://github.com/MTDL9/vim-log-highlighting'
+Plug 'https://github.com/euclidianAce/BetterLua.vim'
 
 Plug 'https://gitlab.com/s.blumentritt/cmake.vim'
 Plug 'https://gitlab.com/s.blumentritt/bitbake.vim'
