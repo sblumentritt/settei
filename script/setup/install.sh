@@ -18,10 +18,10 @@ main() {
         exit 1
     fi
 
-    printf "\nOn which disk do you wanna install the system? "
+    printf "\nOn which disk do you want to install the system? "
     read -r _DISK_PATH
 
-    printf "Which hostname do you wanna use? "
+    printf "Which hostname do you want to use? "
     read -r _HOST
 
     printf "Which custom group should be created? "
@@ -48,7 +48,7 @@ main() {
         printf "\n[ Start partitioning ]\n"
         partition ${_DISK_PATH}
 
-        printf "\n[ Start formating and mounting ]\n"
+        printf "\n[ Start formatting and mounting ]\n"
         format_and_mount ${_DISK_PATH} ${_MOUNT_POINT}
 
         printf "\n[ Start installing base packages ]\n"
@@ -134,7 +134,7 @@ install() {
     # network
     packages="${packages} networkmanager iproute2 iputils"
 
-    # filesytem utils
+    # filesystem utils
     packages="${packages} e2fsprogs sysfsutils btrfs-progs"
 
     # compression
