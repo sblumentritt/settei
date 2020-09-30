@@ -176,7 +176,7 @@ package_installation() {
 
     # cmdl
     packages="${packages} alacritty tmux ranger tig htop"
-    packages="${packages} fzf ripgrep fd exa jq"
+    packages="${packages} fzf ripgrep fd exa jq codespell"
 
     # style
     packages="${packages} qt5ct kvantum-qt5 papirus-icon-theme"

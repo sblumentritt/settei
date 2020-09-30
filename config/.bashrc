@@ -162,6 +162,7 @@ alias make="make -j8"
 alias diff="diff --color --tabsize=4"
 alias lldb="ASAN_OPTIONS=detect_leaks=0 lldb"
 alias sc="shellcheck --exclude=SC1090,SC1094,SC2155,SC2086,SC2032,SC2033 --shell=dash -x"
+alias cs="codespell --builtin clear,rare,informal,code,en-GB_to_en-US -S 'dependency/*,*build*/*'"
 
 # other
 alias :q="exit"
