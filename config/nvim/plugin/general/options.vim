@@ -127,7 +127,7 @@ set sessionoptions=blank,buffers,folds,help,localoptions,tabpages,winsize
 
 " define backend for vimgrep/grep command
 if executable('rg')
-    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --hidden\ --follow
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --hidden\ --follow\ --ignore-vcs
     set grepformat=%f:%l:%c:%m
 else
     set grepprg=grep\ -n\ --with-filename\ -I\ -R
