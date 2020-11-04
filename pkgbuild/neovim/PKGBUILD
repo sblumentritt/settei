@@ -9,7 +9,7 @@ pkgver_=nightly
 pkgdesc="Vim-fork focused on extensibility and usability"
 url="https://github.com/neovim/neovim"
 
-pkgver=20200928
+pkgver=20201104
 pkgrel=1
 
 arch=('x86_64')
@@ -20,7 +20,7 @@ conflicts=("${pkgname_}" "${pkgname_}-git")
 
 optdepends=('python-pynvim' 'wl-clipboard' 'xclip' 'xsel')
 makedepends=('clang' 'cmake' 'ninja' 'lua51-mpack' 'lua51-lpeg' 'gperf')
-depends=('libtermkey' 'libuv' 'libluv' 'libutf8proc' 'msgpack-c' 'unibilium' 'libvterm' 'luajit')
+depends=('libtermkey' 'libuv' 'libluv' 'libutf8proc' 'msgpack-c' 'unibilium' 'libvterm' 'luajit' 'tree-sitter')
 
 source=("https://github.com/${pkgname_}/${pkgname_}/archive/${pkgver_}.tar.gz")
 sha256sums=('SKIP')
