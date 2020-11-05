@@ -72,6 +72,9 @@ vim.g.completion_trigger_on_delete = 1
 vim.g.completion_auto_change_source = 1
 vim.g.completion_word_separator = '[^a-zA-Z0-9_]'
 
+vim.g.completion_abbr_length = 55 -- completion item (left)
+vim.g.completion_menu_length = 30 -- extra info for completion item (right)
+
 vim.g.completion_items_priority = {
     Method = 10,
     Function = 7,
