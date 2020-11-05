@@ -37,9 +37,35 @@ if isdirectory($neovim_plugin_dir . '/nvim-lspconfig')
             \   ],
             \   'default':
             \   [
-            \     {'complete_items': ['lsp', 'path', 'buffers']}
+            \       {'complete_items': ['lsp', 'path', 'buffers']}
             \   ],
             \ }
+
+    " mapping to toggle format on save
+    nnoremap <F12> :call <SID>toggle_format_on_save()<CR>
+
+    function! s:toggle_format_on_save()
+        if !exists('g:format_on_save_toggle')
+            let g:format_on_save_toggle = 1
+        else
+            let g:format_on_save_toggle = 1 - g:format_on_save_toggle
+        endif
+
+        if g:format_on_save_toggle == 1
+            echomsg 'format on save: [enabled]'
+            augroup lsp_format_on_save
+                autocmd!
+                " currently only C and C++ files are supported
+                autocmd BufWritePre *.{c,cpp,h,hpp} lua vim.lsp.buf.formatting_sync(nil, 1000)
+            augroup END
+        else
+            echomsg 'format on save: [disabled]'
+            autocmd! lsp_format_on_save
+        endif
+    endfunction
+
+    " enable format on save when starting neovim
+    silent call s:toggle_format_on_save()
 endif
 
 " gitgutter configurations
@@ -55,22 +81,6 @@ let g:gitgutter_sign_removed_first_line = '‾'
 if executable('rg')
     let g:gitgutter_grep = 'rg --color never --no-line-number'
 endif
-
-" vim-clang-format configurations
-" --------------------------------------
-let g:clang_format#auto_format = 1
-let g:clang_format#code_style = 'llvm'
-let g:clang_format#detect_style_file = 1
-let g:clang_format#enable_fallback_style = 0
-let g:clang_format#auto_format_on_insert_leave = 0
-
-augroup clang_format_settings
-    autocmd!
-    autocmd FileType c,cpp vnoremap <buffer> <Leader>f :ClangFormat<CR>
-    autocmd FileType c,cpp nnoremap <buffer> <Leader>f :<C-u>ClangFormat<CR>
-
-    autocmd FileType c,cpp nmap <buffer> <F12> :ClangFormatAutoToggle<CR>
-augroup END
 
 " cmake configurations
 " --------------------------------------

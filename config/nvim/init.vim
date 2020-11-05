@@ -50,8 +50,6 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/rhysd/git-messenger.vim'
 Plug 'https://github.com/samoshkin/vim-mergetool'
 
-" c++ related
-Plug 'https://github.com/rhysd/vim-clang-format'
 
 " other filetype specific plugins
 Plug 'https://github.com/cespare/vim-toml'
