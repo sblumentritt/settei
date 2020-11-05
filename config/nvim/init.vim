@@ -48,8 +48,6 @@ Plug 'https://github.com/nvim-lua/diagnostic-nvim'
 Plug 'https://github.com/itchyny/vim-gitbranch'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/rhysd/git-messenger.vim'
-Plug 'https://github.com/samoshkin/vim-mergetool'
-
 
 " other filetype specific plugins
 Plug 'https://github.com/cespare/vim-toml'
@@ -63,7 +61,6 @@ Plug 'https://gitlab.com/s.blumentritt/bitbake.vim'
 " utilities
 Plug 'https://github.com/moll/vim-bbye'
 Plug 'https://github.com/junegunn/fzf.vim'
-Plug 'https://github.com/camspiers/lens.vim'
 Plug 'https://github.com/norcalli/nvim-colorizer.lua'
 Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
 
