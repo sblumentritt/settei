@@ -36,13 +36,10 @@
 [diff]
     algorithm = patience
 [merge]
-    tool = vim_mergetool
+    tool = meld
     conflictstyle = diff3
 [mergetool]
     keepBackup = false
-[mergetool "vim_mergetool"]
-    trustExitCode = true
-    cmd = nvim -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
 [alias]
     ci = commit
     co = checkout
