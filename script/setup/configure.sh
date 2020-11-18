@@ -188,7 +188,7 @@ package_installation() {
 
     if [ -f /etc/profile.d/work.sh ]; then
         # work extras
-        packages="${packages} xf86-video-amdgpu wireshark-qt nload socat dos2unix"
+        packages="${packages} xf86-video-amdgpu wireshark-qt nload socat dos2unix meld"
         # work cross development
         packages="${packages} minicom cpio docker aarch64-linux-gnu-gcc"
 
