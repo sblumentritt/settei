@@ -285,10 +285,20 @@ call s:highlight('gitmessengerPopupNormal', s:colors.white, s:colors.dark_gray)
 
 " diagnostic-nvim
 " --------------------------------------
-call s:highlight('LspDiagnosticsInformation', s:colors.blue, s:colors.none, 'italic')
-call s:highlight('LspDiagnosticsHint', s:colors.cyan, s:colors.none, 'italic')
-call s:highlight('LspDiagnosticsError', s:colors.red, s:colors.none, 'italic')
-call s:highlight('LspDiagnosticsWarning', s:colors.orange, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsSignInformation', s:colors.blue)
+call s:highlight('LspDiagnosticsSignHint', s:colors.cyan)
+call s:highlight('LspDiagnosticsSignError', s:colors.red)
+call s:highlight('LspDiagnosticsSignWarning', s:colors.orange)
+
+call s:highlight('LspDiagnosticsVirtualTextInformation', s:colors.blue, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsVirtualTextHint', s:colors.cyan, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsVirtualTextError', s:colors.red, s:colors.none, 'italic')
+call s:highlight('LspDiagnosticsVirtualTextWarning', s:colors.orange, s:colors.none, 'italic')
+
+call s:highlight('LspDiagnosticsFloatingInformation', s:colors.blue)
+call s:highlight('LspDiagnosticsFloatingHint', s:colors.cyan)
+call s:highlight('LspDiagnosticsFloatingError', s:colors.red)
+call s:highlight('LspDiagnosticsFloatingWarning', s:colors.orange)
 
 " internal neovim terminal colors
 " --------------------------------------

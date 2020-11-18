@@ -36,7 +36,7 @@ map('n', '<leader>lw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 -- show diagnostics in a floating windows for the current line
-map('n', '<leader>sld', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>')
+map('n', '<leader>sld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
 
 -- autocommands
 -- --------------------------------------
@@ -47,22 +47,35 @@ vim.cmd [[autocmd FileType c,cpp nnoremap <buffer><silent> <F4> :ClangdSwitchSou
 
 -- configurations
 -- --------------------------------------
+-- diagnostic (built-in)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = true,
+        virtual_text = {
+            prefix = '>',
+            spacing = 1,
+        },
+        signs = true,
+        update_in_insert = true,
+    }
+)
+
 -- update diagnostic sign text
-vim.fn.sign_define('LspDiagnosticsErrorSign', {
+vim.fn.sign_define('LspDiagnosticsSignError', {
     text = '●',
-    texthl = 'LspDiagnosticsError'
+    texthl = 'LspDiagnosticsSignError'
 })
 
-vim.fn.sign_define('LspDiagnosticsWarningSign', {
-    text = '●', texthl = 'LspDiagnosticsWarning'
+vim.fn.sign_define('LspDiagnosticsSignWarning', {
+    text = '●', texthl = 'LspDiagnosticsSignWarning'
 })
 
-vim.fn.sign_define('LspDiagnosticsInformationSign', {
-    text = '●', texthl = 'LspDiagnosticsInformation'
+vim.fn.sign_define('LspDiagnosticsSignInformation', {
+    text = '●', texthl = 'LspDiagnosticsSignInformation'
 })
 
-vim.fn.sign_define('LspDiagnosticsHintSign', {
-    text = '●', texthl = 'LspDiagnosticsHint'
+vim.fn.sign_define('LspDiagnosticsSignHint', {
+    text = '●', texthl = 'LspDiagnosticsSignHint'
 })
 
 -- completion-nvim
@@ -88,21 +101,16 @@ vim.g.completion_items_priority = {
     File = 0
 }
 
--- diagnostic-nvim
-vim.g.diagnostic_enable_virtual_text = 1
-vim.g.diagnostic_virtual_text_prefix = '>'
-
--- nvim_lsp
-local nvim_lsp = require('nvim_lsp')
+-- lspconfig
+local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
 
 local common_attach = function(client)
     require('completion').on_attach(client)
-    require('diagnostic').on_attach(client)
 end
 
 -- clangd
-nvim_lsp.clangd.setup({
+lspconfig.clangd.setup({
     cmd = {
         'clangd',
         '--background-index',
@@ -123,6 +131,6 @@ nvim_lsp.clangd.setup({
         clangdFileStatus = true,
     },
 
-    callbacks = lsp_status.extensions.clangd.setup(),
+    handlers = lsp_status.extensions.clangd.setup(),
     capabilities = lsp_status.capabilities,
 })

@@ -42,7 +42,6 @@ Plug 'https://github.com/steelsojka/completion-buffers'
 " lsp related
 Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'https://github.com/nvim-lua/lsp-status.nvim'
-Plug 'https://github.com/nvim-lua/diagnostic-nvim'
 
 " git related
 Plug 'https://github.com/itchyny/vim-gitbranch'
