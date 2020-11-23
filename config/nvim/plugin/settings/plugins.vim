@@ -139,7 +139,7 @@ let g:fzf_layout = {'down': '~25%'}
 command! -bang -nargs=* Rg
             \ call fzf#vim#grep(
             \   'rg --column --line-number --no-heading --color=always'
-            \   . ' --smart-case --hidden --glob "!.git" '
+            \   . ' --smart-case --hidden --glob "!.git" --glob "!dependency/**" '
             \   . shellescape(<q-args>),
             \   1, <bang>0
             \ )
