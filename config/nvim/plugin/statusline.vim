@@ -90,7 +90,8 @@ function! GitBranch()
         let l:branch = gitbranch#name()
     endif
 
-    return l:branch == '' ? l:branch : printf('%s :: ', l:branch)
+    " when branch variable is non-empty print only the first 30 characters
+    return l:branch == '' ? l:branch : printf('%s :: ', substitute(l:branch, '\(.\{0,30}\).*', '\1...', ''))
 endfunction
 
 function! GitChanges()
