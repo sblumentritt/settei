@@ -168,13 +168,13 @@ alt_send_esc: true
 
 key_bindings:
   # unset some unwanted key bindings
-  - { key: Insert,   mods: Shift,         action: None }
-  - { key: Key0,     mods: Control,       action: None }
-  - { key: Equals,   mods: Control,       action: None }
-  - { key: Add,      mods: Control,       action: None }
-  - { key: Subtract, mods: Control,       action: None }
-  - { key: Minus,    mods: Control,       action: None }
-  - { key: Return,   mods: Alt,           action: None }
+  - { key: Insert,         mods: Shift,         action: None }
+  - { key: Key0,           mods: Control,       action: None }
+  - { key: Equals,         mods: Control,       action: None }
+  - { key: NumpadAdd,      mods: Control,       action: None }
+  - { key: NumpadSubtract, mods: Control,       action: None }
+  - { key: Minus,          mods: Control,       action: None }
+  - { key: Return,         mods: Alt,           action: None }
 
-  - { key: V,        mods: Control|Shift, action: Paste }
-  - { key: C,        mods: Control|Shift, action: Copy  }
+  - { key: V,              mods: Control|Shift, action: Paste }
+  - { key: C,              mods: Control|Shift, action: Copy  }
