@@ -25,6 +25,7 @@ if isdirectory($neovim_plugin_dir . '/nvim-lspconfig')
             \ {
             \   'c': [{'complete_items': ['lsp']}],
             \   'cpp': [{'complete_items': ['lsp']}],
+            \   'lua': [{'complete_items': ['lsp']}],
             \   'cmake':
             \   [
             \       {'complete_items': ['cmake']},

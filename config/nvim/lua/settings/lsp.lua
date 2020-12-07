@@ -134,3 +134,30 @@ lspconfig.clangd.setup({
     handlers = lsp_status.extensions.clangd.setup(),
     capabilities = lsp_status.capabilities,
 })
+
+-- lua-language-server
+lspconfig.sumneko_lua.setup({
+    cmd = {
+        '/usr/lib/lua-language-server/lua-language-server',
+        '-E',
+        '/usr/share/lua-language-server/main.lua'
+    },
+    settings = {
+        Lua = {
+            completion = {
+                keywordSnippet = "Disable",
+            },
+            diagnostics = {
+                globals = {'vim'}
+            },
+            runtime = {
+                version = 'LuaJIT'
+            },
+            workspace = {
+                library = vim.list_extend({[vim.fn.expand("$VIMRUNTIME/lua")] = true}, {}),
+            },
+        },
+    },
+
+    on_attach = common_attach,
+})
