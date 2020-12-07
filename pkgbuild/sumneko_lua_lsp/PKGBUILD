@@ -1,0 +1,55 @@
+# --------------------------------------
+# PKGBUILD for sumneko's lua LSP
+# --------------------------------------
+pkgname=lua-language-server
+
+pkgdesc="Lua Language Server coded by Lua"
+url="https://github.com/sumneko/lua-language-server"
+
+pkgver=r3214.e818b4bd
+pkgrel=1
+
+arch=('x86_64')
+license=('MIT')
+
+conflicts=("${pkgname}-git")
+
+depends=('lua')
+makedepends=('ninja')
+
+source=("git+https://github.com/sumneko/${pkgname}.git"
+        "change_file_path_locations.patch")
+
+sha512sums=('SKIP'
+            'b54444e45cf75e4c162a0f2b57be4c2488b43f6a566865a1019694d3b4293a6214bc010bd5c26c422f21a382beed82091e8b79337ab983f21479fe0c84a47779')
+
+pkgver() {
+    cd "${srcdir}/${pkgname}"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd "${srcdir}/${pkgname}"
+
+    git submodule update --init --recursive
+    patch -p1 -i "${srcdir}/change_file_path_locations.patch"
+}
+
+build() {
+    cd "${srcdir}/${pkgname}"
+
+    ninja -C 3rd/luamake -f ninja/linux.ninja
+    ./3rd/luamake/luamake rebuild
+}
+
+package() {
+    cd "${srcdir}/${pkgname}"
+
+    install -m0755 -d "${pkgdir}/usr/lib/${pkgname}"
+    cp -a bin/Linux/* "${pkgdir}/usr/lib/${pkgname}"
+
+    install -m0755 -d "${pkgdir}/usr/share/${pkgname}"
+
+    cp -a main.lua platform.lua debugger.lua locale script meta \
+        "${pkgdir}/usr/share/${pkgname}"
+}
