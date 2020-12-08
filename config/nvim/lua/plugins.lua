@@ -5,6 +5,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.cmd('silent !git clone https://github.com/wbthomason/packer.nvim '..install_path)
 end
 
+-- search in the optional plugin directory for the given plugin
 vim.cmd('packadd packer.nvim')
 
 return require('packer').startup(function()
@@ -12,12 +13,21 @@ return require('packer').startup(function()
     use {'https://github.com/wbthomason/packer.nvim', opt = true}
 
     -- completion related
-    use {'https://github.com/nvim-lua/completion-nvim'}
-    use {'https://github.com/steelsojka/completion-buffers'}
+    use {'https://github.com/nvim-lua/completion-nvim',
+        requires = {
+            {'https://github.com/steelsojka/completion-buffers'},
+            {'https://gitlab.com/s.blumentritt/cmake.vim'},
+            {'https://gitlab.com/s.blumentritt/bitbake.vim'},
+        }
+    }
 
     -- lsp related
-    use {'https://github.com/neovim/nvim-lspconfig'}
-    use {'https://github.com/nvim-lua/lsp-status.nvim'}
+    use {'https://github.com/neovim/nvim-lspconfig',
+        requires = {
+            {'https://github.com/nvim-lua/lsp-status.nvim'}
+        },
+        config = require('settings/lsp')
+    }
 
     -- git related
     use {'https://github.com/itchyny/vim-gitbranch'}
@@ -29,9 +39,6 @@ return require('packer').startup(function()
     use {'https://github.com/tpope/vim-markdown'}
     use {'https://github.com/MTDL9/vim-log-highlighting'}
     use {'https://github.com/euclidianAce/BetterLua.vim'}
-
-    use {'https://gitlab.com/s.blumentritt/cmake.vim'}
-    use {'https://gitlab.com/s.blumentritt/bitbake.vim'}
 
     -- utilities
     use {'https://github.com/moll/vim-bbye'}

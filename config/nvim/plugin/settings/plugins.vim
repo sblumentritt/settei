@@ -14,8 +14,6 @@ set cpoptions&vim
 " lsp + completion + diagnostic configurations
 " --------------------------------------
 if isdirectory($neovim_plugin_dir . '/nvim-lspconfig')
-    lua require('settings/lsp')
-
     " register custom sources from other plugins
     lua require('completion').addCompletionSource('cmake', require('cmake').complete_item)
     lua require('completion').addCompletionSource('bitbake', require('bitbake').complete_item)
