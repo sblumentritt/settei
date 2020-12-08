@@ -13,13 +13,6 @@ set cpoptions&vim
 
 " autocommands
 " --------------------------------------
-" automatically install missing plugins
-augroup install_missing_plugins
-    autocmd!
-    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-                        \ | PlugInstall | endif
-augroup END
-
 "  update filetypes
 augroup update_filetypes
     autocmd!

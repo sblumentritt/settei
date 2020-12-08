@@ -9,14 +9,7 @@ let g:mapleader = ','
 " save paths as vimscript environment variables
 " --------------------------------------
 let $neovim_data_dir = stdpath('data') . '/site'
-let $neovim_plugin_dir = $neovim_data_dir . '/plugged'
-
-" check if vim-plug is installed
-" --------------------------------------
-if !filereadable($neovim_data_dir . '/autoload/plug.vim')
-    silent !curl -fLo $neovim_data_dir/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
+let $neovim_plugin_dir = $neovim_data_dir . '/pack/packer/start'
 
 " disable some standard plugins
 " --------------------------------------
@@ -31,37 +24,9 @@ let g:loaded_zipPlugin = 1
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
 
-" define plugins
-" --------------------------------------
-call plug#begin('$neovim_plugin_dir')
+lua require('plugins')
 
-" completion related
-Plug 'https://github.com/nvim-lua/completion-nvim'
-Plug 'https://github.com/steelsojka/completion-buffers'
+" always install missing plugins when starting
+PackerInstall
 
-" lsp related
-Plug 'https://github.com/neovim/nvim-lspconfig'
-Plug 'https://github.com/nvim-lua/lsp-status.nvim'
-
-" git related
-Plug 'https://github.com/itchyny/vim-gitbranch'
-Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'https://github.com/rhysd/git-messenger.vim'
-
-" other filetype specific plugins
-Plug 'https://github.com/cespare/vim-toml'
-Plug 'https://github.com/tpope/vim-markdown'
-Plug 'https://github.com/MTDL9/vim-log-highlighting'
-Plug 'https://github.com/euclidianAce/BetterLua.vim'
-
-Plug 'https://gitlab.com/s.blumentritt/cmake.vim'
-Plug 'https://gitlab.com/s.blumentritt/bitbake.vim'
-
-" utilities
-Plug 'https://github.com/moll/vim-bbye'
-Plug 'https://github.com/junegunn/fzf.vim'
-Plug 'https://github.com/norcalli/nvim-colorizer.lua'
-Plug 'https://github.com/mbbill/undotree', {'on': 'UndotreeToggle'}
-
-call plug#end()
 filetype plugin indent on

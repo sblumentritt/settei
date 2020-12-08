@@ -16,3 +16,6 @@ __pycache__/
 pkg/
 src/
 *~
+
+# auto-generated from packer.nvim
+config/nvim/plugin/packer_compiled.vim
