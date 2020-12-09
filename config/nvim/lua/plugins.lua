@@ -18,7 +18,8 @@ return require('packer').startup(function()
             {'https://github.com/steelsojka/completion-buffers'},
             {'https://gitlab.com/s.blumentritt/cmake.vim'},
             {'https://gitlab.com/s.blumentritt/bitbake.vim'},
-        }
+        },
+        config = require('settings/completion')
     }
 
     -- lsp related

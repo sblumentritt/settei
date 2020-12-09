@@ -78,29 +78,6 @@ vim.fn.sign_define('LspDiagnosticsSignHint', {
     text = '●', texthl = 'LspDiagnosticsSignHint'
 })
 
--- completion-nvim
-vim.g.completion_timer_cycle = 200
-vim.g.completion_enable_auto_hover = 0
-vim.g.completion_trigger_on_delete = 1
-vim.g.completion_auto_change_source = 1
-vim.g.completion_word_separator = '[^a-zA-Z0-9_]'
-
-vim.g.completion_abbr_length = 55 -- completion item (left)
-vim.g.completion_menu_length = 30 -- extra info for completion item (right)
-
-vim.g.completion_items_priority = {
-    Method = 10,
-    Function = 7,
-    Variables = 7,
-    Field = 5,
-    Interfaces = 5,
-    Constant = 5,
-    Class = 5,
-    Keyword = 4,
-    Buffers = 1,
-    File = 0
-}
-
 -- lspconfig
 local lspconfig = require('lspconfig')
 local lsp_status = require('lsp-status')
