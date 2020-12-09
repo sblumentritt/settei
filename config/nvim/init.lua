@@ -28,8 +28,5 @@ vim.g.loaded_netrwPlugin = 1
 -- --------------------------------------
 require('plugins')
 
--- always install missing plugins when starting
-vim.cmd('PackerInstall')
-
 -- NOTE: is this still needed?
 vim.cmd('filetype plugin indent on')
