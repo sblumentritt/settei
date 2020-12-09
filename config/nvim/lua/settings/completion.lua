@@ -1,3 +1,8 @@
+-- return directly when the required module cannot be loaded
+if not pcall(require, 'completion') then
+    return
+end
+
 -- configurations
 -- --------------------------------------
 vim.g.completion_timer_cycle = 200

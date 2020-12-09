@@ -1,3 +1,8 @@
+-- return directly when the required module cannot be loaded
+if not pcall(require, 'colorizer') then
+    return
+end
+
 -- key mappings
 -- --------------------------------------
 local map = function(type, key, value)
