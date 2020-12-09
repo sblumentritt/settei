@@ -168,7 +168,8 @@ lspconfig.sumneko_lua.setup({
                 keywordSnippet = "Disable",
             },
             diagnostics = {
-                globals = {'vim'}
+                globals = {'vim', 'use'},
+                disable = {'lowercase-global'}
             },
             runtime = {
                 version = 'LuaJIT',
