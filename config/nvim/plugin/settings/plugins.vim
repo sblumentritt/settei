@@ -11,36 +11,6 @@ let g:loaded_plugin_settings = 1
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-" lsp + completion + diagnostic configurations
-" --------------------------------------
-if isdirectory($neovim_plugin_dir . '/nvim-lspconfig')
-    " mapping to toggle format on save
-    nnoremap <F12> :call <SID>toggle_format_on_save()<CR>
-
-    function! s:toggle_format_on_save()
-        if !exists('g:format_on_save_toggle')
-            let g:format_on_save_toggle = 1
-        else
-            let g:format_on_save_toggle = 1 - g:format_on_save_toggle
-        endif
-
-        if g:format_on_save_toggle == 1
-            echomsg 'format on save: [enabled]'
-            augroup lsp_format_on_save
-                autocmd!
-                " currently only C and C++ files are supported
-                autocmd BufWritePre *.{c,cpp,h,hpp} lua vim.lsp.buf.formatting_sync(nil, 1000)
-            augroup END
-        else
-            echomsg 'format on save: [disabled]'
-            autocmd! lsp_format_on_save
-        endif
-    endfunction
-
-    " enable format on save when starting neovim
-    silent call s:toggle_format_on_save()
-endif
-
 " gitgutter configurations
 " --------------------------------------
 let g:gitgutter_map_keys = 0

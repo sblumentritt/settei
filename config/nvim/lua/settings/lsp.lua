@@ -38,6 +38,44 @@ map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 -- show diagnostics in a floating windows for the current line
 map('n', '<leader>sld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
 
+-- toggle format on save
+map('n', '<F12>', '<cmd>lua toggle_format_on_save()<CR>')
+
+-- TODO: do not pollute the global namespace, maybe use the returned table approach
+function toggle_format_on_save()
+    if vim.g.format_on_save_toggle == nil then
+        vim.g.format_on_save_toggle = 1
+    else
+        vim.g.format_on_save_toggle = 1 - vim.g.format_on_save_toggle
+    end
+
+    if vim.g.format_on_save_toggle == 1 then
+        print('format on save: [enabled]')
+        -- TODO: find better way to do this in lua
+        vim.api.nvim_exec(
+        [[
+        augroup lsp_format_on_save
+            autocmd!
+            " currently only C and C++ files are supported
+            autocmd BufWritePre *.{c,cpp,h,hpp} lua vim.lsp.buf.formatting_sync(nil, 1000)
+        augroup END
+        ]]
+        , false)
+    else
+        print('format on save: [disabled]')
+        -- TODO: find better way to do this in lua
+        vim.api.nvim_exec(
+        [[
+        autocmd! lsp_format_on_save
+        ]]
+        , false)
+    end
+end
+
+-- enable format on save when starting neovim
+-- TODO: replace this with a direct lua call
+vim.cmd('silent lua toggle_format_on_save()')
+
 -- autocommands
 -- --------------------------------------
 -- use completion-nvim in every buffer
