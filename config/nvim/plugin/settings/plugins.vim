@@ -38,32 +38,6 @@ let g:cmake#blacklist = [
 " close current buffer but keep splits
 nnoremap gb :Bdelete<CR>
 
-" nvim-colorizer.lua configurations
-" --------------------------------------
-if isdirectory($neovim_plugin_dir . '/nvim-colorizer.lua')
-    " disable auto highlight and configure options
-    lua require('colorizer').setup({'!*';}, {RRGGBBAA = true; css = true;})
-
-    " mapping to toggle color highlighting in current buffer
-    nnoremap <leader>tc :call <SID>toggle_color_highlight()<CR>
-
-    function! s:toggle_color_highlight()
-        if !exists('b:enable_color_highlight')
-            let b:enable_color_highlight = 1
-        else
-            let b:enable_color_highlight = 1 - b:enable_color_highlight
-        endif
-
-        if b:enable_color_highlight == 1
-            lua require('colorizer').attach_to_buffer(0)
-            echomsg 'nvim-colorizer: highlighting [enabled]'
-        else
-            lua require('colorizer').detach_from_buffer(0)
-            echomsg 'nvim-colorizer: highlighting [disabled]'
-        endif
-    endfunction
-endif
-
 " vim-markdown configurations
 " --------------------------------------
 let g:markdown_syntax_conceal = 0

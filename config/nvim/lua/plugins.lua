@@ -44,6 +44,8 @@ return require('packer').startup(function()
     -- utilities
     use {'https://github.com/moll/vim-bbye'}
     use {'https://github.com/junegunn/fzf.vim'}
-    use {'https://github.com/norcalli/nvim-colorizer.lua'}
+    use {'https://github.com/norcalli/nvim-colorizer.lua',
+        config = require('settings/colorizer')
+    }
     use {'https://github.com/mbbill/undotree', cmd = 'UndotreeToggle'}
 end)
