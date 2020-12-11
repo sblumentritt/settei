@@ -19,7 +19,7 @@ require('packer').startup(function()
             {'https://gitlab.com/s.blumentritt/cmake.vim'},
             {'https://gitlab.com/s.blumentritt/bitbake.vim'},
         },
-        config = require('settings/completion')
+        config = require('settings.completion')
     }
 
     -- lsp related
@@ -27,7 +27,7 @@ require('packer').startup(function()
         requires = {
             {'https://github.com/nvim-lua/lsp-status.nvim'}
         },
-        config = require('settings/lsp')
+        config = require('settings.lsp')
     }
 
     -- git related
@@ -45,7 +45,7 @@ require('packer').startup(function()
     use {'https://github.com/moll/vim-bbye'}
     use {'https://github.com/junegunn/fzf.vim'}
     use {'https://github.com/norcalli/nvim-colorizer.lua',
-        config = require('settings/colorizer')
+        config = require('settings.colorizer')
     }
     use {'https://github.com/mbbill/undotree'}
 end)
