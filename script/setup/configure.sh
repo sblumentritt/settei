@@ -162,7 +162,7 @@ package_installation() {
     packages="${packages} xf86-input-wacom xf86-input-synaptics"
 
     # wayland compositor
-    packages="${packages} wlroots sway swaybg swaylock xorg-server-xwayland"
+    packages="${packages} wlroots sway swaybg swaylock xorg-xwayland"
     # wayland only
     packages="${packages} mako grim slurp wl-clipboard"
 
