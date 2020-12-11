@@ -47,5 +47,5 @@ require('packer').startup(function()
     use {'https://github.com/norcalli/nvim-colorizer.lua',
         config = require('settings/colorizer')
     }
-    use {'https://github.com/mbbill/undotree', cmd = 'UndotreeToggle'}
+    use {'https://github.com/mbbill/undotree'}
 end)
