@@ -8,7 +8,7 @@ end
 -- search in the optional plugin directory for the given plugin
 vim.cmd('packadd packer.nvim')
 
-return require('packer').startup(function()
+require('packer').startup(function()
     -- let packer.nvim manage itself
     use {'https://github.com/wbthomason/packer.nvim', opt = true}
 
