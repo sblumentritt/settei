@@ -6,11 +6,6 @@
 -- --------------------------------------
 vim.g.mapleader = ','
 
--- save paths as vimscript environment variables
--- --------------------------------------
-vim.env.neovim_data_dir = vim.fn.stdpath('data')..'/site'
-vim.env.neovim_plugin_dir = vim.env.neovim_data_dir..'/pack/packer/start'
-
 -- disable some standard plugins
 -- --------------------------------------
 vim.g.loaded_gzip = 1
@@ -24,9 +19,7 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- load plugins configuration file
+-- load other lua modules
 -- --------------------------------------
+require('core/options').setup()
 require('plugins')
-
--- NOTE: is this still needed?
-vim.cmd('filetype plugin indent on')

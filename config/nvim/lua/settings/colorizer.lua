@@ -31,5 +31,4 @@ end
 
 -- configurations
 -- --------------------------------------
-vim.o.termguicolors = true -- prevent error message, problem is an ordering problem on load
 require('colorizer').setup({'!*';}, {RRGGBBAA = true; css = true;})
