@@ -1,8 +1,8 @@
 -- check and ensure that packer.nvim is installed
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    vim.cmd('silent !git clone https://github.com/wbthomason/packer.nvim '..install_path)
+    vim.cmd('silent !git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
 -- search in the optional plugin directory for the given plugin
