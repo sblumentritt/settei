@@ -40,6 +40,9 @@ export MPD_HOST="127.0.0.1"
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
+# needed for 'fd' to use terminal colors
+export LS_COLORS=
+
 # suppress ugly error which pollute log
 export XKB_LOG_LEVEL=critical
 
