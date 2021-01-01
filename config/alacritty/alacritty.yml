@@ -90,42 +90,42 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '0x383838'
-    foreground: '0xe5dbd0'
+    background: '#383838'
+    foreground: '#e5dbd0'
 
   normal:
-    black:   '0x454545'
-    red:     '0xda7c72'
-    green:   '0xb8b48a'
-    yellow:  '0xdfa883'
-    blue:    '0x93b3a3'
-    magenta: '0xcc9999'
-    cyan:    '0x9fb193'
-    white:   '0xf2e7e0'
+    black:   '#454545'
+    red:     '#da7c72'
+    green:   '#b8b48a'
+    yellow:  '#dfa883'
+    blue:    '#93b3a3'
+    magenta: '#cc9999'
+    cyan:    '#9fb193'
+    white:   '#f2e7e0'
 
   bright:
-    black:   '0x998f85'
-    red:     '0xda7c72'
-    green:   '0xb8b48a'
-    yellow:  '0xf7d0a2'
-    blue:    '0x93b3a3'
-    magenta: '0xcc9999'
-    cyan:    '0x9fb193'
-    white:   '0xe5dbd0'
+    black:   '#998f85'
+    red:     '#da7c72'
+    green:   '#b8b48a'
+    yellow:  '#f7d0a2'
+    blue:    '#93b3a3'
+    magenta: '#cc9999'
+    cyan:    '#9fb193'
+    white:   '#e5dbd0'
 
   # indexed colors include all colors from 16 to 256
   indexed_colors: []
 
   # selection colors
   selection:
-    # text: '0xf0ebdc'
-    background: '0x454545'
+    # text: '#f0ebdc'
+    background: '#454545'
 
 # specifying a 'duration' of '0' will disable the visual bell
 bell:
   animation: EaseOutExpo
   duration: 0
-  color: '0xdfa883'
+  color: '#dfa883'
 
 # '0.0' is completely transparent and '1.0' is opaque
 background_opacity: 1.0
