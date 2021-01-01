@@ -1,19 +1,7 @@
--- return directly when the required module cannot be loaded
-if not pcall(require, 'colorizer') then
-    return
-end
+-- @module settings.colorizer
+local colorizer = {}
 
--- key mappings
--- --------------------------------------
-local map = function(type, key, value)
-    vim.fn.nvim_set_keymap(type, key, value, {noremap = true, silent = true});
-end
-
--- toggle color highlighting in current buffer
-map('n', '<leader>tc', '<cmd>lua toggle_color_highlight()<CR>')
-
--- TODO: do not pollute the global namespace, maybe use the returned table approach
-function toggle_color_highlight()
+function colorizer.toggle_color_highlight()
     if vim.b.enable_color_highlight == nil then
         vim.b.enable_color_highlight = 1
     else
@@ -29,6 +17,24 @@ function toggle_color_highlight()
     end
 end
 
--- configurations
--- --------------------------------------
-require('colorizer').setup({'!*';}, {RRGGBBAA = true; css = true;})
+function colorizer.setup()
+    -- return directly when the required module cannot be loaded
+    if not pcall(require, 'colorizer') then
+        return
+    end
+
+    -- key mappings
+    -- --------------------------------------
+    local map = function(type, key, value)
+        vim.fn.nvim_set_keymap(type, key, value, {noremap = true, silent = true});
+    end
+
+    -- toggle color highlighting in current buffer
+    map('n', '<leader>tc', '<cmd>lua require("settings.colorizer").toggle_color_highlight()<CR>')
+
+    -- configurations
+    -- --------------------------------------
+    require('colorizer').setup({'!*';}, {RRGGBBAA = true; css = true;})
+end
+
+return colorizer

@@ -22,4 +22,4 @@ vim.g.loaded_netrwPlugin = 1
 -- load other lua modules
 -- --------------------------------------
 require('core.options').setup()
-require('plugins')
+require('core.plugins').setup()

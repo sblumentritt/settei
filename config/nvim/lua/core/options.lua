@@ -1,7 +1,7 @@
--- --------------------------------------
--- configure built-in neovim options
--- --------------------------------------
-local function setup()
+-- @module core.options
+local options = {}
+
+function options.setup()
     -- create directory which should hold undo files
     local neovim_undo_dir = vim.fn.stdpath('data') .. '/site/undo'
     if not vim.fn.isdirectory(neovim_undo_dir) then
@@ -16,7 +16,7 @@ local function setup()
     -- load color scheme
     vim.cmd('colorscheme susumu')
 
-    local options = {
+    local nvim_options = {
         fileencoding = 'utf-8',
         fileencodings = 'utf-8',
 
@@ -134,11 +134,11 @@ local function setup()
 
     -- define backend for vimgrep/grep command
     if vim.fn.executable('rg') == 1 then
-        options.grepprg = 'rg --vimgrep --no-heading --smart-case --hidden --follow'
-        options.grepformat = '%f:%l:%c:%m'
+        nvim_options.grepprg = 'rg --vimgrep --no-heading --smart-case --hidden --follow'
+        nvim_options.grepformat = '%f:%l:%c:%m'
     else
-        options.grepprg = 'grep -n --with-filename -I -R'
-        options.grepformat = '%f:%l:%m'
+        nvim_options.grepprg = 'grep -n --with-filename -I -R'
+        nvim_options.grepformat = '%f:%l:%m'
     end
 
     -- TODO: write this in lua
@@ -199,11 +199,9 @@ local function setup()
         end
     end
 
-    for name,value in pairs(options) do
+    for name,value in pairs(nvim_options) do
         pcall(set_option, name, value)
     end
 end
 
-return {
-    setup = setup;
-}
+return options
