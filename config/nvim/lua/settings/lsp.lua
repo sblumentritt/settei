@@ -2,46 +2,44 @@
 local lsp = {}
 
 function lsp.mappings()
-    local map = function(type, key, value)
-        vim.fn.nvim_set_keymap(type, key, value, {noremap = true, silent = true});
-    end
+    local utils = require('core.utils')
 
     -- trigger completion
-    map('i', '<C-space>', '<cmd>lua require("completion").triggerCompletion()<CR>')
+    utils.keymap('i', '<C-space>', '<cmd>lua require("completion").triggerCompletion()<CR>')
 
     -- <TAB> completion mapping + helper function
-    map('i', '<TAB>', '<cmd>lua require("completion").smart_tab()<CR>')
+    utils.keymap('i', '<TAB>', '<cmd>lua require("completion").smart_tab()<CR>')
 
     -- show type info and short doc for identifier under cursor
-    map('n', '<leader>sd', '<cmd>lua vim.lsp.buf.hover()<CR>')
+    utils.keymap('n', '<leader>sd', '<cmd>lua vim.lsp.buf.hover()<CR>')
 
     -- goto definition under cursor
-    map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+    utils.keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 
     -- goto type definition under cursor
-    map('n', 'gtd', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+    utils.keymap('n', 'gtd', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 
     -- goto reference of identifier under cursor
     -- opens a list if multiple are available
-    map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+    utils.keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 
     -- rename object under cursor for the whole project
-    map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+    utils.keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
     -- list of current document symbols
-    map('n', '<leader>ld', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+    utils.keymap('n', '<leader>ld', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 
     -- search interactive in workspace symbols
-    map('n', '<leader>lw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+    utils.keymap('n', '<leader>lw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
 
     -- show available code actions for current cursor position
-    map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+    utils.keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
     -- show diagnostics in a floating windows for the current line
-    map('n', '<leader>sld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+    utils.keymap('n', '<leader>sld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
 
     -- toggle format on save
-    map('n', '<F12>', '<cmd>lua require("settings.lsp").toggle_format_on_save()<CR>')
+    utils.keymap('n', '<F12>', '<cmd>lua require("settings.lsp").toggle_format_on_save()<CR>')
 end
 
 function lsp.toggle_format_on_save()

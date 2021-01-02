@@ -25,12 +25,14 @@ function colorizer.setup()
 
     -- key mappings
     -- --------------------------------------
-    local map = function(type, key, value)
-        vim.fn.nvim_set_keymap(type, key, value, {noremap = true, silent = true});
-    end
+    local utils = require('core.utils')
 
     -- toggle color highlighting in current buffer
-    map('n', '<leader>tc', '<cmd>lua require("settings.colorizer").toggle_color_highlight()<CR>')
+    utils.keymap(
+        'n',
+        '<leader>tc',
+        '<cmd>lua require("settings.colorizer").toggle_color_highlight()<CR>'
+    )
 
     -- configurations
     -- --------------------------------------
