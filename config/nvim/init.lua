@@ -4,7 +4,7 @@
 
 -- define value for <leader> as early as possible
 -- --------------------------------------
-vim.g.mapleader = ','
+vim.g.mapleader = ","
 
 -- disable some standard plugins
 -- --------------------------------------
@@ -21,6 +21,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- load other lua modules
 -- --------------------------------------
-require('core.options').setup()
-require('core.plugins').setup()
-require('core.mappings').setup()
+require("core.options").setup()
+require("core.plugins").setup()
+require("core.mappings").setup()

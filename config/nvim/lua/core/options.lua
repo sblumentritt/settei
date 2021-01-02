@@ -3,25 +3,25 @@ local options = {}
 
 function options.setup()
     -- create directory which should hold undo files
-    local neovim_undo_dir = vim.fn.stdpath('data') .. '/site/undo'
+    local neovim_undo_dir = vim.fn.stdpath("data") .. "/site/undo"
     if not vim.fn.isdirectory(neovim_undo_dir) then
         vim.fn.mkdir(neovim_undo_dir)
     end
 
     -- enable filetype detection
-    vim.cmd('filetype plugin indent on')
+    vim.cmd("filetype plugin indent on")
     -- enable syntax highlighting
-    vim.cmd('syntax on')
+    vim.cmd("syntax on")
 
     -- load color scheme
-    vim.cmd('colorscheme susumu')
+    vim.cmd("colorscheme susumu")
 
     local nvim_options = {
-        fileencoding = 'utf-8',
-        fileencodings = 'utf-8',
+        fileencoding = "utf-8",
+        fileencodings = "utf-8",
 
-        matchpairs = vim.o.matchpairs .. ',<:>',
-        backspace = 'indent,eol,start',
+        matchpairs = vim.o.matchpairs .. ",<:>",
+        backspace = "indent,eol,start",
 
         -- don't wrap text if it is longer than the width of the window
         wrap = false,
@@ -45,7 +45,7 @@ function options.setup()
         smartcase = true,
         ignorecase = true,
         -- show effect of a command incrementally e.g. substitute
-        inccommand = 'nosplit',
+        inccommand = "nosplit",
 
         smarttab = true,
         expandtab = true,
@@ -54,8 +54,8 @@ function options.setup()
         smartindent = false, -- disabled because deprecated and should not be used
 
         -- prevent special treatment of lines starting with '#'
-        cinkeys = '0{,0},0),0],:,!^F,o,O,e',
-        indentkeys = '0{,0},0),0],:,!^F,o,O,e',
+        cinkeys = "0{,0},0),0],:,!^F,o,O,e",
+        indentkeys = "0{,0},0),0],:,!^F,o,O,e",
 
         tabstop = 4,
         shiftwidth = 4,
@@ -80,28 +80,28 @@ function options.setup()
         -- enable command-line completion suggestion
         wildmenu = true,
         -- get old wildmenu style instead of new default popup menu style
-        wildoptions = '',
+        wildoptions = "",
 
         -- enable mouse support for all modes
-        mouse = 'a',
+        mouse = "a",
         -- always use the clipboard for all operations
-        clipboard = 'unnamedplus',
+        clipboard = "unnamedplus",
         -- settings for diff mode
-        diffopt = 'vertical,filler,internal,algorithm:patience',
+        diffopt = "vertical,filler,internal,algorithm:patience",
 
         -- show popup menu also for only one match
         -- don't insert any text without user selection
         -- don't auto select a match in the menu
-        completeopt = 'menu,menuone,noinsert,noselect',
+        completeopt = "menu,menuone,noinsert,noselect",
 
         -- disable mode messages on last line
         showmode = false,
         -- don't give ins-completion-menu messages e.g. 'match 1 of 2'
-        shortmess = vim.o.shortmess .. 'c',
+        shortmess = vim.o.shortmess .. "c",
         -- always show status line for last window
         laststatus = 2,
         -- always draw signcolumn
-        signcolumn = 'yes',
+        signcolumn = "yes",
 
         -- if file changes outside of neovim read it again
         autoread = true,
@@ -115,30 +115,30 @@ function options.setup()
         termguicolors = true,
 
         -- change cursor shape if terminal supports it
-        guicursor = 'n-c-r-cr:hor20,i-ci-ve:ver25,v:block',
+        guicursor = "n-c-r-cr:hor20,i-ci-ve:ver25,v:block",
 
         -- enable persistent undo
         undodir = neovim_undo_dir,
         undofile = true,
 
         -- improve session save option
-        sessionoptions = 'blank,buffers,folds,help,localoptions,tabpages,winsize',
+        sessionoptions = "blank,buffers,folds,help,localoptions,tabpages,winsize",
 
         -- use a whitespace as fill character for folds and end-of-buffer indication
-        fillchars = 'fold: ,eob: ,diff:-',
+        fillchars = "fold: ,eob: ,diff:-",
 
         -- fold related options
         foldlevel = 99,
-        foldmethod = 'syntax',
+        foldmethod = "syntax",
     }
 
     -- define backend for vimgrep/grep command
-    if vim.fn.executable('rg') == 1 then
-        nvim_options.grepprg = 'rg --vimgrep --no-heading --smart-case --hidden --follow'
-        nvim_options.grepformat = '%f:%l:%c:%m'
+    if vim.fn.executable("rg") == 1 then
+        nvim_options.grepprg = "rg --vimgrep --no-heading --smart-case --hidden --follow"
+        nvim_options.grepformat = "%f:%l:%c:%m"
     else
-        nvim_options.grepprg = 'grep -n --with-filename -I -R'
-        nvim_options.grepformat = '%f:%l:%m'
+        nvim_options.grepprg = "grep -n --with-filename -I -R"
+        nvim_options.grepformat = "%f:%l:%m"
     end
 
     -- TODO: write this in lua
@@ -181,14 +181,14 @@ function options.setup()
     -- ugly workaround until https://github.com/neovim/neovim/pull/13479 is integrated
     local function set_option(name, value)
         local window_only_options = {
-            'wrap',
-            'number',
-            'relativenumber',
-            'signcolumn',
-            'foldenable',
-            'foldmethod',
-            'fillchars',
-            'foldlevel',
+            "wrap",
+            "number",
+            "relativenumber",
+            "signcolumn",
+            "foldenable",
+            "foldmethod",
+            "fillchars",
+            "foldlevel",
         }
         vim.o[name] = value
 

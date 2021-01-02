@@ -2,44 +2,44 @@
 local lsp = {}
 
 function lsp.mappings()
-    local utils = require('core.utils')
+    local utils = require("core.utils")
 
     -- trigger completion
-    utils.keymap('i', '<C-space>', '<cmd>lua require("completion").triggerCompletion()<CR>')
+    utils.keymap("i", "<C-space>", "<cmd>lua require('completion').triggerCompletion()<cr>")
 
     -- <TAB> completion mapping + helper function
-    utils.keymap('i', '<TAB>', '<cmd>lua require("completion").smart_tab()<CR>')
+    utils.keymap("i", "<TAB>", "<cmd>lua require('completion').smart_tab()<cr>")
 
     -- show type info and short doc for identifier under cursor
-    utils.keymap('n', '<leader>sd', '<cmd>lua vim.lsp.buf.hover()<CR>')
+    utils.keymap("n", "<leader>sd", "<cmd>lua vim.lsp.buf.hover()<cr>")
 
     -- goto definition under cursor
-    utils.keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+    utils.keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 
     -- goto type definition under cursor
-    utils.keymap('n', 'gtd', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+    utils.keymap("n", "gtd", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
 
     -- goto reference of identifier under cursor
     -- opens a list if multiple are available
-    utils.keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+    utils.keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
 
     -- rename object under cursor for the whole project
-    utils.keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+    utils.keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
 
     -- list of current document symbols
-    utils.keymap('n', '<leader>ld', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+    utils.keymap("n", "<leader>ld", "<cmd>lua vim.lsp.buf.document_symbol()<cr>")
 
     -- search interactive in workspace symbols
-    utils.keymap('n', '<leader>lw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+    utils.keymap("n", "<leader>lw", "<cmd>lua vim.lsp.buf.workspace_symbol()<cr>")
 
     -- show available code actions for current cursor position
-    utils.keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+    utils.keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 
     -- show diagnostics in a floating windows for the current line
-    utils.keymap('n', '<leader>sld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
+    utils.keymap("n", "<leader>sld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>")
 
     -- toggle format on save
-    utils.keymap('n', '<F12>', '<cmd>lua require("settings.lsp").toggle_format_on_save()<CR>')
+    utils.keymap("n", "<F12>", "<cmd>lua require('settings.lsp').toggle_format_on_save()<cr>")
 end
 
 function lsp.toggle_format_on_save()
@@ -50,7 +50,7 @@ function lsp.toggle_format_on_save()
     end
 
     if vim.g.format_on_save_toggle == 1 then
-        print('format on save: [enabled]')
+        print("format on save: [enabled]")
         -- TODO: find better way to do this in lua
         vim.api.nvim_exec(
         [[
@@ -62,7 +62,7 @@ function lsp.toggle_format_on_save()
         ]]
         , false)
     else
-        print('format on save: [disabled]')
+        print("format on save: [disabled]")
         -- TODO: find better way to do this in lua
         vim.api.nvim_exec(
         [[
@@ -74,7 +74,7 @@ end
 
 function lsp.autocommands()
     -- use completion-nvim in every buffer
-    vim.cmd [[autocmd BufEnter * lua require('completion').on_attach()]]
+    vim.cmd [[autocmd BufEnter * lua require("completion").on_attach()]]
     -- switch between header and source files
     vim.cmd [[autocmd FileType c,cpp nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<CR>]]
 end
@@ -85,7 +85,7 @@ function lsp.configurations()
         vim.lsp.diagnostic.on_publish_diagnostics, {
             underline = true,
             virtual_text = {
-                prefix = '>',
+                prefix = ">",
                 spacing = 1,
             },
             signs = true,
@@ -94,45 +94,45 @@ function lsp.configurations()
     )
 
     -- update diagnostic sign text
-    vim.fn.sign_define('LspDiagnosticsSignError', {
-        text = '●',
-        texthl = 'LspDiagnosticsSignError'
+    vim.fn.sign_define("LspDiagnosticsSignError", {
+        text = "●",
+        texthl = "LspDiagnosticsSignError"
     })
 
-    vim.fn.sign_define('LspDiagnosticsSignWarning', {
-        text = '●', texthl = 'LspDiagnosticsSignWarning'
+    vim.fn.sign_define("LspDiagnosticsSignWarning", {
+        text = "●", texthl = "LspDiagnosticsSignWarning"
     })
 
-    vim.fn.sign_define('LspDiagnosticsSignInformation', {
-        text = '●', texthl = 'LspDiagnosticsSignInformation'
+    vim.fn.sign_define("LspDiagnosticsSignInformation", {
+        text = "●", texthl = "LspDiagnosticsSignInformation"
     })
 
-    vim.fn.sign_define('LspDiagnosticsSignHint', {
-        text = '●', texthl = 'LspDiagnosticsSignHint'
+    vim.fn.sign_define("LspDiagnosticsSignHint", {
+        text = "●", texthl = "LspDiagnosticsSignHint"
     })
 
     -- lspconfig
-    local lspconfig = require('lspconfig')
-    local lsp_status = require('lsp-status')
+    local lspconfig = require("lspconfig")
+    local lsp_status = require("lsp-status")
 
     local function common_attach(client)
-        require('completion').on_attach(client)
+        require("completion").on_attach(client)
     end
 
     -- clangd
     lspconfig.clangd.setup({
         cmd = {
-            'clangd',
-            '--background-index',
-            '--clang-tidy=true',
-            '--completion-style=bundled',
-            '--function-arg-placeholders=false',
-            '--header-insertion=iwyu',
-            '--header-insertion-decorators',
-            '--pch-storage=memory',
-            '--suggest-missing-includes',
+            "clangd",
+            "--background-index",
+            "--clang-tidy=true",
+            "--completion-style=bundled",
+            "--function-arg-placeholders=false",
+            "--header-insertion=iwyu",
+            "--header-insertion-decorators",
+            "--pch-storage=memory",
+            "--suggest-missing-includes",
 
-            '--log=error'
+            "--log=error"
         },
         on_attach = common_attach,
 
@@ -148,9 +148,9 @@ function lsp.configurations()
     -- lua-language-server
     lspconfig.sumneko_lua.setup({
         cmd = {
-            '/usr/lib/lua-language-server/lua-language-server',
-            '-E',
-            '/usr/share/lua-language-server/main.lua'
+            "/usr/lib/lua-language-server/lua-language-server",
+            "-E",
+            "/usr/share/lua-language-server/main.lua"
         },
         settings = {
             Lua = {
@@ -158,17 +158,17 @@ function lsp.configurations()
                     keywordSnippet = "Disable",
                 },
                 diagnostics = {
-                    globals = {'vim', 'use'},
-                    disable = {'lowercase-global'}
+                    globals = {"vim", "use"},
+                    disable = {"lowercase-global"}
                 },
                 runtime = {
-                    version = 'LuaJIT',
-                    path = vim.split(package.path, ';'),
+                    version = "LuaJIT",
+                    path = vim.split(package.path, ";"),
                 },
                 workspace = {
                     library = {
-                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                     },
                 },
             },
@@ -180,13 +180,13 @@ end
 
 function lsp.setup()
     -- return directly when the required module cannot be loaded
-    if not pcall(require, 'lspconfig') then
+    if not pcall(require, "lspconfig") then
         return
     end
 
     -- enable format on save when starting neovim
     -- TODO: replace this with a direct lua call
-    vim.cmd('silent lua require("settings.lsp").toggle_format_on_save()')
+    vim.cmd("silent lua require('settings.lsp').toggle_format_on_save()")
 
     lsp.mappings()
     lsp.autocommands()
