@@ -42,28 +42,6 @@ local function load_mappings()
     utils.keymap("n", "<F12>", "<cmd>lua require('settings.lsp').toggle_format_on_save()<cr>")
 end
 
-function lsp.toggle_format_on_save()
-    if vim.g.format_on_save_toggle == nil then
-        vim.g.format_on_save_toggle = 1
-    else
-        vim.g.format_on_save_toggle = 1 - vim.g.format_on_save_toggle
-    end
-
-    if vim.g.format_on_save_toggle == 1 then
-        print("format on save: [enabled]")
-        local autocmd_definitions = {
-            lsp_format_on_save = {
-                -- currently only C and C++ files are supported
-                {"BufWritePre", "*.{c,cpp,h,hpp}", "lua vim.lsp.buf.formatting_sync(nil, 1000)"}
-            }
-        }
-        require("core.utils").create_augroups(autocmd_definitions)
-    else
-        print("format on save: [disabled]")
-        vim.cmd("autocmd! lsp_format_on_save")
-    end
-end
-
 local function load_autocommands()
     local autocmd_definitions = {
         lsp_related = {
@@ -189,6 +167,29 @@ function lsp.setup()
     load_mappings()
     load_autocommands()
     load_configurations()
+
+end
+
+function lsp.toggle_format_on_save()
+    if vim.g.format_on_save_toggle == nil then
+        vim.g.format_on_save_toggle = 1
+    else
+        vim.g.format_on_save_toggle = 1 - vim.g.format_on_save_toggle
+    end
+
+    if vim.g.format_on_save_toggle == 1 then
+        print("format on save: [enabled]")
+        local autocmd_definitions = {
+            lsp_format_on_save = {
+                -- currently only C and C++ files are supported
+                {"BufWritePre", "*.{c,cpp,h,hpp}", "lua vim.lsp.buf.formatting_sync(nil, 1000)"}
+            }
+        }
+        require("core.utils").create_augroups(autocmd_definitions)
+    else
+        print("format on save: [disabled]")
+        vim.cmd("autocmd! lsp_format_on_save")
+    end
 end
 
 return lsp
