@@ -6,7 +6,7 @@ pkgname=lua-language-server
 pkgdesc="Lua Language Server coded by Lua"
 url="https://github.com/sumneko/lua-language-server"
 
-pkgver=r3214.e818b4bd
+pkgver=1.10.0
 pkgrel=1
 
 arch=('x86_64')
@@ -18,21 +18,21 @@ depends=('lua')
 makedepends=('ninja')
 
 source=("git+https://github.com/sumneko/${pkgname}.git"
-        "change_file_path_locations.patch")
+        "change_file_path_locations.patch"
+        "remove_telemetry.patch")
 
 sha512sums=('SKIP'
-            'b54444e45cf75e4c162a0f2b57be4c2488b43f6a566865a1019694d3b4293a6214bc010bd5c26c422f21a382beed82091e8b79337ab983f21479fe0c84a47779')
-
-pkgver() {
-    cd "${srcdir}/${pkgname}"
-    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-}
+            '6ed409397641c27ac24b1b3cfab098d264b9b7e8930693a37befb497b22b04dce8998fe69add944b358bae6a4baff9ca93d617fc7bfc05e4ca3ecb3b3162bf47'
+            '5a403d1484c1a2212066938dc9660c69b5f13eb0827968ebcd7ede15b9045bf26530b4b7e028d4826cc29d4f8b82206a58eea426d04cda4bab72c6154b394ea4')
 
 prepare() {
     cd "${srcdir}/${pkgname}"
 
+    git checkout ${pkgver}
     git submodule update --init --recursive
+
     patch -p1 -i "${srcdir}/change_file_path_locations.patch"
+    patch -p1 -i "${srcdir}/remove_telemetry.patch"
 }
 
 build() {
