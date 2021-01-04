@@ -183,6 +183,9 @@ package_installation() {
     # fonts
     packages="${packages} ttf-lato adobe-source-code-pro-fonts adobe-source-han-sans-jp-fonts"
 
+    # graphics
+    packages="${packges} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
+
     # other
     packages="${packages} chromium transmission-qt mpv imv mupdf android-file-transfer"
 
