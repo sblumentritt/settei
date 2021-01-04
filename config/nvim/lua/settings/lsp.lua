@@ -51,32 +51,30 @@ function lsp.toggle_format_on_save()
 
     if vim.g.format_on_save_toggle == 1 then
         print("format on save: [enabled]")
-        -- TODO: find better way to do this in lua
-        vim.api.nvim_exec(
-        [[
-        augroup lsp_format_on_save
-            autocmd!
-            " currently only C and C++ files are supported
-            autocmd BufWritePre *.{c,cpp,h,hpp} lua vim.lsp.buf.formatting_sync(nil, 1000)
-        augroup END
-        ]]
-        , false)
+        local autocmd_definitions = {
+            lsp_format_on_save = {
+                -- currently only C and C++ files are supported
+                {"BufWritePre", "*.{c,cpp,h,hpp}", "lua vim.lsp.buf.formatting_sync(nil, 1000)"}
+            }
+        }
+        require("core.utils").create_augroups(autocmd_definitions)
     else
         print("format on save: [disabled]")
-        -- TODO: find better way to do this in lua
-        vim.api.nvim_exec(
-        [[
-        autocmd! lsp_format_on_save
-        ]]
-        , false)
+        vim.cmd("autocmd! lsp_format_on_save")
     end
 end
 
 function lsp.autocommands()
-    -- use completion-nvim in every buffer
-    vim.cmd([[autocmd BufEnter * lua require("completion").on_attach()]])
-    -- switch between header and source files
-    vim.cmd([[autocmd FileType c,cpp nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<CR>]])
+    local autocmd_definitions = {
+        lsp_related = {
+            -- use completion-nvim in every buffer
+            {"BufEnter", "*", "lua require('completion').on_attach()"},
+            -- switch between header and source files
+            {"FileType", "c,cpp", "nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<cr>"},
+        }
+    }
+
+    require("core.utils").create_augroups(autocmd_definitions)
 end
 
 function lsp.configurations()
