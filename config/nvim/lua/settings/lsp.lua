@@ -1,7 +1,7 @@
 -- @module settings.lsp
 local lsp = {}
 
-function lsp.mappings()
+local function load_mappings()
     local utils = require("core.utils")
 
     -- trigger completion
@@ -64,7 +64,7 @@ function lsp.toggle_format_on_save()
     end
 end
 
-function lsp.autocommands()
+local function load_autocommands()
     local autocmd_definitions = {
         lsp_related = {
             -- use completion-nvim in every buffer
@@ -77,7 +77,7 @@ function lsp.autocommands()
     require("core.utils").create_augroups(autocmd_definitions)
 end
 
-function lsp.configurations()
+local function load_configurations()
     -- diagnostic (built-in)
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -186,9 +186,9 @@ function lsp.setup()
     -- TODO: replace this with a direct lua call
     vim.cmd("silent lua require('settings.lsp').toggle_format_on_save()")
 
-    lsp.mappings()
-    lsp.autocommands()
-    lsp.configurations()
+    load_mappings()
+    load_autocommands()
+    load_configurations()
 end
 
 return lsp
