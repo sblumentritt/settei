@@ -270,8 +270,10 @@ iwyu_log() {
                 -Xiwyu --transitive_includes_only \
                 -Xiwyu --quoted_includes_first \
                 | sed '/^The full.*/,/---/{//!d}' \
-                | sed -r 's/^The full.*//g' \
+                | sed -E 's/^The full.*//g' \
                 | sed 's/^warning:.*//g' \
+                | sed -E '/^(.*has correct.*)/d' \
+                | sed '/^$/N;/^\n$/D' \
                 > $2.iwyu
         else
             printf "%s does not contain a compile_commands.json file!\n" "$1"
