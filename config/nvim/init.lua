@@ -24,3 +24,4 @@ vim.g.loaded_netrwPlugin = 1
 require("core.options").setup()
 require("core.plugins").setup()
 require("core.mappings").setup()
+require("core.autocommands").setup()
