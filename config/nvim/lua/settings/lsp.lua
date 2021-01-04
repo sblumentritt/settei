@@ -74,9 +74,9 @@ end
 
 function lsp.autocommands()
     -- use completion-nvim in every buffer
-    vim.cmd [[autocmd BufEnter * lua require("completion").on_attach()]]
+    vim.cmd([[autocmd BufEnter * lua require("completion").on_attach()]])
     -- switch between header and source files
-    vim.cmd [[autocmd FileType c,cpp nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<CR>]]
+    vim.cmd([[autocmd FileType c,cpp nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<CR>]])
 end
 
 function lsp.configurations()
