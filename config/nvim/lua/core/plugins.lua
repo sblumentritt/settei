@@ -53,6 +53,8 @@ function plugins.setup()
         }
         use {"https://github.com/mbbill/undotree"}
     end)
+
+    require("settings.mixed").setup()
 end
 
 return plugins
