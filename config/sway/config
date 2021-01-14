@@ -12,9 +12,13 @@ set $terminal alacritty
 #       when one browser instance window is in a hidden workspace
 set $web_browser chromium --use-cmd-decoder=validating --use-gl=desktop
 
+# launcher dimensions
+set $ld_dimensions --option window.dimensions.columns=90 --option window.dimensions.lines=7
+set $le_dimensions --option window.dimensions.columns=40 --option window.dimensions.lines=7
+
 # launcher
-set $launcher_exe alacritty --class "launcher" -d 40 7 -e launcher.sh -e
-set $launcher_doc alacritty --class "launcher" -d 90 7 -e launcher.sh -d
+set $launcher_exe $terminal --class "launcher" $le_dimensions -e launcher.sh -e
+set $launcher_doc $terminal --class "launcher" $ld_dimensions -e launcher.sh -d
 
 # special rule let the launcher float
 for_window [app_id="launcher"] floating enable
