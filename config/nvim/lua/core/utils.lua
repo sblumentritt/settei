@@ -1,8 +1,14 @@
 -- @module core.utils
 local utils = {}
 
-function utils.keymap(type, key, value)
-    vim.fn.nvim_set_keymap(type, key, value, {noremap = true, silent = true});
+function utils.keymap(mode, key, value, opts)
+    local options = {noremap = true, silent = true}
+
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+
+    vim.fn.nvim_set_keymap(mode, key, value, options)
 end
 
 function utils.create_augroups(definitions)
