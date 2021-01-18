@@ -169,38 +169,23 @@ function options.setup()
     ]]
     , false)
 
-    local function contains(table, val)
-        for i=1,#table do
-            if table[i] == val then
-                return true
+    -- workaround until https://github.com/neovim/neovim/pull/13479 is integrated
+    local opts_info = vim.api.nvim_get_all_options_info()
+
+    local set_option = setmetatable({}, {
+        __newindex = function(self, key, value)
+            vim.o[key] = value
+            local scope = opts_info[key].scope
+            if scope == 'win' then
+                vim.wo[key] = value
+            elseif scope == 'buf' then
+                vim.bo[key] = value
             end
         end
-        return false
-    end
-
-    -- ugly workaround until https://github.com/neovim/neovim/pull/13479 is integrated
-    local function set_option(name, value)
-        local window_only_options = {
-            "wrap",
-            "number",
-            "relativenumber",
-            "signcolumn",
-            "foldenable",
-            "foldmethod",
-            "fillchars",
-            "foldlevel",
-        }
-        vim.o[name] = value
-
-        if contains(window_only_options, name) then
-            vim.wo[name] = value
-        else
-            vim.bo[name] = value
-        end
-    end
+    })
 
     for name,value in pairs(nvim_options) do
-        pcall(set_option, name, value)
+        set_option[name] = value
     end
 end
 
