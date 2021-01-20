@@ -186,7 +186,7 @@ package_installation() {
     packages="${packages} noto-fonts noto-fonts-cjk noto-fonts-emoji"
 
     # graphics
-    packages="${packges} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
+    packages="${packages} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
 
     # other
     packages="${packages} chromium transmission-qt mpv imv mupdf android-file-transfer"
