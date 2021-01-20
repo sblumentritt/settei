@@ -183,6 +183,7 @@ package_installation() {
     packages="${packages} qt5ct kvantum-qt5 papirus-icon-theme"
     # fonts
     packages="${packages} ttf-lato adobe-source-code-pro-fonts adobe-source-han-sans-jp-fonts"
+    packages="${packages} noto-fonts noto-fonts-cjk noto-fonts-emoji"
 
     # graphics
     packages="${packges} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
