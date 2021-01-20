@@ -194,8 +194,11 @@ package_installation() {
     # graphics
     packages="${packages} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
 
+    # browser
+    packages="${packages} firefox hunspell-en_US chromium"
+
     # other
-    packages="${packages} chromium transmission-qt mpv imv mupdf android-file-transfer"
+    packages="${packages} transmission-qt mpv imv mupdf android-file-transfer"
 
     if [ -f /etc/profile.d/work.sh ]; then
         # work extras
