@@ -29,7 +29,8 @@ function plugins.setup()
         -- lsp related
         use {"https://github.com/neovim/nvim-lspconfig",
             requires = {
-                {"https://github.com/nvim-lua/lsp-status.nvim"}
+                {"https://github.com/nvim-lua/lsp-status.nvim"},
+                {"https://github.com/glepnir/lspsaga.nvim"},
             },
             config = require("settings.lsp").setup()
         }

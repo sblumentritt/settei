@@ -10,21 +10,17 @@ local function load_mappings()
     -- <TAB> completion mapping + helper function
     utils.keymap("i", "<TAB>", "<cmd>lua require('completion').smart_tab()<cr>")
 
-    -- show type info and short doc for identifier under cursor
+    -- show type info and short doc for identifier under the cursor
     utils.keymap("n", "<leader>sd", "<cmd>lua vim.lsp.buf.hover()<cr>")
 
     -- goto definition under cursor
     utils.keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 
-    -- goto type definition under cursor
-    utils.keymap("n", "gtd", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
+    -- show definitons and references of indentifier under the cursor
+    utils.keymap("n", "<leader>si", "<cmd>lua require('lspsaga.provider').lsp_finder()<cr>")
 
-    -- goto reference of identifier under cursor
-    -- opens a list if multiple are available
-    utils.keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-
-    -- rename object under cursor for the whole project
-    utils.keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
+    -- rename object under the cursor for the whole project
+    utils.keymap("n", "<leader>rn", "<cmd>lua require('lspsaga.rename').rename()<cr>")
 
     -- list of current document symbols
     utils.keymap("n", "<leader>ld", "<cmd>lua vim.lsp.buf.document_symbol()<cr>")
@@ -33,10 +29,20 @@ local function load_mappings()
     utils.keymap("n", "<leader>lw", "<cmd>lua vim.lsp.buf.workspace_symbol()<cr>")
 
     -- show available code actions for current cursor position
-    utils.keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+    utils.keymap("n", "<leader>ca", "<cmd>lua require('lspsaga.codeaction').code_action()<cr>")
+    -- show available code actions for current selections
+    utils.keymap(
+        "v",
+        "<leader>ca",
+        "<cmd>'<,'>lua require('lspsaga.codeaction').range_code_action()<cr>"
+    )
 
     -- show diagnostics in a floating windows for the current line
-    utils.keymap("n", "<leader>sld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>")
+    utils.keymap(
+        "n",
+        "<leader>sld",
+        "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>"
+    )
 
     -- toggle format on save
     utils.keymap("n", "<F12>", "<cmd>lua require('settings.lsp').toggle_format_on_save()<cr>")
@@ -152,11 +158,29 @@ local function load_configurations()
 
         on_attach = common_attach,
     })
+
+    -- lspsaga
+    require("lspsaga").init_lsp_saga({
+        use_saga_diagnostic_sign = false,
+        use_saga_diagnostic_handler = false,
+        code_action_icon = "",
+        finder_definition_icon = "",
+        finder_reference_icon = "",
+        definition_preview_icon = "",
+        rename_prompt_prefix = '>',
+        selected_fg = '#383838',
+        selected_bg = '#93b3a3',
+        max_hover_width = 100,
+    })
+
+    -- color scheme can not be used as the lspsaga plugin would overwrite the colors again
+    -- this function gets called after the lspsaga plugin was loaded and defines the final colors
+    require("settings.lspsaga").overwrite_highlight()
 end
 
 function lsp.setup()
     -- return directly when the required module cannot be loaded
-    if not pcall(require, "lspconfig") then
+    if not pcall(require, "lspconfig") or not pcall(require, "lspsaga") then
         return
     end
 
