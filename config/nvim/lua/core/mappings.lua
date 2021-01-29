@@ -30,13 +30,11 @@ function mappings.setup()
     utils.keymap("n", "<F8>", "<cmd>nohl<cr>")
 
     -- substitute all occurrences of word under cursor
-    -- TODO: find better way to do this in lua
-    vim.api.nvim_exec([[nnoremap <leader>sw :%s/\<<C-r><C-w>\>//g<left><left>]], false)
+    utils.keymap("n", "<leader>sw", [[:%s/\<<C-r><C-w>\>//g<left><left>]], {silent = false})
 
     -- substitute all occurrences of the current selection
     -- NOTE: copies selection to clipboard
-    -- TODO: find better way to do this in lua
-    vim.api.nvim_exec([[vnoremap <leader>sw y:%s/<c-r>"//g<left><left>]], false)
+    utils.keymap("v", "<leader>sw", [[y:%s/<c-r>"//g<left><left>]], {silent = false})
 
     -- stay at search position
     utils.keymap("n", "*", [[m`<cmd>keepjumps normal! *``<cr>]])
@@ -80,16 +78,16 @@ function mappings.setup()
     utils.keymap("n", "<leader><F9>", "zR")
 
     -- use <CR> to confirm completion (<C-g>u means break undo chain at current position)
-    -- TODO: find better way to do this in lua
-    vim.api.nvim_exec(
-    [[
-    if exists('*complete_info')
-        inoremap <expr> <cr> complete_info()['selected'] != '-1' ? '<C-y>' : '<C-g>u<cr>'
+    if vim.fn.exists("*complete_info") > 0 then
+        utils.keymap(
+            "i",
+            "<cr>",
+            "complete_info()['selected'] != '-1' ? '<C-y>' : '<C-g>u<cr>'",
+            {expr = true}
+        )
     else
-        inoremap <expr> <cr> pumvisible() ? '<C-y>' : '<C-g>u<cr>'
-    endif
-    ]]
-    , false)
+        utils.keymap("i", "<cr>", "pumvisible() ? '<C-y>' : '<C-g>u<cr>'", {expr = true})
+    end
 end
 
 return mappings
