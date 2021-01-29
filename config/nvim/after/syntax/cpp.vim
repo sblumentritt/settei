@@ -10,7 +10,7 @@ syntax keyword cppSpecifier inline virtual explicit export override
 
 syntax keyword cppCustomStaticAssert static_assert
 
-syntax match cppAttribute "\[\[.*\]\]" contains=cString
+syntax match cppAttribute "\[\[[^\]]*\]\]" contains=cString
 
 " classes should follow 'CamelCase'
 syntax match cppCustomClass "\<\u\(\l\|\u\l\)\+\>"
