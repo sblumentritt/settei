@@ -53,13 +53,6 @@ function plugins.setup()
             config = require("settings.colorizer").setup()
         }
         use {"https://github.com/mbbill/undotree"}
-
-        -- web development related
-        use {"https://github.com/jparise/vim-graphql"}
-        use {"https://github.com/othree/html5.vim"}
-        use {"https://github.com/othree/yajs.vim"}
-        use {"https://github.com/othree/es.next.syntax.vim"}
-        use {"https://github.com/HerringtonDarkholme/yats.vim"}
     end)
 
     require("settings.mixed").setup()
