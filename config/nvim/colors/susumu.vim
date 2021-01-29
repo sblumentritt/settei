@@ -283,7 +283,7 @@ call s:highlight('gitmessengerHeader', s:colors.low_yellow, s:colors.none, 'bold
 call s:highlight('gitmessengerHistory', s:colors.yellow)
 call s:highlight('gitmessengerPopupNormal', s:colors.white, s:colors.dark_gray)
 
-" diagnostic-nvim
+" built-in LSP diagnostic
 " --------------------------------------
 call s:highlight('LspDiagnosticsSignInformation', s:colors.blue)
 call s:highlight('LspDiagnosticsSignHint', s:colors.cyan)
@@ -299,6 +299,10 @@ call s:highlight('LspDiagnosticsFloatingInformation', s:colors.blue)
 call s:highlight('LspDiagnosticsFloatingHint', s:colors.cyan)
 call s:highlight('LspDiagnosticsFloatingError', s:colors.red)
 call s:highlight('LspDiagnosticsFloatingWarning', s:colors.orange)
+
+" lspsaga.nvim
+" --------------------------------------
+call s:highlight('LspSagaFinderSelection', s:colors.white, s:colors.dark_gray)
 
 " internal neovim terminal colors
 " --------------------------------------

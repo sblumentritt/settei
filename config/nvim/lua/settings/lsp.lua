@@ -168,8 +168,6 @@ local function load_configurations()
         finder_reference_icon = "",
         definition_preview_icon = "",
         rename_prompt_prefix = '>',
-        selected_fg = '#383838',
-        selected_bg = '#93b3a3',
         max_hover_width = 100,
     })
 
