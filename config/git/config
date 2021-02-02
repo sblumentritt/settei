@@ -1,6 +1,8 @@
 [user]
     name = Sebastian Blumentritt
     email = blumentritt.sebastian@gmail.com
+[init]
+	defaultBranch = master
 [rerere]
 	enable = true
 	autoupdate = true
