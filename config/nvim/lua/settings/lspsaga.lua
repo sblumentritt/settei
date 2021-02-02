@@ -49,6 +49,8 @@ function lspsaga.overwrite_highlight()
     gui_highlight("DiagnosticTruncateLine", truncate_line_color)
     gui_highlight("LspSagaDocTruncateLine", truncate_line_color)
     gui_highlight("LspSagaCodeActionTruncateLine", truncate_line_color)
+    gui_highlight("LspSagaShTruncateLine", truncate_line_color)
+    gui_highlight("LineDiagTuncateLine", truncate_line_color)
 
     local border_color = "#998f85"
     gui_highlight("LspFloatWinBorder", border_color)
