@@ -16,7 +16,7 @@ local function load_mappings()
     -- goto definition under cursor
     utils.keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 
-    -- show definitons and references of indentifier under the cursor
+    -- show definitions and references of identifier under the cursor
     utils.keymap("n", "<leader>si", "<cmd>lua require('lspsaga.provider').lsp_finder()<cr>")
 
     -- rename object under the cursor for the whole project
