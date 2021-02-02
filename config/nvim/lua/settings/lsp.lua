@@ -11,7 +11,7 @@ local function load_mappings()
     utils.keymap("i", "<TAB>", "<cmd>lua require('completion').smart_tab()<cr>")
 
     -- show type info and short doc for identifier under the cursor
-    utils.keymap("n", "<leader>sd", "<cmd>lua vim.lsp.buf.hover()<cr>")
+    utils.keymap("n", "<leader>sd", "<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>")
 
     -- goto definition under cursor
     utils.keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
