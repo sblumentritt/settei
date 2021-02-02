@@ -201,7 +201,7 @@ package_installation() {
         # work extras
         packages="${packages} xf86-video-amdgpu wireshark-qt nload socat dos2unix meld"
         # work cross development
-        packages="${packages} minicom cpio docker aarch64-linux-gnu-gcc"
+        packages="${packages} minicom cpio aarch64-linux-gnu-gcc"
 
         # old packages:
         # gdb strace valgrind nmap meld tftp-hpa tk
@@ -224,23 +224,6 @@ package_installation() {
         # --------------------------------------
         sudo gpasswd -a $USER uucp # for minicom
         sudo gpasswd -a $USER wireshark
-        sudo gpasswd -a $USER docker
-
-        # create configs
-        # --------------------------------------
-        sudo mkdir -p /etc/systemd/system/docker.service.d
-        if [ ! -f /etc/systemd/system/docker.service.d/proxy.conf ]; then
-            {
-                printf "[Service]\n"; \
-                printf "Environment=\"HTTP_PROXY=%s\"\n" "$HTTP_PROXY"; \
-                printf "Environment=\"HTTPS_PROXY=%s\"\n" "$HTTP_PROXY"; \
-            } | sudo tee -a /etc/systemd/system/docker.service.d/proxy.conf > /dev/null
-        fi
-
-        # enable/start services
-        # --------------------------------------
-        sudo systemctl enable docker.service
-        sudo systemctl start docker.service
     fi
 }
 
