@@ -44,7 +44,7 @@ dir_setup() {
         mkdir -p "$HOME/$folder"
     done
 
-    wanted_folder="ranger,mpd,git,sway,gtk-2.0"
+    wanted_folder="ranger,mpd,git,sway,gtk-2.0,containers"
     for folder in $wanted_folder; do
         mkdir -p "$HOME/.config/$folder"
     done
@@ -94,6 +94,7 @@ file_setup() {
     ln -sf "${CONFIG_BASE_PATH}/config/mpd/"* $HOME/.config/mpd/
     ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* $HOME/.config/ranger/
     ln -sf "${CONFIG_BASE_PATH}/config/gtk-2.0/"* $HOME/.config/gtk-2.0/
+    ln -sf "${CONFIG_BASE_PATH}/config/containers/"* $HOME/.config/containers/
 
     ln -sf "${CONFIG_BASE_PATH}/config/sway/config" $HOME/.config/sway/config
     if [ ! -f /etc/profile.d/work.sh ]; then
@@ -172,6 +173,11 @@ package_installation() {
     # development
     packages="${packages} git cmake cppcheck doxygen graphviz"
 
+    # container
+    # for more flexibility to build OCI container images use `buildah`
+    # https://github.com/containers/buildah
+    packages="${packages} podman crun"
+
     # music
     packages="${packages} mpd mpc"
 
@@ -207,6 +213,12 @@ package_installation() {
 
     # configuration for installed packages
     # --------------------------------------
+    # use rootless podman
+    sudo touch /etc/subuid # file needs to exist before 'usermod' call
+    sudo touch /etc/subgid # file needs to exist before 'usermod' call
+    sudo usermod --add-subuids 165536-231072 --add-subgids 165536-231072 $(whoami)
+    podman system migrate
+
     if [ -f /etc/profile.d/work.sh ]; then
         # add required groups to current user
         # --------------------------------------
