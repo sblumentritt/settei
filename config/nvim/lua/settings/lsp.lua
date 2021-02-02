@@ -162,13 +162,12 @@ local function load_configurations()
     -- lspsaga
     require("lspsaga").init_lsp_saga({
         use_saga_diagnostic_sign = false,
-        use_saga_diagnostic_handler = false,
         code_action_icon = "",
         finder_definition_icon = "",
         finder_reference_icon = "",
         definition_preview_icon = "",
         rename_prompt_prefix = '>',
-        max_hover_width = 100,
+        max_diag_msg_width = 80,
     })
 
     -- color scheme can not be used as the lspsaga plugin would overwrite the colors again
