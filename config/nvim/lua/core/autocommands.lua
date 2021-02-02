@@ -14,6 +14,11 @@ function autocommands.setup()
             {"BufRead,BufNewFile", "*.iwyu", "set filetype=iwyu"},
 
             {
+                "BufRead,BufNewFile", "Containerfile,Containerfile.*,*.Containerfile",
+                "set filetype=dockerfile"
+            },
+
+            {
                 "Filetype", "yaml,xml,html,css,scss,less,javascript",
                 "set tabstop=2 shiftwidth=2 softtabstop=2"
             },
