@@ -17,13 +17,25 @@ function plugins.setup()
         use {"https://github.com/wbthomason/packer.nvim", opt = true}
 
         -- completion related
-        use {"https://github.com/nvim-lua/completion-nvim",
-            requires = {
-                {"https://github.com/steelsojka/completion-buffers"},
-                {"https://gitlab.com/s.blumentritt/cmake.vim"},
-                {"https://gitlab.com/s.blumentritt/bitbake.vim"},
-            },
-            config = require("settings.completion").setup()
+        -- use {"https://github.com/nvim-lua/completion-nvim",
+        --     requires = {
+        --         {"https://github.com/steelsojka/completion-buffers"},
+        --         {"https://gitlab.com/s.blumentritt/cmake.vim"},
+        --         {"https://gitlab.com/s.blumentritt/bitbake.vim"},
+        --     },
+        --     config = require("settings.completion").setup()
+        -- }
+
+        use {"https://github.com/hrsh7th/nvim-compe",
+            config = require("compe").setup({
+                enabled = true,
+                autocomplete = true,
+                source = {
+                    path = true,
+                    buffer = true,
+                    nvim_lsp = true,
+                },
+            }),
         }
 
         -- lsp related

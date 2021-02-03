@@ -5,10 +5,10 @@ local function load_mappings()
     local utils = require("core.utils")
 
     -- trigger completion
-    utils.keymap("i", "<C-space>", "<cmd>lua require('completion').triggerCompletion()<cr>")
+    -- utils.keymap("i", "<C-space>", "<cmd>lua require('completion').triggerCompletion()<cr>")
 
     -- <TAB> completion mapping + helper function
-    utils.keymap("i", "<TAB>", "<cmd>lua require('completion').smart_tab()<cr>")
+    -- utils.keymap("i", "<TAB>", "<cmd>lua require('completion').smart_tab()<cr>")
 
     -- show type info and short doc for identifier under the cursor
     utils.keymap("n", "<leader>sd", "<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>")
@@ -52,7 +52,7 @@ local function load_autocommands()
     local autocmd_definitions = {
         lsp_related = {
             -- use completion-nvim in every buffer
-            {"BufEnter", "*", "lua require('completion').on_attach()"},
+            -- {"BufEnter", "*", "lua require('completion').on_attach()"},
             -- switch between header and source files
             {"FileType", "c,cpp", "nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<cr>"},
             -- show notification for code action in normal mode for the current line
@@ -118,7 +118,7 @@ local function load_configurations()
 
             "--log=error"
         },
-        on_attach = common_attach,
+        -- on_attach = common_attach,
 
         init_options = {
             -- required for lsp-status
@@ -158,7 +158,7 @@ local function load_configurations()
             },
         },
 
-        on_attach = common_attach,
+        -- on_attach = common_attach,
     })
 
     -- lspsaga
