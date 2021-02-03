@@ -304,6 +304,10 @@ call s:highlight('LspDiagnosticsFloatingWarning', s:colors.orange)
 " --------------------------------------
 call s:highlight('LspSagaFinderSelection', s:colors.white, s:colors.dark_gray)
 
+" nvim-lightbulb
+" --------------------------------------
+call s:highlight('LightBulbSign', s:colors.yellow, s:colors.none, 'bold')
+
 " internal neovim terminal colors
 " --------------------------------------
 let g:terminal_color_0 = s:colors.dark_gray[0]

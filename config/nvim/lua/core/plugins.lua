@@ -31,6 +31,7 @@ function plugins.setup()
             requires = {
                 {"https://github.com/nvim-lua/lsp-status.nvim"},
                 {"https://github.com/glepnir/lspsaga.nvim"},
+                {"https://github.com/kosayoda/nvim-lightbulb"},
             },
             config = require("settings.lsp").setup()
         }

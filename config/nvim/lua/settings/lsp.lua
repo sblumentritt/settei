@@ -55,6 +55,8 @@ local function load_autocommands()
             {"BufEnter", "*", "lua require('completion').on_attach()"},
             -- switch between header and source files
             {"FileType", "c,cpp", "nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<cr>"},
+            -- show notification for code action in normal mode for the current line
+            {"CursorHold", "*", "lua require('nvim-lightbulb').update_lightbulb()"},
         }
     }
 
@@ -173,11 +175,18 @@ local function load_configurations()
     -- color scheme can not be used as the lspsaga plugin would overwrite the colors again
     -- this function gets called after the lspsaga plugin was loaded and defines the final colors
     require("settings.lspsaga").overwrite_highlight()
+
+    -- nvim-lightbulb
+    vim.fn.sign_define("LightBulbSign", {
+        text = "", numhl = "LightBulbSign"
+    })
 end
 
 function lsp.setup()
     -- return directly when the required module cannot be loaded
-    if not pcall(require, "lspconfig") or not pcall(require, "lspsaga") then
+    if not pcall(require, "lspconfig")
+        or not pcall(require, "lspsaga")
+        or not pcall(require, "nvim-lightbulb") then
         return
     end
 
