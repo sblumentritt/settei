@@ -27,15 +27,7 @@ function plugins.setup()
         -- }
 
         use {"https://github.com/hrsh7th/nvim-compe",
-            config = require("compe").setup({
-                enabled = true,
-                autocomplete = true,
-                source = {
-                    path = true,
-                    buffer = true,
-                    nvim_lsp = true,
-                },
-            }),
+            config = require("settings.compe").setup()
         }
 
         -- lsp related

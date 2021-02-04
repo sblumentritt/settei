@@ -76,18 +76,6 @@ function mappings.setup()
     -- toggle/open all folds
     utils.keymap("n", "<F9>", "za")
     utils.keymap("n", "<leader><F9>", "zR")
-
-    -- use <CR> to confirm completion (<C-g>u means break undo chain at current position)
-    if vim.fn.exists("*complete_info") > 0 then
-        utils.keymap(
-            "i",
-            "<cr>",
-            "complete_info()['selected'] != '-1' ? '<C-y>' : '<C-g>u<cr>'",
-            {expr = true}
-        )
-    else
-        utils.keymap("i", "<cr>", "pumvisible() ? '<C-y>' : '<C-g>u<cr>'", {expr = true})
-    end
 end
 
 return mappings
