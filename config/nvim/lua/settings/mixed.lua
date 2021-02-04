@@ -16,11 +16,6 @@ function mixed.setup()
         vim.g.gitgutter_grep = "rg --color never --no-line-number"
     end
 
-    -- cmake configurations
-    -- --------------------------------------
-    vim.g["cmake#supported_languages"] = {"C", "CXX"}
-    vim.g["cmake#blacklist"] = {"XCODE", "ANDROID", "OSX", "VS", "Fortran", "Eclipse", "ECLIPSE"}
-
     -- vim-bbye configurations
     -- --------------------------------------
     utils.keymap("n", "gb", "<cmd>Bdelete<cr>")
