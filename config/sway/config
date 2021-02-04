@@ -27,6 +27,13 @@ set $launcher_doc $terminal --class "launcher" $ld_dimensions -e launcher.sh -d
 # special rule let the launcher float
 for_window [app_id="launcher"] floating enable
 
+# move keepassxc directly to the scratchpad
+for_window [title=".*KeePassXC"] {
+    move to scratchpad
+    resize set 1720 980
+    scratchpad show
+}
+
 # screen locker
 set $screen_locker swaylock
 
