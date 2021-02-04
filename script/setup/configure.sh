@@ -195,7 +195,7 @@ package_installation() {
     packages="${packages} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
 
     # browser
-    packages="${packages} firefox hunspell-en_US chromium"
+    packages="${packages} firefox hunspell-en_US"
 
     # other
     packages="${packages} transmission-qt mpv imv mupdf android-file-transfer"
