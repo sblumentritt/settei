@@ -59,6 +59,9 @@ if [ "$(tty)" = "/dev/tty1" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; th
         # use wayland backend in SDL
         export SDL_VIDEODRIVER=wayland
 
+        # lie about the window manager mode (fixes Jetbrain IDE's)
+        export _JAVA_AWT_WM_NONREPARENTING=1
+
         # start sway
         exec sway 2> $HOME/.cache/sway.log
     fi
