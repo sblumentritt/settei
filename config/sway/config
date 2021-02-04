@@ -207,6 +207,10 @@ bindsym
 
     # swap focus between the tiling area and the floating area
     $mod+space focus mode_toggle
+
+    # scratchpad handling
+    $mod+tab scratchpad show
+    $mod+Shift+s move to scratchpad
 }
 
 # include separate files
