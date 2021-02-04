@@ -7,10 +7,14 @@ set $mod Mod4
 # terminal emulator
 set $terminal alacritty
 
+# needed as otherwise chromium get slow and freezes when
+# one browser instance window is in a hidden workspace
+set $freeze_flags --use-cmd-decoder=validating --use-gl=desktop
+# enforce browser wide dark mode which sets 'prefers-color-scheme=dark'
+set $dark_mode_flags --enable-features=WebUIDarkMode --force-dark-mode
+
 # web browser
-# NOTE: extra flags are needed as otherwise chromium get slow and freezes
-#       when one browser instance window is in a hidden workspace
-set $web_browser chromium --use-cmd-decoder=validating --use-gl=desktop
+set $web_browser chromium $freeze_flags $dark_mode_flags
 
 # launcher dimensions
 set $ld_dimensions --option window.dimensions.columns=90 --option window.dimensions.lines=7
