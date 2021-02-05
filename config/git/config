@@ -2,10 +2,10 @@
     name = Sebastian Blumentritt
     email = blumentritt.sebastian@gmail.com
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [rerere]
-	enable = true
-	autoupdate = true
+    enable = true
+    autoupdate = true
 [push]
     default = simple
 [fetch]
