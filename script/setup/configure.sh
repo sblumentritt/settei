@@ -114,6 +114,11 @@ file_setup() {
 
     ln -sf "${CONFIG_BASE_PATH}/config/git/ignore" $HOME/.config/git/ignore
 
+    # setup 'gnupg' related folder with the correct permissions and link configs
+    mkdir -p $HOME/.gnupg
+    chmod 700 $HOME/.gnupg
+    ln -sf "${CONFIG_BASE_PATH}/config/gnupg/"* $HOME/.gnupg/
+
     sudo cp "${CONFIG_BASE_PATH}/config/udev/"* /etc/udev/rules.d/
 
     # link/copy scripts
