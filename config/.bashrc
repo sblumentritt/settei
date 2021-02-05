@@ -68,8 +68,8 @@ export GIT_PS1_SHOWUPSTREAM=auto
 export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 export AUR="https://aur.archlinux.org/"
-export GIT="git@gitlab.com:s.blumentritt"
-export GIT_RO="https://gitlab.com/s.blumentritt"
+export GIT="git@github.com:sblumentritt"
+export GIT_RO="https://github.com/sblumentritt"
 
 # https://wiki.archlinux.org/index.php/XDG_Base_Directory
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -182,7 +182,11 @@ fi
 # set local git config to default
 glocal() {
     git config user.name "Sebastian Blumentritt"
-    git config user.email "blumentritt.sebastian@gmail.com"
+    git config user.email "blumentritt.sebastian@protonmail.com"
+
+    git config user.signingkey D2CCCB70
+    git config commit.gpgSign true
+    git config tag.gpgSign true
 }
 
 # call 'git pull' for each repo in a max depth of 2 which helps
