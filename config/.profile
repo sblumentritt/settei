@@ -29,6 +29,12 @@ if [ ! "$SSH_AUTH_SOCK" ]; then
 fi
 
 # --------------------------------------
+# start gpg-agent for git
+# --------------------------------------
+export GPG_TTY=$(tty)
+gpgconf --launch gpg-agent
+
+# --------------------------------------
 # configure gtk3 manually for wayland
 # because the developer are silly
 # and don't read values from the config file
