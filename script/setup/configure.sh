@@ -247,7 +247,7 @@ external_packages() {
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="neovim,sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu"
+    local external_packages="neovim,sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
 
     for package in $external_packages; do
         cp -r "${CONFIG_BASE_PATH}/pkgbuild/${package}" "./${package}"

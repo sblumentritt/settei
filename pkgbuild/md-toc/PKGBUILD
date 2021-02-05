@@ -1,0 +1,24 @@
+# --------------------------------------
+# PKGBUILD for github-markdown-toc
+# --------------------------------------
+pkgname=github-markdown-toc
+
+pkgdesc="Easy TOC creation for GitHub README.md"
+url="https://github.com/ekalinin/github-markdown-toc"
+
+pkgver=0.7.0
+pkgrel=1
+
+arch=('x86_64')
+license=('MIT')
+
+source=("https://github.com/ekalinin/${pkgname}/archive/${pkgver}.tar.gz")
+sha512sums=('baa6d679972dbe78ca58b5f889c3c5ba7fee846c9f5cc4eb42df568aca703a9d43591879c8e102147574fc5d5041d1aea10174b7b72285df7165d6b307d4a5db')
+
+package() {
+    install -m755 -D "${srcdir}/${pkgname}-${pkgver}/gh-md-toc" \
+    	"${pkgdir}/usr/bin/md-toc"
+
+    install -m644 -D "${srcdir}/${pkgname}-${pkgver}/LICENSE" \
+    	"${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
