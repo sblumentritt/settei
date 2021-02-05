@@ -1,6 +1,7 @@
 [user]
     name = Sebastian Blumentritt
-    email = blumentritt.sebastian@gmail.com
+    email = blumentritt.sebastian@protonmail.com
+    signingkey = D2CCCB70
 [init]
     defaultBranch = develop
 [rerere]
@@ -14,9 +15,9 @@
     rebase = true
 [commit]
     verbose = true
-    gpgSign = false
+    gpgSign = true
 [tag]
-    gpgSign = false
+    gpgSign = true
 [status]
     branch = true
     showStash = true
