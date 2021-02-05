@@ -78,7 +78,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 
 # exports to remove pollution of home dir
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
