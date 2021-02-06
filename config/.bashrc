@@ -251,6 +251,11 @@ nconvert() {
     fi
 }
 
+# helper to generate a strong password with /dev/urandom
+rpw() {
+    < /dev/urandom tr -dc ._!\#[]\(\)\{\}A-Z-a-z-0-9 | head -c${1:-30}; printf '\n'
+}
+
 # helper to easily build with CMake
 cbuild() {
     cmake --build . --parallel "$@" -- -s
