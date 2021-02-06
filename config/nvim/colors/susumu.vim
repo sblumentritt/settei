@@ -300,13 +300,56 @@ call s:highlight('LspDiagnosticsFloatingHint', s:colors.cyan)
 call s:highlight('LspDiagnosticsFloatingError', s:colors.red)
 call s:highlight('LspDiagnosticsFloatingWarning', s:colors.orange)
 
+" nvim-lightbulb
+" --------------------------------------
+call s:highlight('LightBulbSign', s:colors.yellow, s:colors.none, 'bold')
+
 " lspsaga.nvim
 " --------------------------------------
 call s:highlight('LspSagaFinderSelection', s:colors.white, s:colors.dark_gray)
 
-" nvim-lightbulb
-" --------------------------------------
-call s:highlight('LightBulbSign', s:colors.yellow, s:colors.none, 'bold')
+call s:highlight("LspSagaBorderTitle", s:colors.blue)
+call s:highlight("DefinitionPreviewTitle", s:colors.blue)
+call s:highlight("LspSagaCodeActionTitle", s:colors.blue)
+
+call s:highlight("TargetFileName", s:colors.white)
+call s:highlight("DefinitionCount", s:colors.low_yellow)
+call s:highlight("DefinitionIcon", s:colors.low_yellow)
+call s:highlight("ReferencesCount", s:colors.low_yellow)
+call s:highlight("ReferencesIcon", s:colors.low_yellow)
+
+call s:highlight("DiagnosticError", s:colors.red)
+call s:highlight("DiagnosticWarning", s:colors.orange)
+call s:highlight("DiagnosticInformation", s:colors.blue)
+call s:highlight("DiagnosticHint", s:colors.cyan)
+
+call s:highlight("LspSagaCodeActionContent", s:colors.white)
+call s:highlight("LspSagaRenamePromptPrefix", s:colors.white)
+
+call s:highlight("TargetWord", s:colors.white, s:colors.none, "bold")
+call s:highlight("HelpItem", s:colors.gray, s:colors.none, "italic")
+call s:highlight("SagaShadow", s:colors.darker_gray)
+
+call s:highlight("ProviderTruncateLine", s:colors.gray)
+call s:highlight("DiagnosticTruncateLine", s:colors.gray)
+call s:highlight("LspSagaDocTruncateLine", s:colors.gray)
+call s:highlight("LspSagaCodeActionTruncateLine", s:colors.gray)
+call s:highlight("LspSagaShTruncateLine", s:colors.gray)
+call s:highlight("LineDiagTuncateLine", s:colors.gray)
+
+call s:highlight("LspFloatWinBorder", s:colors.gray)
+call s:highlight("LspDiagErrorBorder", s:colors.gray)
+call s:highlight("LspDiagWarnBorder", s:colors.gray)
+call s:highlight("LspDiagInforBorder", s:colors.gray)
+call s:highlight("LspDiagHintBorder", s:colors.gray)
+call s:highlight("LspSagaRenameBorder", s:colors.gray)
+call s:highlight("LspSagaHoverBorder", s:colors.gray)
+call s:highlight("LspSagaSignatureHelpBorder", s:colors.gray)
+call s:highlight("LspSagaLspFinderBorder", s:colors.gray)
+call s:highlight("LspSagaCodeActionBorder", s:colors.gray)
+call s:highlight("LspSagaAutoPreview", s:colors.gray)
+call s:highlight("LspSagaDefPreviewBorder", s:colors.gray)
+call s:highlight("LspLinesDiagBorder", s:colors.gray)
 
 " internal neovim terminal colors
 " --------------------------------------

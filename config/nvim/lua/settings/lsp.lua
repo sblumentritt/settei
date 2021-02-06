@@ -157,10 +157,6 @@ local function load_configurations()
         max_diag_msg_width = 80,
     })
 
-    -- color scheme can not be used as the lspsaga plugin would overwrite the colors again
-    -- this function gets called after the lspsaga plugin was loaded and defines the final colors
-    require("settings.lspsaga").overwrite_highlight()
-
     -- nvim-lightbulb
     vim.fn.sign_define("LightBulbSign", {
         text = "", numhl = "LightBulbSign"
