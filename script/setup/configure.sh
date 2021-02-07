@@ -161,7 +161,7 @@ package_installation() {
     # base
     packages="${packages} pacman-contrib openssh wget bash-completion ntfs-3g libnotify rsync"
     # base extras
-    packages="${packages} unzip zip pulseaudio pulsemixer udiskie light"
+    packages="${packages} unzip zip pipewire pipewire-pulse pulsemixer udiskie light"
 
     # graphic driver
     packages="${packages} xf86-video-intel xf86-video-nouveau"
