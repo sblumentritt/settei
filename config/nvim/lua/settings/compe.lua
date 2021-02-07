@@ -23,6 +23,7 @@ function compe.setup()
     require("compe").setup({
         enabled = true,
         autocomplete = true,
+        documentation = false,
         max_abbr_width = 55,
         source = {
             path = true,
