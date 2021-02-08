@@ -18,6 +18,9 @@ function plugins.setup()
 
         -- completion related
         use {"https://github.com/hrsh7th/nvim-compe",
+            requires = {
+                {"https://github.com/sblumentritt/cmake.vim"},
+            },
             config = require("settings.compe").setup()
         }
 

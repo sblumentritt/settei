@@ -29,8 +29,17 @@ function compe.setup()
             path = true,
             buffer = true,
             nvim_lsp = true,
+            cmake = true,
         },
     })
+
+    -- cmake source
+    vim.g["cmake#supported_languages"] = {"C", "CXX"}
+    vim.g["cmake#blacklist"] = {
+        "XCODE", "OBJC", "OBJCXX", "OSX",
+        "ANDROID", "VS", "Fortran", "Swift",
+        "Eclipse", "ECLIPSE",
+    }
 
     load_mappings()
 end
