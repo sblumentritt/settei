@@ -49,6 +49,13 @@ local function load_autocommands()
             {"FileType", "c,cpp", "nnoremap <buffer><silent> <F4> :ClangdSwitchSourceHeader<cr>"},
             -- show notification for code action in normal mode for the current line
             {"CursorHold", "*", "lua require('nvim-lightbulb').update_lightbulb()"},
+            -- call signature help on cursor hold in insert mode
+            -- NOTE: restricted to C++ and C as the function prints a message when no
+            --       signature help can be found. This can be really annoying.
+            {
+                "CursorHoldI", "*.cpp,*.hpp,*.c,*.h",
+                "lua require('lspsaga.signaturehelp').signature_help()"
+            },
         }
     }
 
