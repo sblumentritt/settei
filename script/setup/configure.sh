@@ -161,7 +161,7 @@ package_installation() {
     # base
     packages="${packages} pacman-contrib openssh wget bash-completion ntfs-3g libnotify rsync"
     # base extras
-    packages="${packages} unzip zip pipewire pipewire-pulse pulsemixer udiskie light"
+    packages="${packages} unzip zip pipewire pipewire-pulse pulsemixer udiskie"
 
     # Ryzen / AMD GPU related
     packages="${packages} amd-ucode xf86-video-amdgpu amdvlk libva-mesa-driver mesa-vdpau"
