@@ -163,10 +163,15 @@ package_installation() {
     # base extras
     packages="${packages} unzip zip pipewire pipewire-pulse pulsemixer udiskie light"
 
-    # graphic driver
-    packages="${packages} xf86-video-intel xf86-video-nouveau"
-    # device driver
-    packages="${packages} xf86-input-wacom xf86-input-synaptics"
+    # Ryzen / AMD GPU related
+    packages="${packages} amd-ucode xf86-video-amdgpu amdvlk libva-mesa-driver mesa-vdpau"
+
+    # Intel / Nvidia GPU related
+    # packages="${packages} intel-ucode xf86-video-intel xf86-video-nouveau"
+
+    # device driver:
+    # Wacom graphic tablet -> xf86-input-wacom
+    # Notebook touchpad -> xf86-input-synaptics
 
     # wayland compositor
     packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
@@ -221,6 +226,9 @@ package_installation() {
 
     # configuration for installed packages
     # --------------------------------------
+    # create ramdisk just to be save that the microcodes are used
+    sudo mkinitcpio -p linux
+
     # use rootless podman
     sudo touch /etc/subuid # file needs to exist before 'usermod' call
     sudo touch /etc/subgid # file needs to exist before 'usermod' call
