@@ -18,58 +18,65 @@ main() {
         exit 1
     fi
 
-    printf "\nOn which disk do you want to install the system? "
-    read -r _DISK_PATH
+    # show list of block devices for easier selection
+    lsblk -a -o NAME,SIZE,MOUNTPOINT
+
+    printf "\nOn which drive do you want to install the system? "
+    read -r drive_path
 
     printf "Which hostname do you want to use? "
-    read -r _HOST
+    read -r custom_hostname
 
     printf "Which custom group should be created? "
-    read -r _CUSTOM_GROUP
+    read -r custom_group
 
     printf "Which custom user should be created? "
-    read -r _CUSTOM_USER
+    read -r custom_user
 
-    if [ -z "${_DISK_PATH}" ]; then
-        printf "\nDisk path need to be set and can't be empty!\n" 1>&2
+    if [ -z "${drive_path}" ]; then
+        printf "\nDrive path needs to be set and can not be empty!\n" 1>&2
         exit 1
-    elif [ -z "${_HOST}" ]; then
-        printf "\nHostname need to be set and can't be empty!\n" 1>&2
+    elif [ -z "${custom_hostname}" ]; then
+        printf "\nHostname needs to be set and can not be empty!\n" 1>&2
         exit 1
-    elif [ -z "${_CUSTOM_GROUP}" ]; then
-        printf "\nCustom group need to be set and can't be empty!\n" 1>&2
+    elif [ -z "${custom_group}" ]; then
+        printf "\nCustom group needs to be set and can not be empty!\n" 1>&2
         exit 1
-    elif [ -z "${_CUSTOM_USER}" ]; then
-        printf "\nCustom user need to be set and can't be empty!\n" 1>&2
+    elif [ -z "${custom_user}" ]; then
+        printf "\nCustom user needs to be set and can not be empty!\n" 1>&2
         exit 1
     else
-        local _MOUNT_POINT="/mnt"
+        local mount_point="/mnt"
 
         printf "\n[ Start partitioning ]\n"
-        partition ${_DISK_PATH}
+        partition ${drive_path}
 
         printf "\n[ Start formatting and mounting ]\n"
-        format_and_mount ${_DISK_PATH} ${_MOUNT_POINT}
+        format_and_mount ${drive_path} ${mount_point}
 
         printf "\n[ Start installing base packages ]\n"
-        install ${_MOUNT_POINT}
+        install ${mount_point}
 
         printf "\n[ Start configuring the system ]\n"
-        configure ${_MOUNT_POINT} ${_DISK_PATH} ${_HOST} ${_CUSTOM_GROUP} ${_CUSTOM_USER}
+        configure ${mount_point} ${custom_hostname} ${custom_group} ${custom_user}
 
         printf "\n[ Installation done! ]\n"
     fi
 }
 
 partition() {
+    local drive_path=$1
+
+    wipefs -a "${drive_path}"
+
     (
     printf "%s\n" "g" # create a new empty GPT partition table
     printf "%s\n" "n" # add a new partition
     printf "%s\n" "" # default partition number (1)
     printf "%s\n" "" # default first sector
-    printf "%s\n" "+1M" # partition size for bios boot
+    printf "%s\n" "+550M" # partition size for EFI (recommended size)
     printf "%s\n" "t" # change partition type
-    printf "%s\n" "21686148-6449-6E6F-744E-656564454649" # type: 'BIOS boot'
+    printf "%s\n" "C12A7328-F81F-11D2-BA4B-00A0C93EC93B" # type: 'EFI'
     printf "%s\n" "n" # add a new partition
     printf "%s\n" "" # default partition number (2)
     printf "%s\n" "" # default first sector
@@ -79,66 +86,97 @@ partition() {
     printf "%s\n" "" # default first sector
     printf "%s\n" "" # default last sector (remaining space)
     printf "%s\n" "w" # write changes
-    ) | fdisk $1
+    ) | fdisk "${drive_path}"
 
-    sleep 2s
+    sleep 2s # TODO: why? Do we have to wait for the partitioning to take effect?
 }
 
 format_and_mount() {
-    # define local variables
-    local _BOOT_PARTITION="${1}2"
-    local _ROOT_PARTITION="${1}3"
+    local drive_path=$1
+    local mount_point=$2
 
-    local _MOUNT_POINT=$2
-    local _MOUNT_OPTIONS="noatime,space_cache,commit=120"
+    lsblk "${drive_path}"
+    # as it is unpredictable how the drives are named (sdxY,mmcblkxpY,nvme0nxpY)
+    # -> https://wiki.archlinux.org/index.php/Device_file
+    # it is much safer to just ask the user for the partition paths
+    printf "Please enter the 'efi' partition path: "
+    read -r efi_partition
+
+    printf "Please enter the 'boot' partition path: "
+    read -r boot_partition
+
+    printf "Please enter the 'root' partition path: "
+    read -r root_partition
 
     # format partitions
-    mkfs.btrfs -f -L boot "${_BOOT_PARTITION}"
-    mkfs.btrfs -f -L root "${_ROOT_PARTITION}"
+    mkfs.fat -F32 -n "efi" "${efi_partition}"
+    mkfs.btrfs -f -L "boot" "${boot_partition}"
+    mkfs.btrfs -f -L "arch" "${root_partition}"
 
     # create subvolumes
-    mount -t btrfs ${_ROOT_PARTITION} ${_MOUNT_POINT}
+    mount -t btrfs ${root_partition} ${mount_point}
+    (
+        cd "${mount_point}" || exit
 
-    btrfs subvolume create "${_MOUNT_POINT}/__root"
-    btrfs subvolume create "${_MOUNT_POINT}/__home"
-    btrfs subvolume create "${_MOUNT_POINT}/__var"
-    btrfs subvolume create "${_MOUNT_POINT}/__snap"
+        btrfs subvolume create "__system"
+        btrfs subvolume create "__system/__root"
+        btrfs subvolume create "__system/__home"
+        btrfs subvolume create "__system/__var"
+        btrfs subvolume create "__snap"
+    )
 
-    umount -R ${_MOUNT_POINT}
+    umount -R ${mount_point}
 
-    # mount subvolumes on correct positions
-    mount -o "${_MOUNT_OPTIONS},compress=zstd,subvol=__root" ${_ROOT_PARTITION} ${_MOUNT_POINT}
+    # mount subvolumes on correct positions with the correct options
+    local common_mount_options="noatime,space_cache,commit=120"
 
-    # define variables
+    mount -o "${common_mount_options},compress=zstd,subvol=__system/__root" \
+        ${root_partition} ${mount_point}
+
+    # define variables to create folders needed for the mount
     local IFS=','
-    local wanted_folder="boot,home,snap,var"
+    local wanted_folder="efi,boot,home,var,snap"
 
     for folder in $wanted_folder; do
-        mkdir -p "${_MOUNT_POINT}/$folder"
+        mkdir -p "${mount_point}/${folder}"
     done
 
-    mount -o "${_MOUNT_OPTIONS},compress=lzo" ${_BOOT_PARTITION} ${_MOUNT_POINT}/boot
+    mount ${efi_partition} ${mount_point}/efi
+    mount -o "${common_mount_options},compress=lzo" ${boot_partition} ${mount_point}/boot
 
-    mount -o "${_MOUNT_OPTIONS},compress=zstd,subvol=__home" ${_ROOT_PARTITION} ${_MOUNT_POINT}/home
-    mount -o "${_MOUNT_OPTIONS},compress=zstd,subvol=__snap" ${_ROOT_PARTITION} ${_MOUNT_POINT}/snap
-    mount -o "${_MOUNT_OPTIONS},compress=zstd,subvol=__var" ${_ROOT_PARTITION} ${_MOUNT_POINT}/var
+    mount -o "${common_mount_options},compress=zstd,subvol=__system/__home" \
+        ${root_partition} ${mount_point}/home
+
+    mount -o "${common_mount_options},compress=zstd,subvol=__system/__var" \
+        ${root_partition} ${mount_point}/var
+
+    mount -o "${common_mount_options},compress=zstd,subvol=__snap" \
+        ${root_partition} ${mount_point}/snap
 }
 
 install() {
+    # use 'reflector' for the best mirror before package installation
+    pacman -Sy --noconfirm pacman-mirrorlist reflector
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.old
+
+    reflector --country "de,jp,ee,se,fi,no,fr" --sort country \
+        --latest 55 --protocol "https,ftp" --sort rate \
+        --verbose --save /etc/pacman.d/mirrorlist
+
     local packages=""
 
     # base
     packages="${packages} coreutils systemd systemd-sysvcompat bash"
-    packages="${packages} linux linux-firmware intel-ucode mkinitcpio grub"
+    packages="${packages} linux linux-firmware mkinitcpio grub efibootmgr"
 
     # network
     packages="${packages} networkmanager iproute2 iputils"
 
     # filesystem utils
-    packages="${packages} e2fsprogs sysfsutils btrfs-progs"
+    packages="${packages} dosfstools e2fsprogs sysfsutils btrfs-progs"
 
     # compression
-    packages="${packages} bzip2 gzip tar xz"
+    packages="${packages} bzip2 gzip tar xz lzop"
 
     # devel
     packages="${packages} gcc gcc-libs perl autoconf automake binutils"
@@ -146,31 +184,30 @@ install() {
 
     # utils
     packages="${packages} file findutils gawk grep less pacman procps-ng"
-    packages="${packages} sed usbutils util-linux which sudo"
+    packages="${packages} sed usbutils pciutils util-linux which sudo"
 
     # misc
-    packages="${packages} man-db man-pages neovim openssh git"
+    packages="${packages} man-db man-pages openssh git nano"
 
     # install packages to mount point
     pacstrap -i $1 $packages
 }
 
 configure() {
-    local _MOUNT_POINT=$1
-    local _DISK_PATH=$2
-    local _HOST=$3
-    local _CUSTOM_GROUP=$4
-    local _CUSTOM_USER=$5
+    local mount_point=$1
+    local custom_hostname=$2
+    local custom_group=$3
+    local custom_user=$4
 
-    local _COLOR='\033[36m' # cyan
-    local _COLOR_RESET='\033[0m'
-    local _SNAPSHOT_NAME=$(date "+initial_setup_%Y_%m_%d")
+    local color='\033[36m' # cyan
+    local color_reset='\033[0m'
+    local snapshot_name=$(date "+base_install_%Y%m%d_%s")
 
     # generate config suitable for /etc/fstab
-    genfstab -p -U ${_MOUNT_POINT} >> ${_MOUNT_POINT}/etc/fstab
+    genfstab -p -U ${mount_point} >> ${mount_point}/etc/fstab
 
     # generate script to configure the system
-    cat > ${_MOUNT_POINT}/rootfs_configure.sh << EOF
+    cat > ${mount_point}/rootfs_configure.sh << EOF
 #!/bin/sh
 
 main() {
@@ -182,102 +219,103 @@ main() {
 }
 
 localization() {
-    printf "${_COLOR}-- enable locales in /etc/locale.gen${_COLOR_RESET}\\n"
+    printf "${color}-- enable locales in /etc/locale.gen${color_reset}\\n"
     sed -i -E 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
     sed -i -E 's/#en_US ISO-8859-1/en_US ISO-8859-1/g' /etc/locale.gen
     sed -i -E 's/#ja_JP.EUC-JP EUC-JP/ja_JP.EUC-JP EUC-JP/g' /etc/locale.gen
     sed -i -E 's/#ja_JP.UTF-8 UTF-8/ja_JP.UTF-8 UTF-8/g' /etc/locale.gen
 
-    printf "${_COLOR}-- define language in /etc/locale.conf${_COLOR_RESET}\\n"
+    printf "${color}-- define language in /etc/locale.conf${color_reset}\\n"
     printf "LANG=en_US.UTF-8\\n" > /etc/locale.conf
 
-    printf "${_COLOR}-- define keymap in /etc/vconsole.conf${_COLOR_RESET}\\n"
+    printf "${color}-- define keymap in /etc/vconsole.conf${color_reset}\\n"
     printf "KEYMAP=us\\n" > /etc/vconsole.conf
 
-    printf "${_COLOR}-- update locales${_COLOR_RESET}\\n"
+    printf "${color}-- update locales${color_reset}\\n"
     locale-gen
 }
 
 date_time() {
-    printf "${_COLOR}-- link zoneinfo to /etc/localtime${_COLOR_RESET}\\n"
+    printf "${color}-- link zoneinfo to /etc/localtime${color_reset}\\n"
     ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 
-    printf "${_COLOR}-- update hardware clock${_COLOR_RESET}\\n"
+    printf "${color}-- update hardware clock${color_reset}\\n"
     hwclock -w
 }
 
 network() {
-    printf "${_COLOR}-- write hostname into /etc/hostname${_COLOR_RESET}\\n"
-    printf "${_HOST}\\n" > /etc/hostname
+    printf "${color}-- write hostname into /etc/hostname${color_reset}\\n"
+    printf "${custom_hostname}\\n" > /etc/hostname
 
-    printf "${_COLOR}-- update /etc/hosts${_COLOR_RESET}\\n"
+    printf "${color}-- update /etc/hosts${color_reset}\\n"
     {
         printf "\\n# The following lines are desirable for IPv4 capable hosts\\n"; \
         printf "127.0.0.1   localhost\\n"; \
-        printf "127.0.0.1   ${_HOST}.localdomain  ${_HOST}\\n"; \
+        printf "127.0.0.1   ${custom_hostname}.localdomain  ${custom_hostname}\\n"; \
         printf "\\n# The following lines are desirable for IPv6 capable hosts\\n"; \
         printf "::1             localhost ip6-localhost ip6-loopback\\n"; \
         printf "ff02::1         ip6-allnodes\\n"; \
         printf "ff02::2         ip6-allrouters\\n"; \
     } >> /etc/hosts
 
-    printf "${_COLOR}-- enable network manager systemd service${_COLOR_RESET}\\n"
+    printf "${color}-- enable network manager systemd service${color_reset}\\n"
     systemctl enable NetworkManager.service
 }
 
 user() {
-    printf "${_COLOR}-- add new group${_COLOR_RESET}\\n"
-    groupadd ${_CUSTOM_GROUP}
+    printf "${color}-- add new group '${custom_group}' ${color_reset}\\n"
+    groupadd ${custom_group}
 
-    printf "${_COLOR}-- add new user${_COLOR_RESET}\\n"
-    useradd -m -g ${_CUSTOM_GROUP} -G wheel,users,audio,video,input -s /bin/bash ${_CUSTOM_USER}
+    printf "${color}-- add new user '${custom_user}' ${color_reset}\\n"
+    useradd -m -g ${custom_group} -G wheel,users,audio,video,input -s /bin/bash ${custom_user}
 
-    printf "${_COLOR}-- set password for root${_COLOR_RESET}\\n"
+    printf "${color}-- set password for root${color_reset}\\n"
     passwd
 
-    printf "${_COLOR}-- set password for new user${_COLOR_RESET}\\n"
-    passwd ${_CUSTOM_USER}
+    printf "${color}-- set password for user '${custom_user}' ${color_reset}\\n"
+    passwd ${custom_user}
 
-    printf "${_COLOR}-- update /etc/sudoers${_COLOR_RESET}\\n"
+    printf "${color}-- update /etc/sudoers${color_reset}\\n"
     {
-        printf "%%${_CUSTOM_GROUP} ALL=(ALL) NOPASSWD: ALL\\n"; \
-        printf "${_CUSTOM_USER} ALL=(ALL) NOPASSWD: ALL\\n"; \
+        printf "%%${custom_group} ALL=(ALL) NOPASSWD: ALL\\n"; \
+        printf "${custom_user} ALL=(ALL) NOPASSWD: ALL\\n"; \
         printf "Defaults env_keep += \\"http_proxy https_proxy ftp_proxy\\"\\n"; \
     } >> /etc/sudoers
 }
 
 misc() {
-    printf "${_COLOR}-- enable options in /etc/pacman.conf${_COLOR_RESET}\\n"
+    printf "${color}-- enable options in /etc/pacman.conf${color_reset}\\n"
     sed -i -E 's/#Color/Color\\nILoveCandy/g' /etc/pacman.conf
     sed -i -E 's/#TotalDownload/TotalDownload/g' /etc/pacman.conf
     sed -i -E 's/#VerbosePkgLists/VerbosePkgLists/g' /etc/pacman.conf
 
-    printf "${_COLOR}-- enable MAKEFLAGS in /etc/makepkg.conf${_COLOR_RESET}\\n"
-    sed -i -E 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j8"/g' /etc/makepkg.conf
+    printf "${color}-- enable MAKEFLAGS in /etc/makepkg.conf${color_reset}\\n"
+    sed -i -E 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j"/g' /etc/makepkg.conf
     sed -i -E 's/DEBUG_CFLAGS="-g -fvar-tracking-assignments"/DEBUG_CFLAGS="-g"/g' /etc/makepkg.conf
     sed -i -E 's/DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"/DEBUG_CXXFLAGS="-g"/g' /etc/makepkg.conf
 
-    printf "${_COLOR}-- update /etc/mkinitcpio.conf and create ramdisk${_COLOR_RESET}\\n"
+    printf "${color}-- update /etc/mkinitcpio.conf and create ramdisk${color_reset}\\n"
     sed -i -E 's/fsck\\)/fsck btrfs\\)/g' /etc/mkinitcpio.conf
     mkinitcpio -p linux
 
-    printf "${_COLOR}-- install grub and generate config${_COLOR_RESET}\\n"
-    grub-install ${_DISK_PATH}
+    printf "${color}-- install grub and generate config${color_reset}\\n"
+    grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=arch_grub --recheck
     grub-mkconfig -o /boot/grub/grub.cfg
 
-    printf "${_COLOR}-- create btrfs snapshots${_COLOR_RESET}\\n"
-    btrfs subvolume snapshot -r / /snap/__root_${_SNAPSHOT_NAME}
-    btrfs subvolume snapshot -r /home /snap/__home_${_SNAPSHOT_NAME}
+    printf "${color}-- create btrfs snapshots from the current system${color_reset}\\n"
+    mkdir -p /snap/__root /snap/__home
+    btrfs subvolume snapshot -r / /snap/__root/root_${snapshot_name}
+    btrfs subvolume snapshot -r /home /snap/__home/home_${snapshot_name}
 }
 
 main
 EOF
     # run script in real system context
-    chmod +x ${_MOUNT_POINT}/rootfs_configure.sh
-    arch-chroot ${_MOUNT_POINT} /usr/bin/sh -c "/rootfs_configure.sh"
+    chmod +x ${mount_point}/rootfs_configure.sh
+    arch-chroot ${mount_point} /usr/bin/sh -c "/rootfs_configure.sh"
 
-    rm ${_MOUNT_POINT}/rootfs_configure.sh
-    umount -R ${_MOUNT_POINT}
+    rm ${mount_point}/rootfs_configure.sh
+    umount -R ${mount_point}
 }
 
 main "$@"
