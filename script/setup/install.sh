@@ -55,7 +55,7 @@ main() {
         partition ${drive_path}
 
         printf "\n${color}[ Start formatting and mounting ]${color_reset}\n"
-        format_and_mount ${drive_path} ${mount_point}
+        format_and_mount ${drive_path} ${mount_point} ${custom_hostname}
 
         printf "\n${color}[ Start installing base packages ]${color_reset}\n"
         install ${mount_point}
@@ -97,6 +97,7 @@ partition() {
 format_and_mount() {
     local drive_path=$1
     local mount_point=$2
+    local custom_hostname=$3
 
     lsblk "${drive_path}"
     # as it is unpredictable how the drives are named (sdxY,mmcblkxpY,nvme0nxpY)
@@ -121,11 +122,11 @@ format_and_mount() {
     (
         cd "${mount_point}" || exit
 
-        btrfs subvolume create "__system"
-        btrfs subvolume create "__system/__root"
-        btrfs subvolume create "__system/__home"
-        btrfs subvolume create "__system/__var"
-        btrfs subvolume create "__snap"
+        btrfs subvolume create "${custom_hostname}"
+        btrfs subvolume create "${custom_hostname}/root"
+        btrfs subvolume create "${custom_hostname}/home"
+        btrfs subvolume create "${custom_hostname}/var"
+        btrfs subvolume create "snapshots"
     )
 
     umount -R ${mount_point}
@@ -133,7 +134,7 @@ format_and_mount() {
     # mount subvolumes on correct positions with the correct options
     local common_mount_options="noatime,space_cache,commit=120"
 
-    mount -o "${common_mount_options},compress=zstd,subvol=__system/__root" \
+    mount -o "${common_mount_options},compress=zstd,subvol=${custom_hostname}/root" \
         ${root_partition} ${mount_point}
 
     # define variables to create folders needed for the mount
@@ -147,13 +148,13 @@ format_and_mount() {
     mount ${efi_partition} ${mount_point}/efi
     mount -o "${common_mount_options},compress=lzo" ${boot_partition} ${mount_point}/boot
 
-    mount -o "${common_mount_options},compress=zstd,subvol=__system/__home" \
+    mount -o "${common_mount_options},compress=zstd,subvol=${custom_hostname}/home" \
         ${root_partition} ${mount_point}/home
 
-    mount -o "${common_mount_options},compress=zstd,subvol=__system/__var" \
+    mount -o "${common_mount_options},compress=zstd,subvol=${custom_hostname}/var" \
         ${root_partition} ${mount_point}/var
 
-    mount -o "${common_mount_options},compress=zstd,subvol=__snap" \
+    mount -o "${common_mount_options},compress=zstd,subvol=snapshots" \
         ${root_partition} ${mount_point}/snap
 }
 
@@ -306,9 +307,9 @@ misc() {
     grub-mkconfig -o /boot/grub/grub.cfg
 
     printf "${color}-- create btrfs snapshots from the current system${color_reset}\\n"
-    mkdir -p /snap/__root /snap/__home
-    btrfs subvolume snapshot -r / /snap/__root/root_${snapshot_name}
-    btrfs subvolume snapshot -r /home /snap/__home/home_${snapshot_name}
+    mkdir -p /snap/root /snap/home
+    btrfs subvolume snapshot -r / /snap/root/root_${snapshot_name}
+    btrfs subvolume snapshot -r /home /snap/home/home_${snapshot_name}
 }
 
 main
