@@ -48,19 +48,22 @@ main() {
     else
         local mount_point="/mnt"
 
-        printf "\n[ Start partitioning ]\n"
+        local color='\033[33m' # yellow/orange
+        local color_reset='\033[0m'
+
+        printf "\n${color}[ Start partitioning ]${color_reset}\n"
         partition ${drive_path}
 
-        printf "\n[ Start formatting and mounting ]\n"
+        printf "\n${color}[ Start formatting and mounting ]${color_reset}\n"
         format_and_mount ${drive_path} ${mount_point}
 
-        printf "\n[ Start installing base packages ]\n"
+        printf "\n${color}[ Start installing base packages ]${color_reset}\n"
         install ${mount_point}
 
-        printf "\n[ Start configuring the system ]\n"
+        printf "\n${color}[ Start configuring the system ]${color_reset}\n"
         configure ${mount_point} ${custom_hostname} ${custom_group} ${custom_user}
 
-        printf "\n[ Installation done! ]\n"
+        printf "\n${color}[ Installation done! ]\n"
     fi
 }
 
