@@ -70,7 +70,7 @@ main() {
 partition() {
     local drive_path=$1
 
-    wipefs -a "${drive_path}"
+    wipefs --all --force "${drive_path}"
 
     (
     printf "%s\n" "g" # create a new empty GPT partition table
