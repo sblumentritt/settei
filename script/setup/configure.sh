@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # global variable
-CONFIG_BASE_PATH="$HOME/development/unspecified/settei"
+CONFIG_BASE_PATH="$HOME/workspace/configs/settei"
 
 main() {
     printf "\nSetup directories? [y/n] "
@@ -39,7 +39,7 @@ dir_setup() {
     local wanted_folder=""
 
     # create directories
-    wanted_folder="development,documents,downloads,music,pictures,videos,.ssh,.cache"
+    wanted_folder="workspace,documents,downloads,music,pictures,videos,.ssh,.cache"
     for folder in $wanted_folder; do
         mkdir -p "$HOME/$folder"
     done
@@ -50,7 +50,7 @@ dir_setup() {
     done
 
     if [ -f /etc/profile.d/work.sh ]; then
-        mkdir -p $HOME/development/work
+        mkdir -p $HOME/workspace/work
     else
         mkdir -p $HOME/downloads/torrents
     fi
