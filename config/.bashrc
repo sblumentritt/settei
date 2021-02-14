@@ -140,8 +140,9 @@ alias pacfind="sudo pacman -Fy && sudo pacman -Fs"
 # directory movement
 alias ..="cd .."
 alias cd..="cd .."
-alias cdp='cd $HOME/development'
-alias cpd="cdp" # wrapper if misspelling the above alias
+alias cdw='cd $HOME/workspace'
+alias cwd="cdw" # wrapper if misspelling the above alias
+alias cds='cd $HOME/workspace/configs/settei'
 
 # change permissions recursive
 alias fmode="find . -type f -exec chmod 644 -- {} +"
