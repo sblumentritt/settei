@@ -172,10 +172,6 @@ alias uumount="sudo udiskie-umount --detach"
 alias pulsemixer="PULSEMIXER_BAR_STYLE='┌╶┐-└┘■- ──' pulsemixer"
 alias sudo="sudo " # this allows to use 'sudo' with aliases
 
-if [ -f /etc/profile.d/work.sh ]; then
-    alias cdw='cd $HOME/development/work'
-fi
-
 # --------------------------------------
 # custom functions
 # --------------------------------------

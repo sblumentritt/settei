@@ -13,9 +13,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 # --------------------------------------
 # start music daemon
 # --------------------------------------
-if [ ! -f /etc/profile.d/work.sh ]; then
-    [ ! -s "$HOME/.config/mpd/pid" ] && mpd
-fi
+[ ! -s "$HOME/.config/mpd/pid" ] && mpd
 
 # --------------------------------------
 # start ssh-agent for git

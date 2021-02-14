@@ -4,10 +4,8 @@ music_info() {
     local symbol=""
     local song=""
 
-    # only check mpd status on a system where mpd should run
-    if [ -f /etc/profile.d/work.sh ]; then
-        symbol="[?]"
-    else
+    # only check mpd status on a system where mpd is running
+    if pgrep -x "mpd" > /dev/null; then
         local playing=$(mpc status | sed -n 2p | cut -c1-9)
 
         if [ "${playing}" = "[playing]" ]; then
@@ -19,6 +17,8 @@ music_info() {
         elif [ ! "${playing}" = "[playing]" ]; then
             symbol="[?]"
         fi
+    else
+        symbol="[?]"
     fi
 
     printf "%s%s" "${symbol}" "${song}"

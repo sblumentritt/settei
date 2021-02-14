@@ -44,16 +44,12 @@ dir_setup() {
         mkdir -p "$HOME/$folder"
     done
 
+    mkdir -p $HOME/downloads/torrents
+
     wanted_folder="ranger,mpd,git,sway,gtk-2.0,containers"
     for folder in $wanted_folder; do
         mkdir -p "$HOME/.config/$folder"
     done
-
-    if [ -f /etc/profile.d/work.sh ]; then
-        mkdir -p $HOME/workspace/work
-    else
-        mkdir -p $HOME/downloads/torrents
-    fi
 
     # required to not pollute the home dir
     mkdir -p "$HOME/.local/share/tig"
@@ -91,28 +87,15 @@ file_setup() {
     ln -sf "${CONFIG_BASE_PATH}/config/fontconfig" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/user-dirs.dirs" $HOME/.config/
 
+    ln -sf "${CONFIG_BASE_PATH}/config/git/"* $HOME/.config/git/
     ln -sf "${CONFIG_BASE_PATH}/config/mpd/"* $HOME/.config/mpd/
     ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* $HOME/.config/ranger/
     ln -sf "${CONFIG_BASE_PATH}/config/gtk-2.0/"* $HOME/.config/gtk-2.0/
     ln -sf "${CONFIG_BASE_PATH}/config/containers/"* $HOME/.config/containers/
 
     ln -sf "${CONFIG_BASE_PATH}/config/sway/config" $HOME/.config/sway/config
-    if [ ! -f /etc/profile.d/work.sh ]; then
-        ln -sf "${CONFIG_BASE_PATH}/config/sway/config.d/dual_output.conf" \
-            $HOME/.config/sway/output.conf
-    else
-        ln -sf "${CONFIG_BASE_PATH}/config/sway/config.d/triple_output.conf" \
-            $HOME/.config/sway/output.conf
-    fi
-
-    if [ -f /etc/profile.d/work.sh ]; then
-        cp "${CONFIG_BASE_PATH}/config/git/config" $HOME/.config/git/config
-        nvim $HOME/.config/git/config
-    else
-        ln -sf "${CONFIG_BASE_PATH}/config/git/config" $HOME/.config/git/config
-    fi
-
-    ln -sf "${CONFIG_BASE_PATH}/config/git/ignore" $HOME/.config/git/ignore
+    ln -sf "${CONFIG_BASE_PATH}/config/sway/config.d/dual_output.conf" \
+        $HOME/.config/sway/output.conf
 
     # setup 'gnupg' related folder with the correct permissions and link configs
     mkdir -p $HOME/.gnupg
@@ -138,11 +121,6 @@ file_setup() {
         printf "#!/bin/sh\n"; \
         printf "[ -f /root/.bashrc ] && . /root/.bashrc\n"; \
     } | sudo tee /root/.profile > /dev/null
-
-    if [ -f /etc/profile.d/work.sh ]; then
-        # disable annoying pc speaker
-        sudo sh -c 'printf "blacklist pcspkr\n" > /etc/modprobe.d/nobeep.conf'
-    fi
 
     # generate new grub config
     # --------------------------------------
@@ -210,16 +188,6 @@ package_installation() {
     # other
     packages="${packages} transmission-qt mpv imv mupdf android-file-transfer"
 
-    if [ -f /etc/profile.d/work.sh ]; then
-        # work extras
-        packages="${packages} xf86-video-amdgpu wireshark-qt nload socat dos2unix meld"
-        # work cross development
-        packages="${packages} minicom cpio aarch64-linux-gnu-gcc"
-
-        # old packages:
-        # gdb strace valgrind nmap meld tftp-hpa tk
-    fi
-
     # install packages
     # --------------------------------------
     sudo pacman -S --needed --noconfirm ${packages}
@@ -234,13 +202,6 @@ package_installation() {
     sudo touch /etc/subgid # file needs to exist before 'usermod' call
     sudo usermod --add-subuids 165536-231072 --add-subgids 165536-231072 $(whoami)
     podman system migrate
-
-    if [ -f /etc/profile.d/work.sh ]; then
-        # add required groups to current user
-        # --------------------------------------
-        sudo gpasswd -a $USER uucp # for minicom
-        sudo gpasswd -a $USER wireshark
-    fi
 }
 
 external_packages() {
