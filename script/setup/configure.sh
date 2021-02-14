@@ -160,6 +160,8 @@ package_installation() {
     packages="${packages} llvm clang lld lldb"
     # development
     packages="${packages} git cmake cppcheck doxygen graphviz"
+    # other development related programs which can be useful:
+    # strace | valgrind | wireshark-qt | meld | ninja | meson | (gdb)
 
     # container
     # for more flexibility to build OCI container images use `buildah`
