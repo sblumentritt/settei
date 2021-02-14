@@ -154,7 +154,7 @@ package_installation() {
     # wayland compositor
     packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
     # wayland only
-    packages="${packages} mako grim slurp wl-clipboard"
+    packages="${packages} mako grim slurp wl-clipboard wf-recorder"
 
     # llvm
     packages="${packages} llvm clang lld lldb"
