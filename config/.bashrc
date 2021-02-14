@@ -149,8 +149,8 @@ alias fmode="find . -type f -exec chmod 644 -- {} +"
 alias dmode="find . -type d -exec chmod 755 -- {} +"
 
 # grim related
-alias _grim='grim -t png "$(date "+%Y%m%d_%H%M%S_grim.png")"'
-alias _sgrim='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%H%M%S_grim.png")"'
+alias _grim='grim -t png "$(date "+%Y%m%d_%s_grim.png")"'
+alias _sgrim='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%s_grim.png")"'
 
 # nvim related
 alias vi="nvim"
