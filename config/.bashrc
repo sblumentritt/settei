@@ -288,12 +288,12 @@ iwyu_log() {
 
 # helper to create btrfs snapshots
 csnap() {
-    local snapshot_date=$(date "+%Y_%m_%d")
+    local snapshot_date=$(date "+%Y%m%d_%s")
 
     if [ "$1" = "-r" ]; then
-        btrfs subvolume snapshot -r / "/snap/__root_${snapshot_date}"
+        sudo btrfs subvolume snapshot -r / "/snap/root/root_${snapshot_date}"
     elif [ "$1" = "-h" ]; then
-        btrfs subvolume snapshot -r /home "/snap/__home_${snapshot_date}"
+        sudo btrfs subvolume snapshot -r /home "/snap/home/home_${snapshot_date}"
     else
         printf "Usage: csnap [ -r | -h ]\n"
     fi
