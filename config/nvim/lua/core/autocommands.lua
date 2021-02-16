@@ -5,27 +5,27 @@ function autocommands.setup()
     local autocmd_definitions = {
         -- update filetypes
         update_filetypes = {
-            {"BufRead,BufNewFile", "*.{c,h}", "set filetype=c"},
-            {"BufRead,BufNewFile", ".{clang-}*", "set filetype=yaml"},
+            {"BufRead,BufNewFile", "*.{c,h}", "setlocal filetype=c"},
+            {"BufRead,BufNewFile", ".{clang-}*", "setlocal filetype=yaml"},
 
-            {"BufRead,BufNewFile", "config", "set filetype=config"},
-            {"BufRead,BufNewFile", "*.{conf,config}", "set filetype=config"},
+            {"BufRead,BufNewFile", "config", "setlocal filetype=config"},
+            {"BufRead,BufNewFile", "*.{conf,config}", "setlocal filetype=config"},
 
-            {"BufRead,BufNewFile", "*.iwyu", "set filetype=iwyu"},
+            {"BufRead,BufNewFile", "*.iwyu", "setlocal filetype=iwyu"},
 
             {
                 "BufRead,BufNewFile", "Containerfile,Containerfile.*,*.Containerfile",
-                "set filetype=dockerfile"
+                "setlocal filetype=dockerfile"
             },
 
             {
                 "Filetype", "yaml,xml,html,css,scss,less,javascript",
-                "set tabstop=2 shiftwidth=2 softtabstop=2"
+                "setlocal tabstop=2 shiftwidth=2 softtabstop=2"
             },
 
             {
                 "Filetype", "markdown",
-                "set tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80 colorcolumn=80"
+                "setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=80 colorcolumn=80"
             },
         },
 
