@@ -323,6 +323,12 @@ call s:highlight("DiagnosticWarning", s:colors.orange)
 call s:highlight("DiagnosticInformation", s:colors.blue)
 call s:highlight("DiagnosticHint", s:colors.cyan)
 
+call s:highlight("LspDiagnosticsFloatingError", s:colors.red)
+call s:highlight("LspDiagnosticsFloatingWarn", s:colors.orange)
+call s:highlight("LspDiagnosticsFloatingInfor", s:colors.blue)
+call s:highlight("LspDiagnosticsFloatingHint", s:colors.cyan)
+
+call s:highlight("LspSagaDiagnosticHeader", s:colors.white)
 call s:highlight("LspSagaCodeActionContent", s:colors.white)
 call s:highlight("LspSagaRenamePromptPrefix", s:colors.white)
 
@@ -335,7 +341,7 @@ call s:highlight("DiagnosticTruncateLine", s:colors.gray)
 call s:highlight("LspSagaDocTruncateLine", s:colors.gray)
 call s:highlight("LspSagaCodeActionTruncateLine", s:colors.gray)
 call s:highlight("LspSagaShTruncateLine", s:colors.gray)
-call s:highlight("LineDiagTuncateLine", s:colors.gray)
+call s:highlight("LspSagaDiagnostcTruncateLine", s:colors.gray)
 
 call s:highlight("LspFloatWinBorder", s:colors.gray)
 call s:highlight("LspDiagErrorBorder", s:colors.gray)
@@ -349,7 +355,7 @@ call s:highlight("LspSagaLspFinderBorder", s:colors.gray)
 call s:highlight("LspSagaCodeActionBorder", s:colors.gray)
 call s:highlight("LspSagaAutoPreview", s:colors.gray)
 call s:highlight("LspSagaDefPreviewBorder", s:colors.gray)
-call s:highlight("LspLinesDiagBorder", s:colors.gray)
+call s:highlight("LspSagaDiagnosticBorder", s:colors.gray)
 
 " internal neovim terminal colors
 " --------------------------------------
