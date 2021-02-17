@@ -75,6 +75,7 @@ file_setup() {
     ln -sf "${CONFIG_BASE_PATH}/config/mpv" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/imv" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/tig" $HOME/.config/
+    ln -sf "${CONFIG_BASE_PATH}/config/bash" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/nvim" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/tmux" $HOME/.config/
     ln -sf "${CONFIG_BASE_PATH}/config/mako" $HOME/.config/
