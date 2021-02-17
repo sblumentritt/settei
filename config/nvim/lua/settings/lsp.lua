@@ -160,8 +160,13 @@ local function load_configurations()
         finder_definition_icon = "",
         finder_reference_icon = "",
         definition_preview_icon = "",
-        dianostic_header_icon = "";
+        dianostic_header_icon = "",
         rename_prompt_prefix = '>',
+
+        finder_action_keys = {
+            open = "<cr>",
+            quit = "<ESC>",
+        }
     })
 
     -- nvim-lightbulb
