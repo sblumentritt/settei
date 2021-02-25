@@ -26,6 +26,9 @@ syntax match cppScopeFront "\w\+\ze::" contains=cppCustomScope
 syntax match cppCustomTemplateFunc "\<[a-z][a-zA-Z0-9_]\+\ze<.*>("
             \ containedin=cppScopeEnd,cppCustomClass
 
+" Qt related
+syntax keyword cppQtEmit emit
+
 " define highlight links
 " --------------------------------------
 highlight default link cppBool        Identifier
@@ -45,3 +48,5 @@ highlight default link cppCustomClass Typedef
 
 highlight default link cppCustomTemplateFunc Function
 highlight default link cppCustomStaticAssert StorageClass
+
+highlight default link cppQtEmit Macro
