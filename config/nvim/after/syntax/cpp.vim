@@ -13,7 +13,7 @@ syntax keyword cppCustomStaticAssert static_assert
 syntax match cppAttribute "\[\[[^\]]*\]\]" contains=cString
 
 " classes should follow 'CamelCase'
-syntax match cppCustomClass "\<\u\(\l\|\u\l\)\+\>"
+syntax match cppCustomClass "\<\u\(\l\|\u\)\+\>"
 
 syntax match cppCustomScope "::" contained
 syntax match cppScopeEnd "::\w\+"
