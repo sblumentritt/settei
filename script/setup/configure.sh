@@ -114,6 +114,7 @@ file_setup() {
     sudo mkdir -p /root/.config/ranger
     sudo mkdir -p /root/.local/share/bash
     sudo ln -sf "${CONFIG_BASE_PATH}/config/nvim" /root/.config/
+    sudo ln -sf "${CONFIG_BASE_PATH}/config/bash" /root/.config/
     sudo ln -sf "${CONFIG_BASE_PATH}/config/.bashrc" /root/.bashrc
     sudo ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* /root/.config/ranger/
 
