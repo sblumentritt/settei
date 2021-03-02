@@ -1,18 +1,16 @@
 diff --git a/main.lua b/main.lua
-index 9bbd8a1f..c4cd2c1b 100644
+index 1c99fcd4..9a24e43f 100644
 --- a/main.lua
 +++ b/main.lua
-@@ -1,7 +1,8 @@
- local currentPath = debug.getinfo(1, 'S').source:sub(2)
- local rootPath = currentPath:gsub('[/\\]*[^/\\]-$', '')
--loadfile((rootPath == '' and '.' or rootPath) .. '/platform.lua')('script')
-+loadfile(rootPath .. '/platform.lua')('script')
+@@ -3,6 +3,7 @@ local rootPath = currentPath:gsub('[/\\]*[^/\\]-$', '')
+ rootPath = (rootPath == '' and '.' or rootPath)
+ loadfile(rootPath .. '/platform.lua')('script')
  local fs = require 'bee.filesystem'
 +local math = require 'math'
  
  local function expanduser(path)
      if path:sub(1, 1) == '~' then
-@@ -34,8 +35,9 @@ end
+@@ -39,8 +40,9 @@ end
  loadArgs()
  
  ROOT     = fs.path(expanduser(rootPath))
@@ -23,12 +21,12 @@ index 9bbd8a1f..c4cd2c1b 100644
 +METAPATH = METAPATH and expanduser(METAPATH) or (TMP_ROOT:string() .. '/meta')
  
  debug.setcstacklimit(200)
- collectgarbage('generational', 10, 100)
+ collectgarbage('generational', 10, 50)
 diff --git a/make.lua b/make.lua
-index ee733c2c..8f3ca9f0 100644
+index ce5c0012..fa8f0857 100644
 --- a/make.lua
 +++ b/make.lua
-@@ -57,6 +57,4 @@ lm:build 'unittest' {
+@@ -43,6 +43,4 @@ lm:build 'unittest' {
  
  lm:default {
      'install',
@@ -58,10 +56,10 @@ index 6c9d7c09..77e45c35 100644
 +package.path = tostring(rootPath / script / '?.lua')
 +     .. ';' .. tostring(rootPath / script / '?' / 'init.lua')
 diff --git a/script/library.lua b/script/library.lua
-index 09b14d25..6225747b 100644
+index c7cecef6..afbc3a58 100644
 --- a/script/library.lua
 +++ b/script/library.lua
-@@ -145,7 +145,7 @@ local function compileSingleMetaDoc(script, metaLang)
+@@ -162,7 +162,7 @@ local function compileSingleMetaDoc(script, metaLang)
          end,
      }, { __index = _ENV })
  
@@ -69,4 +67,4 @@ index 09b14d25..6225747b 100644
 +    util.saveFile((TMP_ROOT / 'log' / 'middleScript.lua'):string(), middleScript)
  
      assert(load(middleScript, middleScript, 't', env))()
-     return table.concat(compileBuf)
+     if disable then

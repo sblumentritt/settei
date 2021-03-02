@@ -6,7 +6,7 @@ pkgname=lua-language-server
 pkgdesc="Lua Language Server coded by Lua"
 url="https://github.com/sumneko/lua-language-server"
 
-pkgver=1.10.0
+pkgver=1.17.1
 pkgrel=1
 
 arch=('x86_64')
@@ -22,7 +22,7 @@ source=("git+https://github.com/sumneko/${pkgname}.git"
         "remove_telemetry.patch")
 
 sha512sums=('SKIP'
-            '6ed409397641c27ac24b1b3cfab098d264b9b7e8930693a37befb497b22b04dce8998fe69add944b358bae6a4baff9ca93d617fc7bfc05e4ca3ecb3b3162bf47'
+            'c68e5e4cbe7085350b212723f757fdac3fb00abff5055b6e4419a281dfc7f2a4c98c1448c130a421f1e6a241fc5e9c0bd46a9715500ec102b95b5d7351569f33'
             '5a403d1484c1a2212066938dc9660c69b5f13eb0827968ebcd7ede15b9045bf26530b4b7e028d4826cc29d4f8b82206a58eea426d04cda4bab72c6154b394ea4')
 
 prepare() {
