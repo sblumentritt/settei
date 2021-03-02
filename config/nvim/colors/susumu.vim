@@ -341,7 +341,7 @@ call s:highlight("DiagnosticTruncateLine", s:colors.gray)
 call s:highlight("LspSagaDocTruncateLine", s:colors.gray)
 call s:highlight("LspSagaCodeActionTruncateLine", s:colors.gray)
 call s:highlight("LspSagaShTruncateLine", s:colors.gray)
-call s:highlight("LspSagaDiagnostcTruncateLine", s:colors.gray)
+call s:highlight("LspSagaDiagnosticTruncateLine", s:colors.gray)
 
 call s:highlight("LspFloatWinBorder", s:colors.gray)
 call s:highlight("LspDiagErrorBorder", s:colors.gray)
