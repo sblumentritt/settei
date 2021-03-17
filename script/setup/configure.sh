@@ -189,6 +189,9 @@ package_installation() {
     # browser
     packages="${packages} firefox hunspell-en_US"
 
+    # gstreamer related (needed for video conferencing system)
+    packages="${packages} gst-plugins-bad gst-plugins-good gst-plugins-ugly gst-plugins-bad-libs"
+
     # other
     packages="${packages} transmission-qt mpv imv mupdf android-file-transfer"
 
