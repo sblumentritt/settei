@@ -40,6 +40,12 @@
 
 - Auto-save interval: 10min
 
+# Text Editor
+
+- Font size: 10
+- Clean whitespace in entire document
+- Disable clean indentation
+
 # C++
 
 ## File Naming
