@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style-scheme version="1.0" name="susumu">
+  <style name="Text" foreground="#e5dbd0" background="#383838"/>
+  <style name="Link" foreground="#93b3a3"/>
+  <style name="Selection" foreground="#e5dbd0" background="#454545"/>
+  <style name="LineNumber" foreground="#998f85"/>
+  <style name="SearchResult" background="#83714c"/>
+  <style name="SearchResultAlt1" background="#836542"/>
+  <style name="SearchResultAlt2" background="#835b34"/>
+  <style name="SearchScope" foreground="#e5dbd0"/>
+  <style name="Parentheses" foreground="#dfa883"/>
+  <style name="ParenthesesMismatch" foreground="#da7c72"/>
+  <style name="AutoComplete" foreground="#383838" background="#e5dbd0"/>
+  <style name="CurrentLine" foreground="#e5dbd0" background="#454545"/>
+  <style name="CurrentLineNumber" foreground="#e5dbd0" bold="true"/>
+  <style name="Occurrences" foreground="#e5dbd0" background="#998f85"/>
+  <style name="Occurrences.Unused" foreground="#e5dbd0"/>
+  <style name="Occurrences.Rename" foreground="#e5dbd0"/>
+  <style name="Number" foreground="#f7d0a2"/>
+  <style name="String" foreground="#b8b48a"/>
+  <style name="Type" foreground="#93b3a3"/>
+  <style name="Local" foreground="#e5dbd0"/>
+  <style name="Global" foreground="#e5dbd0" italic="true"/>
+  <style name="Field" foreground="#e5dbd0"/>
+  <style name="Static" foreground="#dfa883"/>
+  <style name="VirtualMethod" foreground="#9fb193" italic="true"/>
+  <style name="Function" foreground="#9fb193"/>
+  <style name="Keyword" foreground="#93b3a3"/>
+  <style name="PrimitiveType" foreground="#f7d0a2"/>
+  <style name="Punctuation"/>
+  <style name="Operator" foreground="#e5dbd0"/>
+  <style name="Overloaded Operator" foreground="#e5dbd0"/>
+  <style name="Preprocessor" foreground="#cc9999"/>
+  <style name="Label" foreground="#da7c72"/>
+  <style name="Comment" foreground="#998f85"/>
+  <style name="Doxygen.Comment" foreground="#998f85" italic="true"/>
+  <style name="Doxygen.Tag" foreground="#998f85" bold="true"/>
+  <style name="VisualWhitespace" foreground="#e5dbd0"/>
+  <style name="QmlLocalId" foreground="#93b3a3" italic="true"/>
+  <style name="QmlExternalId" foreground="#dfa883" italic="true"/>
+  <style name="QmlTypeId" foreground="#9fb193"/>
+  <style name="QmlRootObjectProperty" foreground="#cc9999" italic="true"/>
+  <style name="QmlScopeObjectProperty" foreground="#b8b48a" italic="true"/>
+  <style name="QmlExternalObjectProperty" foreground="#dfa883" italic="true"/>
+  <style name="JsScopeVar" foreground="#e5dbd0" italic="true"/>
+  <style name="JsImportVar" foreground="#93b3a3" italic="true"/>
+  <style name="JsGlobalVar" foreground="#e5dbd0" italic="true"/>
+  <style name="QmlStateName" foreground="#b8b48a"/>
+  <style name="Binding" foreground="#e5dbd0" bold="true"/>
+  <style name="DisabledCode" foreground="#998f85"/>
+  <style name="AddedLine" foreground="#93b3a3" background="#454545"/>
+  <style name="RemovedLine" foreground="#9fb193" background="#454545"/>
+  <style name="DiffFile" foreground="#da7c72" background="#454545"/>
+  <style name="DiffLocation" foreground="#da7c72" background="#454545"/>
+  <style name="DiffFileLine" foreground="#e5dbd0"/>
+  <style name="DiffContextLine" foreground="#e5dbd0"/>
+  <style name="DiffSourceLine" foreground="#93b3a3" background="#454545"/>
+  <style name="DiffSourceChar" foreground="#9fb193" background="#454545"/>
+  <style name="DiffDestLine" foreground="#93b3a3" background="#454545"/>
+  <style name="DiffDestChar" foreground="#93b3a3" background="#454545"/>
+  <style name="LogChangeLine" foreground="#da7c72"/>
+  <style name="LogAuthorName" foreground="#93b3a3"/>
+  <style name="LogCommitDate" foreground="#9fb193"/>
+  <style name="LogCommitHash" foreground="#dfa883"/>
+  <style name="LogCommitSubject" foreground="#e5dbd0"/>
+  <style name="LogDecoration" foreground="#cc9999"/>
+  <style name="Warning" underlineColor="#dfa883" underlineStyle="SingleUnderline"/>
+  <style name="WarningContext" underlineColor="#dfa883" underlineStyle="DotLine"/>
+  <style name="Error" underlineColor="#da7c72" underlineStyle="SingleUnderline"/>
+  <style name="ErrorContext" underlineColor="#da7c72" underlineStyle="DotLine"/>
+  <style name="Declaration" foreground="#9fb193"/>
+  <style name="OutputArgument" italic="true"/>
+  <style name="FunctionDefinition" foreground="#9fb193"/>
+  <style name="LastStyleSentinel" foreground="#dfa883"/>
+</style-scheme>

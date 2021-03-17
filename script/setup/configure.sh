@@ -161,9 +161,9 @@ package_installation() {
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git cmake cppcheck doxygen graphviz"
+    packages="${packages} git cmake cppcheck doxygen graphviz qtcreator clazy gdb tk"
     # other development related programs which can be useful:
-    # strace | valgrind | wireshark-qt | meld | ninja | meson | (gdb)
+    # strace | valgrind | wireshark-qt | meld | ninja | meson
 
     # container
     # for more flexibility to build OCI container images use `buildah`
@@ -209,6 +209,11 @@ package_installation() {
     sudo touch /etc/subgid # file needs to exist before 'usermod' call
     sudo usermod --add-subuids 165536-231072 --add-subgids 165536-231072 $(whoami)
     podman system migrate
+
+    # create symlinks for custom QtCreator style/theme
+    sudo ln -sf "${CONFIG_BASE_PATH}/config/qtcreator/styles/"* /usr/share/qtcreator/styles/
+    sudo ln -sf "${CONFIG_BASE_PATH}/config/qtcreator/themes/"* /usr/share/qtcreator/themes/
+    sudo ln -sf "${CONFIG_BASE_PATH}/config/qtcreator/schemes/"* /usr/share/qtcreator/schemes/
 }
 
 external_packages() {
