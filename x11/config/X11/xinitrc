@@ -1,0 +1,37 @@
+#!/bin/sh
+
+monitor_count=$(xrandr -q | rg -c '\bconnected\b')
+if [ ${monitor_count} -eq 2 ]; then
+    # --------------------------------------
+    # monitor configuration
+    # --------------------------------------
+    xrandr --output HDMI-A-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+        --output HDMI-A-2 --mode 1920x1080 --left-of HDMI-A-1 --rotate normal
+elif [ ${monitor_count} -eq 3 ]; then
+    # --------------------------------------
+    # monitor configuration
+    # --------------------------------------
+    xrandr --output DP-4 --primary --mode 1920x1200 --pos 0x0 --rotate normal \
+        --output DVI-I-1 --mode 1920x1200 --right-of DP-4 --rotate normal \
+        --output DP1 --mode 1920x1200 --left-of DP-4 --rotate normal
+fi
+
+# --------------------------------------
+# set default cursor shape
+# --------------------------------------
+xsetroot -cursor_name left_ptr
+
+# --------------------------------------
+# start auto-mounter
+# --------------------------------------
+udiskie &
+
+# --------------------------------------
+# set wallpaper
+# --------------------------------------
+nitrogen --restore &
+
+# --------------------------------------
+# start window manager
+# --------------------------------------
+exec awesome 2> $HOME/.cache/awesome.log
