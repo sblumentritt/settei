@@ -174,6 +174,7 @@ file_setup_x11() {
     # link/copy configs
     # --------------------------------------
     ln -sf "${CONFIG_X11_PATH}/config/X11" $HOME/.config/
+    ln -sf "${CONFIG_X11_PATH}/config/awesome" $HOME/.config/
 
     sudo mkdir -p /etc/X11/xorg.conf.d
     sudo cp "${CONFIG_X11_PATH}/config/xorg.conf.d/"* /etc/X11/xorg.conf.d/
