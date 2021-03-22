@@ -3,37 +3,60 @@
 # global variable
 CONFIG_BASE_PATH="$HOME/workspace/configs/settei"
 
+CONFIG_SHARED_PATH="${CONFIG_BASE_PATH}/shared"
+CONFIG_WAYLAND_PATH="${CONFIG_BASE_PATH}/wayland"
+CONFIG_X11_PATH="${CONFIG_BASE_PATH}/x11"
+
 main() {
+    printf "\nWhich display server should be configured? [wayland/x11/both] "
+    read -r display_server_flag
+
     printf "\nSetup directories? [y/n] "
     read -r dir_flag
 
     if [ "${dir_flag}" = "y" ] || [ "${dir_flag}" = "Y" ]; then
-        dir_setup
+        dir_setup_shared
     fi
 
     printf "\nSetup files? [y/n] "
     read -r file_flag
 
     if [ "${file_flag}" = "y" ] || [ "${file_flag}" = "Y" ]; then
-        file_setup
+        file_setup_shared
+
+        if [ "${display_server_flag}" = "wayland" ] || [ "${display_server_flag}" = "both" ]; then
+            file_setup_wayland
+        fi
+
+        if [ "${display_server_flag}" = "x11" ] || [ "${display_server_flag}" = "both" ]; then
+            file_setup_x11
+        fi
     fi
 
     printf "\nInstall packages (core/community/extra)? [y/n] "
     read -r package_flag
 
     if [ "${package_flag}" = "y" ] || [ "${package_flag}" = "Y" ]; then
-        package_installation
+        package_installation_shared
+
+        if [ "${display_server_flag}" = "wayland" ] || [ "${display_server_flag}" = "both" ]; then
+            package_installation_wayland
+        fi
+
+        if [ "${display_server_flag}" = "x11" ] || [ "${display_server_flag}" = "both" ]; then
+            package_installation_x11
+        fi
     fi
 
     printf "\nExternal packages (AUR/git)? [y/n] "
     read -r external_flag
 
     if [ "${external_flag}" = "y" ] || [ "${external_flag}" = "Y" ]; then
-        external_packages
+        external_packages_shared
     fi
 }
 
-dir_setup() {
+dir_setup_shared() {
     # define character at which a string should be split
     local IFS=','
     local wanted_folder=""
@@ -46,77 +69,76 @@ dir_setup() {
 
     mkdir -p $HOME/downloads/torrents
 
-    wanted_folder="ranger,mpd,git,sway,gtk-2.0,containers"
-    for folder in $wanted_folder; do
-        mkdir -p "$HOME/.config/$folder"
-    done
-
     # required to not pollute the home dir
     mkdir -p "$HOME/.local/share/tig"
     mkdir -p "$HOME/.local/share/bash"
 }
 
-file_setup() {
+file_setup_shared() {
+    # create required directories to link configs
+    # --------------------------------------
+    # define character at which a string should be split
+    local IFS=','
+
+    local wanted_folder="ranger,mpd,git,gtk-2.0,containers"
+    for folder in $wanted_folder; do
+        mkdir -p "$HOME/.config/$folder"
+    done
+
     # link/copy dotfiles
     # --------------------------------------
-    ln -sf "${CONFIG_BASE_PATH}/config/.bashrc" $HOME/.bashrc
-    ln -sf "${CONFIG_BASE_PATH}/config/.profile" $HOME/.profile
+    ln -sf "${CONFIG_SHARED_PATH}/config/.bashrc" $HOME/.bashrc
+    ln -sf "${CONFIG_SHARED_PATH}/config/.profile" $HOME/.profile
 
     # remove possible available .bash_profile which blocks .profile
     if [ -f $HOME/.bash_profile ]; then
         rm -rf $HOME/.bash_profile
     fi
 
-    printf "command script import %s/config/lldb/settings.py\n" "${CONFIG_BASE_PATH}" \
+    printf "command script import %s/shared/config/lldb/settings.py\n" "${CONFIG_BASE_PATH}" \
         > $HOME/.lldbinit
 
     # link/copy configs
     # --------------------------------------
-    ln -sf "${CONFIG_BASE_PATH}/config/mpv" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/imv" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/tig" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/bash" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/nvim" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/tmux" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/mako" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/iwyu" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/qt5ct" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/Kvantum" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/gtk-3.0" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/swaylock" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/alacritty" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/fontconfig" $HOME/.config/
-    ln -sf "${CONFIG_BASE_PATH}/config/user-dirs.dirs" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/mpv" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/imv" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/tig" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/bash" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/nvim" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/tmux" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/iwyu" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/qt5ct" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/Kvantum" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/gtk-3.0" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/alacritty" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/fontconfig" $HOME/.config/
+    ln -sf "${CONFIG_SHARED_PATH}/config/user-dirs.dirs" $HOME/.config/
 
-    ln -sf "${CONFIG_BASE_PATH}/config/git/"* $HOME/.config/git/
-    ln -sf "${CONFIG_BASE_PATH}/config/mpd/"* $HOME/.config/mpd/
-    ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* $HOME/.config/ranger/
-    ln -sf "${CONFIG_BASE_PATH}/config/gtk-2.0/"* $HOME/.config/gtk-2.0/
-    ln -sf "${CONFIG_BASE_PATH}/config/containers/"* $HOME/.config/containers/
-
-    ln -sf "${CONFIG_BASE_PATH}/config/sway/config" $HOME/.config/sway/config
-    ln -sf "${CONFIG_BASE_PATH}/config/sway/config.d/dual_output.conf" \
-        $HOME/.config/sway/output.conf
+    ln -sf "${CONFIG_SHARED_PATH}/config/git/"* $HOME/.config/git/
+    ln -sf "${CONFIG_SHARED_PATH}/config/mpd/"* $HOME/.config/mpd/
+    ln -sf "${CONFIG_SHARED_PATH}/config/ranger/"* $HOME/.config/ranger/
+    ln -sf "${CONFIG_SHARED_PATH}/config/gtk-2.0/"* $HOME/.config/gtk-2.0/
+    ln -sf "${CONFIG_SHARED_PATH}/config/containers/"* $HOME/.config/containers/
 
     # setup 'gnupg' related folder with the correct permissions and link configs
     mkdir -p $HOME/.gnupg
     chmod 700 $HOME/.gnupg
-    ln -sf "${CONFIG_BASE_PATH}/config/gnupg/"* $HOME/.gnupg/
+    ln -sf "${CONFIG_SHARED_PATH}/config/gnupg/"* $HOME/.gnupg/
 
-    sudo cp "${CONFIG_BASE_PATH}/config/udev/"* /etc/udev/rules.d/
+    sudo cp "${CONFIG_SHARED_PATH}/config/udev/"* /etc/udev/rules.d/
 
     # link/copy scripts
     # --------------------------------------
-    sudo ln -sf "${CONFIG_BASE_PATH}/script/"*.sh /usr/local/bin/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/script/"*.sh /usr/local/bin/
 
     # links for root
     # --------------------------------------
-    sudo mkdir -p /root/.config/ranger
+    sudo mkdir -p /root/.shared/config/ranger
     sudo mkdir -p /root/.local/share/bash
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/nvim" /root/.config/
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/bash" /root/.config/
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/.bashrc" /root/.bashrc
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/ranger/"* /root/.config/ranger/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/nvim" /root/.config/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/bash" /root/.config/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/.bashrc" /root/.bashrc
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/ranger/"* /root/.config/ranger/
 
     # generate .profile file for root
     {
@@ -126,11 +148,29 @@ file_setup() {
 
     # generate new grub config
     # --------------------------------------
-    sudo cp "${CONFIG_BASE_PATH}/config/grub/grub" /etc/default/
+    sudo cp "${CONFIG_SHARED_PATH}/config/grub/grub" /etc/default/
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
-package_installation() {
+file_setup_wayland() {
+    # link/copy configs
+    # --------------------------------------
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/mako" $HOME/.config/
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/swaylock" $HOME/.config/
+
+    # create required directory to link configs
+    mkdir -p "$HOME/.config/sway"
+
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/sway/config" $HOME/.config/sway/config
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/sway/config.d/dual_output.conf" \
+        $HOME/.config/sway/output.conf
+
+    # link/copy scripts
+    # --------------------------------------
+    sudo ln -sf "${CONFIG_WAYLAND_PATH}/script/"*.sh /usr/local/bin/
+}
+
+package_installation_shared() {
     # always install archlinux-keyring to get updated database (needed after fresh install)
     sudo pacman -S --noconfirm archlinux-keyring
 
@@ -152,11 +192,6 @@ package_installation() {
     # device driver:
     # Wacom graphic tablet -> xf86-input-wacom
     # Notebook touchpad -> xf86-input-synaptics
-
-    # wayland compositor
-    packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
-    # wayland only
-    packages="${packages} mako grim slurp wl-clipboard wf-recorder"
 
     # llvm
     packages="${packages} llvm clang lld lldb"
@@ -211,12 +246,27 @@ package_installation() {
     podman system migrate
 
     # create symlinks for custom QtCreator style/theme
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/qtcreator/styles/"* /usr/share/qtcreator/styles/
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/qtcreator/themes/"* /usr/share/qtcreator/themes/
-    sudo ln -sf "${CONFIG_BASE_PATH}/config/qtcreator/schemes/"* /usr/share/qtcreator/schemes/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/qtcreator/styles/"* /usr/share/qtcreator/styles/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/qtcreator/themes/"* /usr/share/qtcreator/themes/
+    sudo ln -sf "${CONFIG_SHARED_PATH}/config/qtcreator/schemes/"* /usr/share/qtcreator/schemes/
 }
 
-external_packages() {
+package_installation_wayland() {
+    # define packages for installation
+    # --------------------------------------
+    local packages=""
+
+    # wayland compositor
+    packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
+    # wayland only
+    packages="${packages} mako grim slurp wl-clipboard wf-recorder"
+
+    # install packages
+    # --------------------------------------
+    sudo pacman -S --needed --noconfirm ${packages}
+}
+
+external_packages_shared() {
     mkdir -p /tmp/external_packages
     cd /tmp/external_packages || exit
 
@@ -231,7 +281,7 @@ external_packages() {
     local external_packages="neovim,sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
 
     for package in $external_packages; do
-        cp -r "${CONFIG_BASE_PATH}/pkgbuild/${package}" "./${package}"
+        cp -r "${CONFIG_SHARED_PATH}/pkgbuild/${package}" "./${package}"
         cd "./${package}" || return
         makepkg -sric --noconfirm || exit
         cd ../ || return
