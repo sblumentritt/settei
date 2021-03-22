@@ -47,6 +47,7 @@ export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export HISTFILE="$XDG_DATA_HOME/bash/history"
+export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 

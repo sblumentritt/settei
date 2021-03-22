@@ -20,7 +20,7 @@ set +H
 # --------------------------------------
 # start/attach to tmux
 # --------------------------------------
-if [ $WAYLAND_DISPLAY ]; then
+if [ $WAYLAND_DISPLAY ] || [ $DISPLAY ]; then
     if [ -z "$TMUX" ]; then
         ID="$(tmux ls | grep -vm1 attached | cut -d: -f1)"
         if [ -z "$ID" ]; then

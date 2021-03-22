@@ -37,12 +37,14 @@ alias cds='cd $HOME/workspace/configs/settei'
 alias fmode="find . -type f -exec chmod 644 -- {} +"
 alias dmode="find . -type d -exec chmod 755 -- {} +"
 
-# grim related
-alias _grim='grim -t png "$(date "+%Y%m%d_%s_grim.png")"'
-alias _sgrim='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%s_grim.png")"'
+if [ $WAYLAND_DISPLAY ]; then
+    # grim related
+    alias _grim='grim -t png "$(date "+%Y%m%d_%s_grim.png")"'
+    alias _sgrim='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%s_grim.png")"'
 
-# wf-recorder related
-alias _srecord='wf-recorder -g "$(slurp)" -f "$(date "+%Y%m%d_%s_screen_record.mp4")"'
+    # wf-recorder related
+    alias _srecord='wf-recorder -g "$(slurp)" -f "$(date "+%Y%m%d_%s_screen_record.mp4")"'
+fi
 
 # nvim related
 alias vi="nvim"

@@ -51,22 +51,31 @@ gsettings set ${gnome_interface_schema} cursor-theme "Adwaita"
 # --------------------------------------
 # start display server
 # --------------------------------------
+backend="x11" # [wayland/x11]
+
 if [ "$(tty)" = "/dev/tty1" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    if [ -z $WAYLAND_DISPLAY ]; then
-        # use wayland backend in Qt
-        # export QT_QPA_PLATFORM=wayland-egl
-        # export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+    if [ "${backend}" = "x11" ]; then
+        if [ -z $DISPLAY ]; then
+            # start xserver
+            exec startx "$XDG_CONFIG_HOME/X11/xinitrc"
+        fi
+    elif [ "${backend}" = "wayland" ]; then
+        if [ -z $WAYLAND_DISPLAY ]; then
+            # use wayland backend in Qt
+            # export QT_QPA_PLATFORM=wayland-egl
+            # export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 
-        # use xcb backend in Qt (wayland support is not stable enough)
-        export QT_QPA_PLATFORM=xcb
+            # use xcb backend in Qt (wayland support is not stable enough)
+            export QT_QPA_PLATFORM=xcb
 
-        # use wayland backend in SDL
-        export SDL_VIDEODRIVER=wayland
+            # use wayland backend in SDL
+            export SDL_VIDEODRIVER=wayland
 
-        # lie about the window manager mode (fixes Jetbrain IDE's)
-        export _JAVA_AWT_WM_NONREPARENTING=1
+            # lie about the window manager mode (fixes Jetbrain IDE's)
+            export _JAVA_AWT_WM_NONREPARENTING=1
 
-        # start sway
-        exec sway 2> $HOME/.cache/sway.log
+            # start sway
+            exec sway 2> $HOME/.cache/sway.log
+        fi
     fi
 fi
