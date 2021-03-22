@@ -170,6 +170,15 @@ file_setup_wayland() {
     sudo ln -sf "${CONFIG_WAYLAND_PATH}/script/"*.sh /usr/local/bin/
 }
 
+file_setup_x11() {
+    # link/copy configs
+    # --------------------------------------
+    ln -sf "${CONFIG_X11_PATH}/config/X11" $HOME/.config/
+
+    sudo mkdir -p /etc/X11/xorg.conf.d
+    sudo cp "${CONFIG_X11_PATH}/config/xorg.conf.d/"* /etc/X11/xorg.conf.d/
+}
+
 package_installation_shared() {
     # always install archlinux-keyring to get updated database (needed after fresh install)
     sudo pacman -S --noconfirm archlinux-keyring
@@ -260,6 +269,28 @@ package_installation_wayland() {
     packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
     # wayland only
     packages="${packages} mako grim slurp wl-clipboard wf-recorder"
+
+    # install packages
+    # --------------------------------------
+    sudo pacman -S --needed --noconfirm ${packages}
+}
+
+package_installation_x11() {
+    # define packages for installation
+    # --------------------------------------
+    local packages=""
+
+    # xorg
+    packages="${packages} xorg-server xorg-server-devel xorg-server-xephyr xorg-xrdb xorg-xsetroot"
+    packages="${packages} xorg-setxkbmap xorg-xset xorg-xinit xorg-xrandr xorg-xinput"
+    packages="${packages} xorg-xhost xorg-xmodmap xorg-xprop"
+
+    # xcb
+    packages="${packages} libxcb xcb-util xcb-util-cursor xcb-util-image xcb-util-keysyms"
+    packages="${packages} xcb-util-renderutil xcb-util-wm xcb-util-xrm"
+
+    # other
+    packages="${packages} awesome xclip nitrogen"
 
     # install packages
     # --------------------------------------
