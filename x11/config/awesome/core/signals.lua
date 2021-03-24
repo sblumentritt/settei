@@ -17,8 +17,8 @@ function signals.setup()
             end
 
             if awesome.startup
-              and not c.size_hints.user_position
-              and not c.size_hints.program_position then
+                and not c.size_hints.user_position
+                and not c.size_hints.program_position then
                 -- Prevent clients from being unreachable after screen count changes.
                 awful.placement.no_offscreen(c)
             end

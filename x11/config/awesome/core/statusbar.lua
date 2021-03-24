@@ -20,29 +20,37 @@ function statusbar.setup()
 
     -- vicious widgets
     local clock_info = wibox.widget.textbox()
-    vicious.register(clock_info, vicious.widgets.date, "%I:%M %p", 5)
+    vicious.register(clock_info, vicious.widgets.date, "%I:%M %p")
+
+    local month_calendar = awful.widget.calendar_popup.month()
+    month_calendar:attach(clock_info, "tr", {on_hover = false})
 
     local memory_info = wibox.widget.textbox()
-    vicious.register(memory_info, vicious.widgets.mem, "$2 MB/$3 MB", 10)
+    vicious.register(memory_info, vicious.widgets.mem, "$2 MB/$3 MB", 5)
 
     local load_info = wibox.widget.textbox()
-    vicious.register(load_info, vicious.widgets.uptime, "$4", 10)
+    vicious.register(load_info, vicious.widgets.uptime, "$4 $5 $6", 5)
 
-    local cpu_info = wibox.widget.textbox()
-    vicious.register(cpu_info, vicious.widgets.cpu, "$1%", 10)
+    local update_info = wibox.widget.textbox()
+    vicious.register(update_info, vicious.widgets.pkg, "$1", 300, "Arch C")
 
     local music_info = wibox.widget.textbox()
     vicious.register(
         music_info,
         vicious.widgets.mpd,
         function(widget, args)
-            if args["{state}"] == "N/A" then
+            if args["{state}"] == "N/A" or args["{state}"] == "Stop" then
                 return "[?]"
             else
-                -- TODO: find out how the states are written and
-                --       add the same handling as in the statusinfo.sh
-                return ('%s %s - %s'):format(
-                    args["{state}"], args["{Artist}"], args["{Title}"])
+                local symbol = "[ ]"
+
+                if args["{state}"] == "Play" then
+                    symbol = "[>]"
+                elseif args["{state}"] == "Pause" then
+                    symbol = "[=]"
+                end
+
+                return ('%s %s - %s'):format(symbol, args["{Artist}"], args["{Title}"])
             end
         end,
         10,
@@ -57,24 +65,6 @@ function statusbar.setup()
         ),
 
         awful.button({}, 3, awful.tag.viewtoggle)
-    )
-
-    local tasklist_buttons = gears.table.join(
-        awful.button({}, 1,
-            function (c)
-                if c == client.focus then
-                    c.minimized = true
-                else
-                    c:emit_signal("request::activate", "tasklist", {raise = true})
-                end
-            end
-        ),
-
-        awful.button({}, 3,
-            function ()
-                awful.menu.client_list()
-            end
-        )
     )
 
     -- Create a wibox for each screen and add it
@@ -108,28 +98,11 @@ function statusbar.setup()
         s.taglist = awful.widget.taglist {
             screen = s,
             filter = awful.widget.taglist.filter.all,
-            buttons = taglist_buttons
-        }
-
-        -- create a tasklist widget
-        s.tasklist = awful.widget.tasklist {
-            screen   = s,
-            filter   = awful.widget.tasklist.filter.currenttags,
-            buttons  = tasklist_buttons,
-            style   = {
-                align = "center",
-                shape_border_width = 1,
-                shape  = gears.shape.rectangle,
-            },
-            layout = {
-                spacing = 10,
-                max_widget_size = 250,
-                layout = wibox.layout.flex.horizontal,
-            }
+            buttons = taglist_buttons,
         }
 
         -- create the wibar
-        s.bar = awful.wibar({position = "top", screen = s, height = 30})
+        s.bar = awful.wibar({position = "top", screen = s, height = 35})
 
         -- add widgets to the wibar
         s.bar:setup {
@@ -143,7 +116,7 @@ function statusbar.setup()
                 s.txt_layoutbox,
                 separator,
             },
-            s.tasklist, -- middle widget
+            separator,
             {
                 -- right widgets
                 layout = wibox.layout.fixed.horizontal,
@@ -152,10 +125,10 @@ function statusbar.setup()
                 music_info,
                 spacer,
 
-                load_info,
+                update_info,
                 spacer,
 
-                cpu_info,
+                load_info,
                 spacer,
 
                 memory_info,

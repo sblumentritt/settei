@@ -114,6 +114,10 @@ function theme.setup()
     config.menu_bg_focus     = color.dark_gray
     config.menu_fg_focus     = color.foreground
 
+    -- variables set for theming the calendar:
+    config.calendar_week_numbers = true
+    config.calendar_start_sunday = false
+
     -- define the image to load
     config.titlebar_close_button_normal = config.default_dir .. "/titlebar/close_normal.png"
     config.titlebar_close_button_focus  = config.default_dir .. "/titlebar/close_focus.png"

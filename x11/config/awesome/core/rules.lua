@@ -16,6 +16,7 @@ function rules.setup()
                 border_color = beautiful.border_normal,
                 focus = awful.client.focus.filter,
                 raise = true,
+                size_hints_honor = false,
                 keys = bindings.client_keys(),
                 buttons = bindings.client_mouse_buttons(),
                 screen = awful.screen.preferred,
@@ -45,9 +46,34 @@ function rules.setup()
                 role = {
                     "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
                 }
-            }, properties = {
+            },
+            properties = {
                 floating = true,
-                placement = awful.placement.centered,
+                placement = awful.placement.centered + awful.placement.no_offscreen,
+            },
+        },
+
+        -- fix JetBrains dialog problems
+        {
+            rule = {
+                class = "jetbrains-.*",
+            },
+            properties = {
+                focus = true,
+                buttons = bindings.client_mouse_buttons_jetbrains(),
+            },
+        },
+        {
+            rule = {
+                class = "jetbrains-.*",
+                name = "win.*",
+            },
+            properties = {
+                titlebars_enabled = false,
+                focusable = false,
+                focus = true,
+                floating = true,
+                placement = awful.placement.restore,
             },
         },
 

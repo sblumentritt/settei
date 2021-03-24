@@ -33,6 +33,19 @@ local function set_global_keys()
             {description = "focus previous by index", group = "client"}
         ),
 
+        awful.key({modkey, "Control"}, "Right",
+            function()
+                awful.screen.focus_relative(1)
+            end,
+            {description = "focus the next screen", group = "screen"}
+        ),
+        awful.key({modkey, "Control"}, "Left",
+            function()
+                awful.screen.focus_relative(-1)
+            end,
+            {description = "focus the previous screen", group = "screen"}
+        ),
+
         -- Layout manipulation
         awful.key({modkey, "Shift"}, "Right",
             function ()
@@ -47,13 +60,13 @@ local function set_global_keys()
             {description = "swap with previous client by index", group = "client"}
         ),
 
-        awful.key({modkey, "Control"}, "Right",
+        awful.key({modkey}, "l",
             function()
                 awful.tag.incmwfact(0.05)
             end,
             {description = "increase master width factor", group = "layout"}
         ),
-        awful.key({modkey, "Control"}, "Left",
+        awful.key({modkey}, "h",
             function()
                 awful.tag.incmwfact(-0.05)
             end,
@@ -166,6 +179,13 @@ function bindings.client_mouse_buttons()
     )
 end
 
+function bindings.client_mouse_buttons_jetbrains()
+    return gears.table.join(
+        awful.button({modkey}, 1, awful.mouse.client.move),
+        awful.button({modkey}, 3, awful.mouse.client.resize)
+    )
+end
+
 function bindings.client_keys()
     return gears.table.join(
         awful.key({modkey, "Shift"}, "q",
@@ -184,8 +204,53 @@ function bindings.client_keys()
         ),
 
         awful.key({modkey}, "f",
-            awful.client.floating.toggle,
+            function (c)
+                c.floating = not c.floating
+
+                -- toggle titlebar depending on the floating value
+                if c.floating then
+                    awful.titlebar.show(c)
+
+                    -- resize client if it is to large
+                    local client_max_width = c.screen.geometry.width - 80
+                    local client_max_height = c.screen.geometry.height - 100
+
+                    if c.width >= client_max_width  then
+                        c.width = client_max_width
+                    end
+
+                    if c.height >= client_max_height then
+                        c.height = client_max_height
+                    end
+                else
+                    awful.titlebar.hide(c)
+                end
+
+                -- center client on current screen
+                c.x =  c.screen.geometry.width / 2 + c.screen.geometry.x - c.width / 2
+                c.y = c.screen.geometry.height / 2 - c.screen.geometry.y - c.height / 2
+            end,
             {description = "toggle floating", group = "client"}
+        ),
+
+        awful.key({modkey, "Shift"}, "t",
+            function (c)
+                awful.titlebar.toggle(c)
+            end,
+            {description = "toggle title bar", group = "client"}
+        ),
+
+        awful.key({modkey}, "n",
+            function (c)
+                c:move_to_screen(c.screen.index + 1)
+            end,
+            {description = "move client to next screen (to the right)", group = "client"}
+        ),
+        awful.key({modkey}, "p",
+            function (c)
+                c:move_to_screen(c.screen.index - 1)
+            end,
+            {description = "move client to previous screen (to the left)", group = "client"}
         )
     )
 end
