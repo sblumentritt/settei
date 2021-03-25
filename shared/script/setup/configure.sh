@@ -291,7 +291,7 @@ package_installation_x11() {
     packages="${packages} xcb-util-renderutil xcb-util-wm xcb-util-xrm"
 
     # other
-    packages="${packages} awesome vicious xclip nitrogen xsecurelock"
+    packages="${packages} awesome vicious xclip nitrogen xsecurelock maim"
 
     # install packages
     # --------------------------------------

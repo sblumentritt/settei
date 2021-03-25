@@ -44,6 +44,10 @@ if [ $WAYLAND_DISPLAY ]; then
 
     # wf-recorder related
     alias _srecord='wf-recorder -g "$(slurp)" -f "$(date "+%Y%m%d_%s_screen_record.mp4")"'
+else
+    # maim related
+    alias _maim='maim -o -u -f png "$(date "+%Y%m%d_%s_maim.png")"'
+    alias _smaim='maim -o -u -f png -s -b 3 "$(date "+%Y%m%d_%s_maim.png")"'
 fi
 
 # nvim related

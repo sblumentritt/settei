@@ -114,6 +114,14 @@ local function set_global_keys()
             {description = "open a launcher for documents", group = "launcher"}
         ),
 
+        awful.key({modkey}, "F12",
+            function ()
+                local file_path = "/tmp/" .. os.date("%Y%m%d") .. "_" .. os.time() .. "_maim.png"
+                awful.spawn("maim -o -u -f png -s -b 3 " .. file_path)
+            end,
+            {description = "take a screenshot (select window / draw selection)", group = "launcher"}
+        ),
+
         awful.key({modkey, "Shift"}, "r",
             awesome.restart,
             {description = "reload awesome", group = "awesome"}
