@@ -68,13 +68,17 @@ function rules.setup()
             },
             properties = {
                 floating = true,
+                titlebars_enabled = true,
                 placement = awful.placement.centered + awful.placement.no_offscreen,
             },
         },
 
         {
-            rule_any = {
+            rule = {
                 floating = true,
+            },
+            except_any = {
+                type = {"dialog"},
             },
             properties = {
                 placement = awful.placement.centered + awful.placement.no_offscreen,
