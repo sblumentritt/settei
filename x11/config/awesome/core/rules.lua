@@ -24,6 +24,25 @@ function rules.setup()
             },
         },
 
+        -- Remove titlebars from normal clients
+        {
+            rule_any = {
+                type = {"normal"},
+            },
+            properties = {
+                titlebars_enabled = false,
+            },
+        },
+        -- Add titlebars to dialogs clients
+        {
+            rule_any = {
+                type = {"dialog"},
+            },
+            properties = {
+                titlebars_enabled = true,
+            },
+        },
+
         -- custom launcher
         {
             rule = { instance = "launcher" },
@@ -83,25 +102,6 @@ function rules.setup()
                 focus = true,
                 floating = true,
                 placement = awful.placement.restore,
-            },
-        },
-
-        -- Remove titlebars from normal clients
-        {
-            rule_any = {
-                type = {"normal"},
-            },
-            properties = {
-                titlebars_enabled = false,
-            },
-        },
-        -- Add titlebars to dialogs clients
-        {
-            rule_any = {
-                type = {"dialog"},
-            },
-            properties = {
-                titlebars_enabled = true,
             },
         },
     }
