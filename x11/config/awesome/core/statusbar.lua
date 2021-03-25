@@ -23,6 +23,12 @@ function statusbar.setup()
     vicious.register(clock_info, vicious.widgets.date, "%I:%M %p")
 
     local month_calendar = awful.widget.calendar_popup.month()
+    -- fix wrong screen placement for calendar_popup
+    -- https://github.com/awesomeWM/awesome/issues/2501
+    function month_calendar.call_calendar(self, offset, position, screen)
+        screen = awful.screen.focused()
+        awful.widget.calendar_popup.call_calendar(self, offset, position, screen)
+    end
     month_calendar:attach(clock_info, "tr", {on_hover = false})
 
     local memory_info = wibox.widget.textbox()
