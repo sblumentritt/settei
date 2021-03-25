@@ -113,6 +113,17 @@ iwyu_log() {
     fi
 }
 
+_srecord() {
+    local file_name=$(date "+%Y%m%d_%s_screen_record.mp4")
+    if [ $WAYLAND_DISPLAY ]; then
+        wf-recorder -g "$(slurp)" -f "${file_name}"
+    else
+        slop_info=$(slop -o -f "%x %y %w %h %g %i") || return
+        read -r X Y W H G ID < <(echo $slop_info)
+        ffmpeg -framerate 25 -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y "${file_name}"
+    fi
+}
+
 # helper to create btrfs snapshots
 csnap() {
     local snapshot_date=$(date "+%Y%m%d_%s")
