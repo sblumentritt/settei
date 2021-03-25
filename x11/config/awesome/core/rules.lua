@@ -53,6 +53,15 @@ function rules.setup()
             },
         },
 
+        {
+            rule_any = {
+                floating = true,
+            },
+            properties = {
+                placement = awful.placement.centered + awful.placement.no_offscreen,
+            },
+        },
+
         -- fix JetBrains dialog problems
         {
             rule = {
