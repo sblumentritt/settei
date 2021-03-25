@@ -8,7 +8,7 @@ require("awful.autofocus")
 if awesome.startup_errors then
     naughty.notify({
         preset = naughty.config.presets.critical,
-        title = "Oops, there were errors during startup!",
+        title = "Startup Error",
         text = awesome.startup_errors,
     })
 end
@@ -27,7 +27,7 @@ do
 
             naughty.notify({
                 preset = naughty.config.presets.critical,
-                title = "Oops, an error happened!",
+                title = "Runtime Error",
                 text = tostring(err),
             })
 
