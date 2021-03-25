@@ -115,8 +115,29 @@ function theme.setup()
     config.menu_fg_focus     = color.foreground
 
     -- variables set for theming the calendar:
+    config.calendar_spacing = dpi(10)
     config.calendar_week_numbers = true
     config.calendar_start_sunday = false
+
+    config.calendar_month_border_color = color.dark_gray
+
+    config.calendar_header_border_width = 0
+
+    config.calendar_weekday_padding = dpi(5)
+    config.calendar_weekday_border_width = 0
+    config.calendar_weekday_fg_color = color.gray
+
+    config.calendar_weeknumber_padding = config.calendar_weekday_padding
+    config.calendar_weeknumber_border_width = config.calendar_weekday_border_width
+    config.calendar_weeknumber_fg_color = config.calendar_weekday_fg_color
+
+    config.calendar_normal_padding = config.calendar_weekday_padding
+    config.calendar_normal_border_width = config.calendar_weekday_border_width
+
+    config.calendar_focus_padding = config.calendar_weekday_padding
+    config.calendar_focus_border_width = config.calendar_weekday_border_width
+    config.calendar_focus_fg_color = color.background
+    config.calendar_focus_bg_color = color.green
 
     -- define the image to load
     config.titlebar_close_button_normal = config.default_dir .. "/titlebar/close_normal.png"
