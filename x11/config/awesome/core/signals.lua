@@ -94,6 +94,13 @@ function signals.setup()
             c.border_color = beautiful.border_normal
         end
     )
+
+    -- prevent client minimization
+    client.connect_signal("property::minimized",
+        function (c)
+            c.minimized = false
+        end
+    )
 end
 
 return signals
