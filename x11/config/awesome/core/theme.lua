@@ -97,14 +97,6 @@ function theme.setup()
     config.layout_txt_magnifier  = "[M]"
     config.layout_txt_floating   = "[*]"
 
-    -- variables set for theming notifications
-    config.notification_font         = "Source Code Pro 9"
-    config.notification_max_width    = dpi(270)
-    config.notification_max_height   = dpi(500)
-    config.notification_margin       = dpi(20)
-    config.notification_border_width = dpi(6)
-    config.notification_border_color = color.dark_gray
-
     -- variables set for theming the menu:
     config.menu_height       = dpi(30)
     config.menu_width        = dpi(400)
@@ -174,14 +166,32 @@ function theme.setup()
     -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
     config.icon_theme = nil
 
-    -- needed because notification settings are not properly applied
+    -- variables set for theming notifications
+    config.notification_font         = "Source Code Pro 9"
+    config.notification_width        = dpi(270)
+    config.notification_max_height   = dpi(500)
+    config.notification_margin       = dpi(20)
+    config.notification_border_width = config.border_width
+    config.notification_border_color = color.dark_gray
+
     naughty.config.padding               = dpi(15)
     naughty.config.spacing               = dpi(7)
+    naughty.config.defaults.timeout      = 10
     naughty.config.defaults.border_width = config.notification_border_width
     naughty.config.defaults.margin       = config.notification_margin
+    naughty.config.defaults.title        = "System Notification"
     naughty.config.presets.low.fg        = color.green
     naughty.config.presets.critical.fg   = color.red
     naughty.config.presets.critical.bg   = color.background
+
+    naughty.config.notify_callback = function (args)
+        -- disable any kind of actions
+        args.actions = nil
+
+        -- disable any kind of icon
+        args.icon = nil
+        return args
+    end
 
     beautiful.init(config)
 end
