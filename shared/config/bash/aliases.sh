@@ -37,14 +37,13 @@ alias cds='cd $HOME/workspace/configs/settei'
 alias fmode="find . -type f -exec chmod 644 -- {} +"
 alias dmode="find . -type d -exec chmod 755 -- {} +"
 
+# screenshot related
 if [ $WAYLAND_DISPLAY ]; then
-    # grim related
-    alias _grim='grim -t png "$(date "+%Y%m%d_%s_grim.png")"'
-    alias _sgrim='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%s_grim.png")"'
+    alias _shot='grim -t png "$(date "+%Y%m%d_%s_screenshot.png")"'
+    alias _sshot='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%s_screenshot.png")"'
 else
-    # maim related
-    alias _maim='maim -o -u -f png "$(date "+%Y%m%d_%s_maim.png")"'
-    alias _smaim='maim -o -u -f png -s -b 3 "$(date "+%Y%m%d_%s_maim.png")"'
+    alias _shot='maim -o -u -f png "$(date "+%Y%m%d_%s_screenshot.png")"'
+    alias _sshot='maim -o -u -f png -s -b 3 "$(date "+%Y%m%d_%s_screenshot.png")"'
 fi
 
 # nvim related

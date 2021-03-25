@@ -116,7 +116,7 @@ local function set_global_keys()
 
         awful.key({modkey}, "F12",
             function ()
-                local file_path = "/tmp/" .. os.date("%Y%m%d") .. "_" .. os.time() .. "_maim.png"
+                local file_path = "/tmp/" .. os.date("%Y%m%d") .. "_" .. os.time() .. "_screenshot.png"
                 awful.spawn("maim -o -u -f png -s -b 3 " .. file_path)
             end,
             {description = "take a screenshot (select window / draw selection)", group = "launcher"}
