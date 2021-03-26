@@ -82,7 +82,7 @@ rpw() {
 
 # helper to easily build with CMake
 cbuild() {
-    cmake --build . --parallel "$@" -- -s
+    cmake --build . "$@" --parallel -- -s
 }
 
 # helper to for include-what-you-use
