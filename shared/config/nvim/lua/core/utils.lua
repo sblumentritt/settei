@@ -8,7 +8,7 @@ function utils.keymap(mode, key, value, opts)
         options = vim.tbl_extend("force", options, opts)
     end
 
-    vim.fn.nvim_set_keymap(mode, key, value, options)
+    vim.api.nvim_set_keymap(mode, key, value, options)
 end
 
 function utils.create_augroups(definitions)
