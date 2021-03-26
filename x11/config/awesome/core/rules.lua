@@ -82,6 +82,7 @@ function rules.setup()
                 type = {"dialog"},
             },
             properties = {
+                titlebars_enabled = true,
                 placement = awful.placement.centered + awful.placement.no_offscreen,
             },
         },
