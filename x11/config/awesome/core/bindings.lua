@@ -251,12 +251,14 @@ function bindings.client_keys()
         awful.key({modkey}, "n",
             function (c)
                 c:move_to_screen(c.screen.index + 1)
+                awful.screen.focus_relative(-1)
             end,
             {description = "move client to next screen (to the right)", group = "client"}
         ),
         awful.key({modkey}, "p",
             function (c)
                 c:move_to_screen(c.screen.index - 1)
+                awful.screen.focus_relative(1)
             end,
             {description = "move client to previous screen (to the left)", group = "client"}
         )
