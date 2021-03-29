@@ -174,6 +174,7 @@ file_setup_x11() {
     # link/copy configs
     # --------------------------------------
     ln -sf "${CONFIG_X11_PATH}/config/X11" $HOME/.config/
+    ln -sf "${CONFIG_X11_PATH}/config/picom" $HOME/.config/
     ln -sf "${CONFIG_X11_PATH}/config/awesome" $HOME/.config/
 
     sudo mkdir -p /etc/X11/xorg.conf.d
@@ -291,7 +292,7 @@ package_installation_x11() {
     packages="${packages} xcb-util-renderutil xcb-util-wm xcb-util-xrm"
 
     # other
-    packages="${packages} awesome vicious xclip nitrogen xsecurelock maim"
+    packages="${packages} awesome vicious xclip nitrogen xsecurelock maim picom"
 
     # install packages
     # --------------------------------------

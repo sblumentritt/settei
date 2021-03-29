@@ -32,6 +32,11 @@ udiskie &
 nitrogen --restore &
 
 # --------------------------------------
+# start compositor
+# --------------------------------------
+picom --log-file $HOME/.cache/picom.log &
+
+# --------------------------------------
 # start window manager
 # --------------------------------------
 exec awesome 2> $HOME/.cache/awesome.log
