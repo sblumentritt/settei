@@ -43,7 +43,7 @@ if [ $WAYLAND_DISPLAY ]; then
     alias _sshot='grim -t png -g "$(slurp)" "$(date "+%Y%m%d_%s_screenshot.png")"'
 else
     alias _shot='maim -o -u -f png "$(date "+%Y%m%d_%s_screenshot.png")"'
-    alias _sshot='maim -o -u -f png -s -b 3 "$(date "+%Y%m%d_%s_screenshot.png")"'
+    alias _sshot='maim -o -u -f png -s -c 0.4,0.4,0.4,0.5 -b 10000 "$(date "+%Y%m%d_%s_screenshot.png")"'
 fi
 
 # nvim related

@@ -118,7 +118,7 @@ _srecord() {
     if [ $WAYLAND_DISPLAY ]; then
         wf-recorder -g "$(slurp)" -f "${file_name}"
     else
-        slop_info=$(slop -o -f "%x %y %w %h %g %i") || return
+        slop_info=$(slop -o -f "%x %y %w %h %g %i" -c 0.4,0.4,0.4,0.5 -b 10000) || return
         read -r X Y W H G ID < <(echo $slop_info)
         ffmpeg -framerate 25 -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y "${file_name}"
     fi
