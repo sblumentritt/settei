@@ -18,6 +18,15 @@ function statusbar.setup()
     local separator = wibox.widget.textbox(' ')
     local spacer = wibox.widget.textbox(" :: ")
 
+    -- get CPU count
+    local cpu_count = wibox.widget.textbox()
+
+    awful.spawn.easy_async([[sh -c "cat /proc/cpuinfo | rg 'model name' | wc -l"]],
+        function(stdout, _, _, _)
+            cpu_count.text = "(" .. string.gsub(stdout, "\n", "") .. ")"
+        end
+    )
+
     -- vicious widgets
     local clock_info = wibox.widget.textbox()
     vicious.register(clock_info, vicious.widgets.date, "%I:%M %p")
@@ -135,6 +144,8 @@ function statusbar.setup()
                 spacer,
 
                 load_info,
+                separator,
+                cpu_count,
                 spacer,
 
                 memory_info,
