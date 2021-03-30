@@ -132,35 +132,23 @@ function theme.setup()
     config.calendar_focus_bg_color = color.green
 
     -- define the image to load
-    config.titlebar_close_button_normal = config.default_dir .. "/titlebar/close_normal.png"
-    config.titlebar_close_button_focus  = config.default_dir .. "/titlebar/close_focus.png"
+    local custom_icon_path = os.getenv("XDG_CONFIG_HOME") .. "/awesome/icons"
 
-    config.titlebar_minimize_button_normal = config.default_dir .. "/titlebar/minimize_normal.png"
-    config.titlebar_minimize_button_focus  = config.default_dir .. "/titlebar/minimize_focus.png"
+    config.titlebar_close_button_normal = custom_icon_path .. "/titlebar/close_normal.svg"
+    config.titlebar_close_button_focus = custom_icon_path .. "/titlebar/close_focus.svg"
+    config.titlebar_close_button_focus_hover = custom_icon_path .. "/titlebar/close_focus_hover.svg"
 
-    config.titlebar_ontop_button_normal_inactive = config.default_dir .. "/titlebar/ontop_normal_inactive.png"
-    config.titlebar_ontop_button_focus_inactive  = config.default_dir .. "/titlebar/ontop_focus_inactive.png"
+    config.titlebar_minimize_button_normal = custom_icon_path .. "/titlebar/minimize_normal.svg"
+    config.titlebar_minimize_button_focus = custom_icon_path .. "/titlebar/minimize_focus.svg"
+    config.titlebar_minimize_button_focus_hover = custom_icon_path .. "/titlebar/minimize_focus_hover.svg"
 
-    config.titlebar_ontop_button_normal_active = config.default_dir .. "/titlebar/ontop_normal_active.png"
-    config.titlebar_ontop_button_focus_active  = config.default_dir .. "/titlebar/ontop_focus_active.png"
+    config.titlebar_ontop_button_normal_inactive = custom_icon_path .. "/titlebar/ontop_normal_inactive.svg"
+    config.titlebar_ontop_button_focus_inactive = custom_icon_path .. "/titlebar/ontop_focus_inactive.svg"
+    config.titlebar_ontop_button_focus_inactive_hover = custom_icon_path .. "/titlebar/ontop_focus_inactive_hover.svg"
 
-    config.titlebar_sticky_button_normal_inactive = config.default_dir .. "/titlebar/sticky_normal_inactive.png"
-    config.titlebar_sticky_button_focus_inactive  = config.default_dir .. "/titlebar/sticky_focus_inactive.png"
-
-    config.titlebar_sticky_button_normal_active = config.default_dir .. "/titlebar/sticky_normal_active.png"
-    config.titlebar_sticky_button_focus_active  = config.default_dir .. "/titlebar/sticky_focus_active.png"
-
-    config.titlebar_floating_button_normal_inactive = config.default_dir .. "/titlebar/floating_normal_inactive.png"
-    config.titlebar_floating_button_focus_inactive  = config.default_dir .. "/titlebar/floating_focus_inactive.png"
-
-    config.titlebar_floating_button_normal_active = config.default_dir .. "/titlebar/floating_normal_active.png"
-    config.titlebar_floating_button_focus_active  = config.default_dir .. "/titlebar/floating_focus_active.png"
-
-    config.titlebar_maximized_button_normal_inactive = config.default_dir .. "/titlebar/maximized_normal_inactive.png"
-    config.titlebar_maximized_button_focus_inactive  = config.default_dir .. "/titlebar/maximized_focus_inactive.png"
-
-    config.titlebar_maximized_button_normal_active = config.default_dir .. "/titlebar/maximized_normal_active.png"
-    config.titlebar_maximized_button_focus_active  = config.default_dir .. "/titlebar/maximized_focus_active.png"
+    config.titlebar_ontop_button_normal_active = custom_icon_path .. "/titlebar/ontop_normal_active.svg"
+    config.titlebar_ontop_button_focus_active = custom_icon_path .. "/titlebar/ontop_focus_active.svg"
+    config.titlebar_ontop_button_focus_active_hover = custom_icon_path .. "/titlebar/ontop_focus_active_hover.svg"
 
     -- define the icon theme for application icons. if not set then the icons
     -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
