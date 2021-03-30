@@ -53,7 +53,7 @@ function statusbar.setup()
     vicious.register(
         music_info,
         vicious.widgets.mpd,
-        function(widget, args)
+        function(_, args)
             if args["{state}"] == "N/A" or args["{state}"] == "Stop" then
                 return "[?]"
             else
