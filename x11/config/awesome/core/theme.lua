@@ -63,10 +63,6 @@ function theme.setup()
     config.titlebar_bg_focus = config.border_focus
     config.titlebar_fg_focus = color.foreground
 
-    config.tasklist_shape_border_color = color.gray
-    config.tasklist_shape_border_color_focus = color.gray
-    config.tasklist_shape_border_color_minimized = color.dark_gray
-
     config.tasklist_fg_normal = color.gray
     config.tasklist_fg_focus = color.foreground
 
@@ -74,18 +70,6 @@ function theme.setup()
     config.tasklist_bg_focus = color.green
     config.tasklist_bg_urgent = color.red
     config.tasklist_bg_minimize = color.yellow
-
-    -- use text for tasklist status information
-    config.ocol                          = "<span color='" .. config.fg_minimize .. "'>"
-    config.tasklist_sticky               = config.ocol .. "(S) </span>"
-    config.tasklist_ontop                = config.ocol .. "(T) </span>"
-    config.tasklist_floating             = config.ocol .. "(F) </span>"
-    config.tasklist_above                = config.ocol .. "(A) </span>"
-    config.tasklist_below                = config.ocol .. "(B) </span>"
-    config.tasklist_maximized            = config.ocol .. "(M) </span>"
-    config.tasklist_maximized_horizontal = config.ocol .. "(Mh) </span>"
-    config.tasklist_maximized_vertical   = config.ocol .. "(Mv) </span>"
-    config.tasklist_disable_icon         = true
 
     -- define text view of layouts
     config.layout_txt_tile       = "[t]"
@@ -100,15 +84,6 @@ function theme.setup()
     config.layout_txt_fullscreen = "[F]"
     config.layout_txt_magnifier  = "[M]"
     config.layout_txt_floating   = "[*]"
-
-    -- variables set for theming the menu:
-    config.menu_height       = dpi(30)
-    config.menu_width        = dpi(400)
-    config.menu_font         = "Source Code Pro 10"
-    config.menu_border_width = dpi(3)
-    config.menu_border_color = color.dark_gray
-    config.menu_bg_focus     = color.dark_gray
-    config.menu_fg_focus     = color.foreground
 
     -- variables set for theming the calendar:
     config.calendar_spacing = dpi(10)
