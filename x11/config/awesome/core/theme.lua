@@ -69,7 +69,11 @@ function theme.setup()
 
     config.tasklist_fg_normal = color.gray
     config.tasklist_fg_focus = color.foreground
-    config.tasklist_bg_minimize = color.dark_gray
+
+    config.tasklist_bg_normal = color.gray
+    config.tasklist_bg_focus = color.green
+    config.tasklist_bg_urgent = color.red
+    config.tasklist_bg_minimize = color.yellow
 
     -- use text for tasklist status information
     config.ocol                          = "<span color='" .. config.fg_minimize .. "'>"

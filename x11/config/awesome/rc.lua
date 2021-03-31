@@ -51,3 +51,5 @@ require("core.statusbar").setup()
 require("core.bindings").setup()
 require("core.rules").setup()
 require("core.signals").setup()
+
+require("modules.taskbar").setup()
