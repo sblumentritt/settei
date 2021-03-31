@@ -96,13 +96,6 @@ function signals.setup()
         end
     )
 
-    -- prevent client minimization
-    client.connect_signal("property::minimized",
-        function (c)
-            c.minimized = false
-        end
-    )
-
     -- prevent client maximization
     client.connect_signal("property::maximized",
         function (c)
