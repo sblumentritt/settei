@@ -5,6 +5,7 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local dpi = require("beautiful.xresources").apply_dpi
 
 function signals.setup()
     -- Signal function to execute when a new client appears.
@@ -74,6 +75,10 @@ function signals.setup()
                         awful.titlebar.widget.closebutton(c),
                         layout = wibox.layout.flex.horizontal
                     },
+                    top = dpi(2),
+                    left = dpi(2),
+                    right = dpi(2),
+                    bottom = dpi(2),
                     widget = wibox.container.margin,
                 },
                 expand = "none",
