@@ -85,6 +85,17 @@ function theme.setup()
     config.layout_txt_magnifier  = "[M]"
     config.layout_txt_floating   = "[*]"
 
+    -- variables set for theming tooltips:
+    config.tooltip_opacity = 0.9
+    config.tooltip_bg = color.background
+    config.tooltip_fg = color.foreground
+
+    config.tooltip_border_width = dpi(1)
+    config.tooltip_border_color = color.gray
+
+    config.tooltip_align = "top"
+    config.tooltip_font = "Source Code Pro 9"
+
     -- variables set for theming the calendar:
     config.calendar_spacing = dpi(10)
     config.calendar_week_numbers = true
