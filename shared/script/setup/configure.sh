@@ -220,6 +220,9 @@ package_installation_shared() {
     # other development related programs which can be useful:
     # strace | valgrind | wireshark-qt | meld | ninja | meson
 
+    # a better alternative to virtualbox:
+    # https://virt-manager.org/
+
     # container
     # for more flexibility to build OCI container images use `buildah`
     # https://github.com/containers/buildah
