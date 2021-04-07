@@ -49,13 +49,13 @@ function mappings.setup()
     -- move lines up/down
     utils.keymap("n", "<C-j>", "<cmd>m .+<cr>==")
     utils.keymap("n", "<C-k>", "<cmd>m .-2<cr>==")
-    utils.keymap("v", "<C-j>", "<cmd>m '>+1<cr>gv=gv")
-    utils.keymap("v", "<C-k>", "<cmd>m '<-2<cr>gv=gv")
+    -- utils.keymap("v", "<C-j>", "<cmd>m '>+1<cr>gv=gv")
+    -- utils.keymap("v", "<C-k>", "<cmd>m '<-2<cr>gv=gv")
 
     utils.keymap("n", "<C-down>", "<cmd>m .+<cr>==")
     utils.keymap("n", "<C-up>", "<cmd>m .-2<cr>==")
-    utils.keymap("v", "<C-down>", "<cmd>m '>+1<cr>gv=gv")
-    utils.keymap("v", "<C-up>", "<cmd>m '<-2<cr>gv=gv")
+    -- utils.keymap("v", "<C-down>", "<cmd>m '>+1<cr>gv=gv")
+    -- utils.keymap("v", "<C-up>", "<cmd>m '<-2<cr>gv=gv")
 
     -- keep selection after indentation
     utils.keymap("v", "<", "<gv")
