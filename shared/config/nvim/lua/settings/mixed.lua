@@ -28,6 +28,10 @@ function mixed.setup()
         "viml=vim", "bash=sh"
     }
 
+    -- ft-sh-syntax configurations
+    -- --------------------------------------
+    vim.g.sh_fold_enabled = 5
+
     -- fzf configurations
     -- --------------------------------------
     vim.g.fzf_buffers_jump = 1
