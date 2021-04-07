@@ -207,7 +207,16 @@ package_installation_shared() {
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git cmake cppcheck doxygen graphviz qtcreator clazy gdb tk"
+    packages="${packages} git cmake cppcheck doxygen graphviz gdb tk"
+    # Qt/QML development
+    packages="${packages} qtcreator clazy qt5-base qt5-tools qt5-doc"
+    packages="${packages} qt5-multimedia qt5-imageformats qt5-svg qt5-xmlpatterns"
+    packages="${packages} qt5-remoteobjects qt5-serialbus qt5-serialport qt5-sensors"
+    packages="${packages} qt5-networkauth qt5-webchannel qt5-webglplugin qt5-websockets"
+    packages="${packages} qt5-declarative qt5-graphicaleffects qt5-quickcontrols qt5-quickcontrols2"
+    packages="${packages} qt5-charts qt5-script qt5-virtualkeyboard qt5-webview"
+    packages="${packages} qt5-wayland qt5-x11extras qt5-xcb-private-headers"
+
     # other development related programs which can be useful:
     # strace | valgrind | wireshark-qt | meld | ninja | meson
 
