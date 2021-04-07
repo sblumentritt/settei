@@ -28,8 +28,8 @@ function signals.setup()
     -- Add a titlebar if titlebars_enabled is set to true in the rules.
     client.connect_signal("request::titlebars",
         function (c)
-            -- buttons for the titlebar
-            local buttons = gears.table.join(
+            -- mouse button bindings for the titlebar
+            local mouse_buttons = gears.table.join(
                 awful.button({}, 1,
                     function ()
                         c:emit_signal("request::activate", "titlebar", {raise = true})
@@ -47,31 +47,36 @@ function signals.setup()
             awful.titlebar(c):setup({
                 -- Left
                 {
-                    buttons = buttons,
-                    layout  = wibox.layout.fixed.horizontal
+                    buttons = mouse_buttons,
+                    layout = wibox.layout.fixed.horizontal
                 },
 
                 -- Middle
                 {
                     -- Title
                     {
-                        align  = "center",
+                        align = "center",
+                        valign = "center",
                         widget = awful.titlebar.widget.titlewidget(c)
                     },
-                    buttons = buttons,
-                    layout  = wibox.layout.flex.horizontal
+                    buttons = mouse_buttons,
+                    layout = wibox.layout.flex.horizontal
                 },
 
                 -- Right
                 {
-                    -- awful.titlebar.widget.floatingbutton(c),
-                    -- awful.titlebar.widget.maximizedbutton(c),
-                    -- awful.titlebar.widget.stickybutton(c),
-                    awful.titlebar.widget.minimizebutton(c),
-                    awful.titlebar.widget.ontopbutton(c),
-                    awful.titlebar.widget.closebutton(c),
-                    layout = wibox.layout.fixed.horizontal()
+                    {
+                        -- awful.titlebar.widget.floatingbutton(c),
+                        -- awful.titlebar.widget.maximizedbutton(c),
+                        -- awful.titlebar.widget.stickybutton(c),
+                        awful.titlebar.widget.minimizebutton(c),
+                        awful.titlebar.widget.ontopbutton(c),
+                        awful.titlebar.widget.closebutton(c),
+                        layout = wibox.layout.flex.horizontal
+                    },
+                    widget = wibox.container.margin,
                 },
+                expand = "none",
                 layout = wibox.layout.align.horizontal
             })
         end
