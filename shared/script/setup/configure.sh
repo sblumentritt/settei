@@ -56,6 +56,9 @@ main() {
     fi
 }
 
+# --------------------------------------
+# 'shared' functions
+# --------------------------------------
 dir_setup_shared() {
     # define character at which a string should be split
     local IFS=','
@@ -152,35 +155,6 @@ file_setup_shared() {
     sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
-file_setup_wayland() {
-    # link/copy configs
-    # --------------------------------------
-    ln -sf "${CONFIG_WAYLAND_PATH}/config/mako" $HOME/.config/
-    ln -sf "${CONFIG_WAYLAND_PATH}/config/swaylock" $HOME/.config/
-
-    # create required directory to link configs
-    mkdir -p "$HOME/.config/sway"
-
-    ln -sf "${CONFIG_WAYLAND_PATH}/config/sway/config" $HOME/.config/sway/config
-    ln -sf "${CONFIG_WAYLAND_PATH}/config/sway/config.d/dual_output.conf" \
-        $HOME/.config/sway/output.conf
-
-    # link/copy scripts
-    # --------------------------------------
-    sudo ln -sf "${CONFIG_WAYLAND_PATH}/script/"*.sh /usr/local/bin/
-}
-
-file_setup_x11() {
-    # link/copy configs
-    # --------------------------------------
-    ln -sf "${CONFIG_X11_PATH}/config/X11" $HOME/.config/
-    ln -sf "${CONFIG_X11_PATH}/config/picom" $HOME/.config/
-    ln -sf "${CONFIG_X11_PATH}/config/awesome" $HOME/.config/
-
-    sudo mkdir -p /etc/X11/xorg.conf.d
-    sudo cp "${CONFIG_X11_PATH}/config/xorg.conf.d/"* /etc/X11/xorg.conf.d/
-}
-
 package_installation_shared() {
     # always install archlinux-keyring to get updated database (needed after fresh install)
     sudo pacman -S --noconfirm archlinux-keyring
@@ -274,19 +248,43 @@ package_installation_shared() {
     sudo ln -sf "${CONFIG_SHARED_PATH}/config/qtcreator/schemes/"* /usr/share/qtcreator/schemes/
 }
 
-package_installation_wayland() {
-    # define packages for installation
-    # --------------------------------------
-    local packages=""
+external_packages_shared() {
+    mkdir -p /tmp/external_packages
+    cd /tmp/external_packages || exit
 
-    # wayland compositor
-    packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
-    # wayland only
-    packages="${packages} mako grim slurp wl-clipboard wf-recorder"
+    export CC=/usr/bin/clang
+    export CXX=/usr/bin/clang++
 
-    # install packages
+    # define character at which a string should be split
+    local IFS=','
+
+    # iterate over custom packages
     # --------------------------------------
-    sudo pacman -S --needed --noconfirm ${packages}
+    local external_packages="neovim,sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
+
+    for package in $external_packages; do
+        cp -r "${CONFIG_SHARED_PATH}/pkgbuild/${package}" "./${package}"
+        cd "./${package}" || return
+        makepkg -sric --noconfirm || exit
+        cd ../ || return
+    done
+
+    cd $HOME || return
+    rm -rdf /tmp/external_packages
+}
+
+# --------------------------------------
+# 'x11' functions
+# --------------------------------------
+file_setup_x11() {
+    # link/copy configs
+    # --------------------------------------
+    ln -sf "${CONFIG_X11_PATH}/config/X11" $HOME/.config/
+    ln -sf "${CONFIG_X11_PATH}/config/picom" $HOME/.config/
+    ln -sf "${CONFIG_X11_PATH}/config/awesome" $HOME/.config/
+
+    sudo mkdir -p /etc/X11/xorg.conf.d
+    sudo cp "${CONFIG_X11_PATH}/config/xorg.conf.d/"* /etc/X11/xorg.conf.d/
 }
 
 package_installation_x11() {
@@ -311,29 +309,40 @@ package_installation_x11() {
     sudo pacman -S --needed --noconfirm ${packages}
 }
 
-external_packages_shared() {
-    mkdir -p /tmp/external_packages
-    cd /tmp/external_packages || exit
-
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
-
-    # define character at which a string should be split
-    local IFS=','
-
-    # iterate over custom packages
+# --------------------------------------
+# 'wayland' functions
+# --------------------------------------
+file_setup_wayland() {
+    # link/copy configs
     # --------------------------------------
-    local external_packages="neovim,sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/mako" $HOME/.config/
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/swaylock" $HOME/.config/
 
-    for package in $external_packages; do
-        cp -r "${CONFIG_SHARED_PATH}/pkgbuild/${package}" "./${package}"
-        cd "./${package}" || return
-        makepkg -sric --noconfirm || exit
-        cd ../ || return
-    done
+    # create required directory to link configs
+    mkdir -p "$HOME/.config/sway"
 
-    cd $HOME || return
-    rm -rdf /tmp/external_packages
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/sway/config" $HOME/.config/sway/config
+    ln -sf "${CONFIG_WAYLAND_PATH}/config/sway/config.d/dual_output.conf" \
+        $HOME/.config/sway/output.conf
+
+    # link/copy scripts
+    # --------------------------------------
+    sudo ln -sf "${CONFIG_WAYLAND_PATH}/script/"*.sh /usr/local/bin/
+}
+
+package_installation_wayland() {
+    # define packages for installation
+    # --------------------------------------
+    local packages=""
+
+    # wayland compositor
+    packages="${packages} wlroots sway swaybg swaylock xdg-desktop-portal-wlr xorg-xwayland"
+    # wayland only
+    packages="${packages} mako grim slurp wl-clipboard wf-recorder"
+
+    # install packages
+    # --------------------------------------
+    sudo pacman -S --needed --noconfirm ${packages}
 }
 
 main "$@"
