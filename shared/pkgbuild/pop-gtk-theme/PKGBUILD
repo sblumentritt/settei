@@ -5,30 +5,20 @@ pkgname=pop-gtk-theme
 pkgdesc="A GTK+ theme for Pop!_OS"
 url="https://github.com/pop-os/gtk-theme"
 
-pkgver=5.1.2
+pkgver=5.3.1
 pkgrel=1
 
 arch=('x86_64')
 license=('GPL2' 'CCPL')
 
 depends=('gtk3' 'gtk2' 'gtk-engine-murrine' 'gdk-pixbuf2')
-makedepends=('meson' 'ninja' 'glib2')
+makedepends=('meson' 'ninja' 'glib2' 'sassc')
 
-source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
-        "libsass.pkg.tar.zst::https://archive.archlinux.org/packages/l/libsass/libsass-3.6.1-1-x86_64.pkg.tar.zst")
-
-sha512sums=('2fe1929a2e4ed61b5f682990ebddfbb508ff058e7d6464024c8a856c7f5fbdd59c3f10eaa141d0cb8752c393b68bb4750bd0e1ba32bdb9f6497d70bcea56753b'
-            'b39027bd0ef1a40c984ee85b73b601cc508614759f396296eb13fb638663072c4d3458a8154378b3903b826bf628629fc1c84de3614d8d392f75fab54f8c5b1b')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
+sha512sums=('8ac9258bfb9c7985ac3955b0f1102ba792ec24c3628f832154ef5958bb9d8c10e4f5c45a7beb9236391d3202d0b3972406d65c5dcd8852736d6e7606e283a015')
 
 # configure options to decrease build time
 options=('!strip' '!zipman' 'libtool' 'staticlibs')
-
-prepare() {
-    # needed as libsass > 3.6.1 has a bug with hanging build and high memory/cpu consumption
-    # https://github.com/sass/libsass/issues/3033
-    sudo pacman -U --noconfirm "${srcdir}/libsass.pkg.tar.zst"
-    sudo pacman -S --noconfirm sassc
-}
 
 build() {
     cd "${srcdir}/gtk-theme-${pkgver}"
@@ -39,7 +29,4 @@ build() {
 package() {
     cd "${srcdir}/gtk-theme-${pkgver}"
     DESTDIR="${pkgdir}" ninja -C build install
-
-    # remove custom installed packaged
-    sudo pacman -Rs --noconfirm sassc libsass
 }
