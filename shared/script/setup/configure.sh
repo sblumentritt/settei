@@ -148,11 +148,6 @@ file_setup_shared() {
         printf "#!/bin/sh\n"; \
         printf "[ -f /root/.bashrc ] && . /root/.bashrc\n"; \
     } | sudo tee /root/.profile > /dev/null
-
-    # generate new grub config
-    # --------------------------------------
-    sudo cp "${CONFIG_SHARED_PATH}/config/grub/grub" /etc/default/
-    sudo grub-mkconfig -o /boot/grub/grub.cfg
 }
 
 package_installation_shared() {
