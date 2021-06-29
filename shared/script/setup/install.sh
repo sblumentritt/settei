@@ -11,6 +11,14 @@
 #       4. run: modprobe tg3
 #       5. connect ethernet cable
 
+BOOT_DEVICE_PATH=""
+BOOT_CRYPT_NAME="cryptboot"
+BOOT_KEY_NAME="boot_keyfile.bin"
+
+ROOT_DEVICE_PATH=""
+ROOT_CRYPT_NAME="cryptroot"
+ROOT_KEY_NAME="crypto_keyfile.bin"
+
 main() {
     # script should be run as root
     if [ "$(id -u)" -ne 0 ]; then
@@ -99,6 +107,9 @@ format_and_mount() {
     local mount_point=$2
     local custom_hostname=$3
 
+    local boot_crypt_path="/dev/mapper/${BOOT_CRYPT_NAME}"
+    local root_crypt_path="/dev/mapper/${ROOT_CRYPT_NAME}"
+
     lsblk "${drive_path}"
     # as it is unpredictable how the drives are named (sdxY,mmcblkxpY,nvme0nxpY)
     # -> https://wiki.archlinux.org/index.php/Device_file
@@ -108,17 +119,32 @@ format_and_mount() {
 
     printf "Please enter the 'boot' partition path: "
     read -r boot_partition
+    BOOT_DEVICE_PATH="${boot_partition}"
 
     printf "Please enter the 'root' partition path: "
     read -r root_partition
+    ROOT_DEVICE_PATH="${root_partition}"
+
+    # encrypt the boot partition with LUKS1 because GRUB cannot handle LUKS2 correctly
+    printf "\nSetup encryption for the 'boot' partition:\n"
+    cryptsetup luksFormat --type luks1 "${boot_partition}"
+    # use LUKS2 for the root partition
+    printf "\nSetup encryption for the 'root' partition:\n"
+    cryptsetup luksFormat "${root_partition}"
+
+    # open the encrypted partitions which will be mapped to /dev/mapper/<name>
+    printf "\nUnlocking 'boot' partition, passphrase has to be entered:\n"
+    cryptsetup open "${boot_partition}" "${BOOT_CRYPT_NAME}"
+    printf "\nUnlocking 'root' partition, passphrase has to be entered:\n"
+    cryptsetup open "${root_partition}" "${ROOT_CRYPT_NAME}"
 
     # format partitions
     mkfs.fat -F32 -n "efi" "${efi_partition}"
-    mkfs.btrfs -f -L "boot" "${boot_partition}"
-    mkfs.btrfs -f -L "arch" "${root_partition}"
+    mkfs.btrfs -f -L "boot" "${boot_crypt_path}"
+    mkfs.btrfs -f -L "arch" "${root_crypt_path}"
 
     # create subvolumes
-    mount -t btrfs ${root_partition} ${mount_point}
+    mount -t btrfs ${root_crypt_path} ${mount_point}
     (
         cd "${mount_point}" || exit
 
@@ -135,7 +161,7 @@ format_and_mount() {
     local common_mount_options="noatime,space_cache,commit=120"
 
     mount -o "${common_mount_options},compress=zstd,subvol=${custom_hostname}/root" \
-        ${root_partition} ${mount_point}
+        ${root_crypt_path} ${mount_point}
 
     # define variables to create folders needed for the mount
     local IFS=','
@@ -146,16 +172,29 @@ format_and_mount() {
     done
 
     mount ${efi_partition} ${mount_point}/efi
-    mount -o "${common_mount_options},compress=lzo" ${boot_partition} ${mount_point}/boot
+    mount -o "${common_mount_options},compress=lzo" ${boot_crypt_path} ${mount_point}/boot
 
     mount -o "${common_mount_options},compress=zstd,subvol=${custom_hostname}/home" \
-        ${root_partition} ${mount_point}/home
+        ${root_crypt_path} ${mount_point}/home
 
     mount -o "${common_mount_options},compress=zstd,subvol=${custom_hostname}/var" \
-        ${root_partition} ${mount_point}/var
+        ${root_crypt_path} ${mount_point}/var
 
     mount -o "${common_mount_options},compress=zstd,subvol=snapshots" \
-        ${root_partition} ${mount_point}/snap
+        ${root_crypt_path} ${mount_point}/snap
+
+    # create keyfile to unlock the root partition automatically after unlocking the boot partition
+    dd bs=512 count=4 if=/dev/random of="${mount_point}/${ROOT_KEY_NAME}" iflag=fullblock
+    chmod 600 "${mount_point}/${ROOT_KEY_NAME}"
+    printf "\nAdding new keyfile to the 'root' partition, passphrase has to be entered:\n"
+    cryptsetup luksAddKey "${root_partition}" "${mount_point}/${ROOT_KEY_NAME}"
+
+    # create keyfile to unlock the boot partition when in the root partition
+    # best working way for me currently :)
+    dd bs=512 count=4 if=/dev/random of="${mount_point}/${BOOT_KEY_NAME}" iflag=fullblock
+    chmod 600 "${mount_point}/${BOOT_KEY_NAME}"
+    printf "\nAdding new keyfile to the 'boot' partition, passphrase has to be entered:\n"
+    cryptsetup luksAddKey "${boot_partition}" "${mount_point}/${BOOT_KEY_NAME}"
 }
 
 install() {
@@ -203,12 +242,36 @@ configure() {
     local custom_group=$3
     local custom_user=$4
 
+    local boot_partition_uuid=$(blkid -s UUID -o value "${BOOT_DEVICE_PATH}")
+
     local color='\033[36m' # cyan
     local color_reset='\033[0m'
     local snapshot_name=$(date "+base_install_%Y%m%d_%s")
 
     # generate config suitable for /etc/fstab
     genfstab -p -U ${mount_point} >> ${mount_point}/etc/fstab
+
+    # generate the GRUB config file
+    cat > ${mount_point}/etc/default/grub << EOF
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+
+GRUB_DISTRIBUTOR=""
+GRUB_CMDLINE_LINUX="cryptdevice=${ROOT_DEVICE_PATH}:${ROOT_CRYPT_NAME}"
+GRUB_CMDLINE_LINUX_DEFAULT="cgroup_no_v1='all'"
+
+GRUB_ENABLE_CRYPTODISK=y
+
+GRUB_DISABLE_SUBMENU=y
+GRUB_DISABLE_RECOVERY=true
+
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_TERMINAL_INPUT=console
+GRUB_GFXMODE=auto
+GRUB_GFXPAYLOAD_LINUX=keep
+EOF
 
     # generate script to configure the system
     cat > ${mount_point}/rootfs_configure.sh << EOF
@@ -290,8 +353,8 @@ user() {
 misc() {
     printf "${color}-- enable options in /etc/pacman.conf${color_reset}\\n"
     sed -i -E 's/#Color/Color\\nILoveCandy/g' /etc/pacman.conf
-    sed -i -E 's/#TotalDownload/TotalDownload/g' /etc/pacman.conf
     sed -i -E 's/#VerbosePkgLists/VerbosePkgLists/g' /etc/pacman.conf
+    sed -i -E 's/#ParallelDownloads/ParallelDownloads/g' /etc/pacman.conf
 
     printf "${color}-- enable MAKEFLAGS in /etc/makepkg.conf${color_reset}\\n"
     sed -i -E 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j"/g' /etc/makepkg.conf
@@ -299,12 +362,18 @@ misc() {
     sed -i -E 's/DEBUG_CXXFLAGS="-g -fvar-tracking-assignments"/DEBUG_CXXFLAGS="-g"/g' /etc/makepkg.conf
 
     printf "${color}-- update /etc/mkinitcpio.conf and create ramdisk${color_reset}\\n"
+    sed -i -E 's/filesystems/encrypt filesystems/g' /etc/mkinitcpio.conf
     sed -i -E 's/fsck\\)/fsck btrfs\\)/g' /etc/mkinitcpio.conf
+    sed -i -E 's/FILES=\\(\\)/FILES=\\(\/crypto_keyfile.bin\\)/g' /etc/mkinitcpio.conf
     mkinitcpio -p linux
+    chmod 600 /boot/initramfs-linux*
 
     printf "${color}-- install grub and generate config${color_reset}\\n"
     grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=arch_grub --recheck
     grub-mkconfig -o /boot/grub/grub.cfg
+
+    printf "${color}-- update /etc/crypttab${color_reset}\\n"
+    printf "${BOOT_CRYPT_NAME} UUID=${boot_partition_uuid} /${BOOT_KEY_NAME} luks\\n" >> /etc/crypttab
 
     printf "${color}-- create btrfs snapshots from the current system${color_reset}\\n"
     mkdir -p /snap/root /snap/home
@@ -320,6 +389,10 @@ EOF
 
     rm ${mount_point}/rootfs_configure.sh
     umount -R ${mount_point}
+
+    # close the encrypted partition after everything is done
+    cryptsetup close cryptroot
+    cryptsetup close cryptboot
 }
 
 main "$@"
