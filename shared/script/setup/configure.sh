@@ -136,7 +136,7 @@ file_setup_shared() {
 
     # links for root
     # --------------------------------------
-    sudo mkdir -p /root/.shared/config/ranger
+    sudo mkdir -p /root/.config/ranger
     sudo mkdir -p /root/.local/share/bash
     sudo ln -sf "${CONFIG_SHARED_PATH}/config/nvim" /root/.config/
     sudo ln -sf "${CONFIG_SHARED_PATH}/config/bash" /root/.config/
