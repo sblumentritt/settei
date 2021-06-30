@@ -7,9 +7,14 @@ CONFIG_SHARED_PATH="${CONFIG_BASE_PATH}/shared"
 CONFIG_WAYLAND_PATH="${CONFIG_BASE_PATH}/wayland"
 CONFIG_X11_PATH="${CONFIG_BASE_PATH}/x11"
 
+CONFIG_SETUP_WORK="false"
+
 main() {
     printf "\nWhich display server should be configured? [wayland/x11/both] "
     read -r display_server_flag
+
+    printf "\nSetup a work environment? [y/n] "
+    read -r CONFIG_SETUP_WORK
 
     printf "\nSetup directories? [y/n] "
     read -r dir_flag
@@ -117,11 +122,16 @@ file_setup_shared() {
     ln -sf "${CONFIG_SHARED_PATH}/config/fontconfig" $HOME/.config/
     ln -sf "${CONFIG_SHARED_PATH}/config/user-dirs.dirs" $HOME/.config/
 
-    ln -sf "${CONFIG_SHARED_PATH}/config/git/"* $HOME/.config/git/
     ln -sf "${CONFIG_SHARED_PATH}/config/mpd/"* $HOME/.config/mpd/
     ln -sf "${CONFIG_SHARED_PATH}/config/ranger/"* $HOME/.config/ranger/
     ln -sf "${CONFIG_SHARED_PATH}/config/gtk-2.0/"* $HOME/.config/gtk-2.0/
     ln -sf "${CONFIG_SHARED_PATH}/config/containers/"* $HOME/.config/containers/
+
+    if [ "${CONFIG_SETUP_WORK}" = "y" ] || [ "${CONFIG_SETUP_WORK}" = "Y" ]; then
+        cp "${CONFIG_SHARED_PATH}/config/git/"* $HOME/.config/git/
+    else
+        ln -sf "${CONFIG_SHARED_PATH}/config/git/"* $HOME/.config/git/
+    fi
 
     # setup 'gnupg' related folder with the correct permissions and link configs
     mkdir -p $HOME/.gnupg
@@ -176,7 +186,8 @@ package_installation_shared() {
     # llvm
     packages="${packages} llvm clang lld lldb"
     # development
-    packages="${packages} git cmake cppcheck doxygen graphviz gdb tk"
+    packages="${packages} git cmake cppcheck doxygen graphviz tk"
+    packages="${packages} gdb ninja valgrind meld"
     # Qt/QML development
     packages="${packages} qtcreator clazy qt5-base qt5-tools qt5-doc"
     packages="${packages} qt5-multimedia qt5-imageformats qt5-svg qt5-xmlpatterns"
@@ -187,10 +198,14 @@ package_installation_shared() {
     packages="${packages} qt5-wayland qt5-x11extras qt5-xcb-private-headers"
 
     # other development related programs which can be useful:
-    # strace | valgrind | wireshark-qt | meld | ninja | meson
+    # strace | wireshark-qt | meson
 
     # a better alternative to virtualbox:
     # https://virt-manager.org/
+
+    if [ "${CONFIG_SETUP_WORK}" = "y" ] || [ "${CONFIG_SETUP_WORK}" = "Y" ]; then
+        packages="${packages} openvpn networkmanager-openvpn aws-cli"
+    fi
 
     # container
     # for more flexibility to build OCI container images use `buildah`
@@ -208,7 +223,7 @@ package_installation_shared() {
     packages="${packages} qt5ct kvantum-qt5 papirus-icon-theme"
     # fonts
     packages="${packages} ttf-lato adobe-source-code-pro-fonts adobe-source-han-sans-jp-fonts"
-    packages="${packages} noto-fonts noto-fonts-cjk noto-fonts-emoji"
+    packages="${packages} noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-roboto ttf-roboto-mono"
 
     # graphics
     packages="${packages} krita krita-plugin-gmic inkscape scour python-lxml python-numpy"
