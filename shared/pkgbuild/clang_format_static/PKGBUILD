@@ -1,0 +1,26 @@
+# --------------------------------------
+# improved PKGBUILD for clang-format-static
+# --------------------------------------
+pkgname=clang-format-static
+
+pkgdesc="Static-linked versions of clang tools for Linux, Mac OS X and Windows"
+url="https://github.com/muttleyxd/clang-tools-static-binaries"
+
+pkg_version="master-a37b22cd"
+pkgver=6.a37b22cd
+pkgrel=1
+
+arch=('x86_64')
+license=('Unlicense')
+
+provides=("${pkgname}")
+conflicts=("${pkgname}" "${pkgname}-bin")
+
+source=("clang-format-6::${url}/releases/download/${pkg_version}/clang-format-6_linux-amd64")
+sha512sums=('53ce70847716859fecd0aa57ab16d492209e2276c8ff891f31444629f1363426e64dc559cb1c1a47b71e88f877efdbf4dfb26f373478c77b9fc8c496d43f7755')
+
+package() {
+    mkdir -p "${pkgdir}/opt/clang-format-static"
+    cp -L "${srcdir}/clang-format-6" "${pkgdir}/opt/clang-format-static/"
+    chmod 755 "${pkgdir}/opt/clang-format-static/"*
+}

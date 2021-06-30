@@ -279,6 +279,14 @@ external_packages_shared() {
         cd ../ || return
     done
 
+    if [ "${CONFIG_SETUP_WORK}" = "y" ] || [ "${CONFIG_SETUP_WORK}" = "Y" ]; then
+        package="clang_format_static"
+        cp -r "${CONFIG_SHARED_PATH}/pkgbuild/${package}" "./${package}"
+        cd "./${package}" || return
+        makepkg -sric --noconfirm || exit
+        cd ../ || return
+    fi
+
     cd $HOME || return
     rm -rdf /tmp/external_packages
 }
