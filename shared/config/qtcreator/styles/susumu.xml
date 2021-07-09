@@ -27,9 +27,9 @@
   <style name="Function" foreground="#9fb193"/>
   <style name="Keyword" foreground="#93b3a3"/>
   <style name="PrimitiveType" foreground="#f7d0a2"/>
-  <style name="Punctuation"/>
   <style name="Operator" foreground="#e5dbd0"/>
   <style name="Overloaded Operator" foreground="#e5dbd0"/>
+  <style name="Punctuation"/>
   <style name="Preprocessor" foreground="#cc9999"/>
   <style name="Label" foreground="#da7c72"/>
   <style name="Comment" foreground="#998f85"/>
@@ -37,15 +37,15 @@
   <style name="Doxygen.Tag" foreground="#998f85" bold="true"/>
   <style name="VisualWhitespace" foreground="#e5dbd0"/>
   <style name="QmlLocalId" foreground="#93b3a3" italic="true"/>
-  <style name="QmlExternalId" foreground="#dfa883" italic="true"/>
+  <style name="QmlExternalId" foreground="#da7c72" italic="true"/>
   <style name="QmlTypeId" foreground="#9fb193"/>
-  <style name="QmlRootObjectProperty" foreground="#cc9999" italic="true"/>
-  <style name="QmlScopeObjectProperty" foreground="#b8b48a" italic="true"/>
-  <style name="QmlExternalObjectProperty" foreground="#dfa883" italic="true"/>
+  <style name="QmlRootObjectProperty" foreground="#dfa883" italic="true"/>
+  <style name="QmlScopeObjectProperty" foreground="#f7d0a2"/>
+  <style name="QmlExternalObjectProperty" foreground="#da7c72" italic="true"/>
   <style name="JsScopeVar" foreground="#e5dbd0" italic="true"/>
   <style name="JsImportVar" foreground="#93b3a3" italic="true"/>
-  <style name="JsGlobalVar" foreground="#e5dbd0" italic="true"/>
-  <style name="QmlStateName" foreground="#b8b48a"/>
+  <style name="JsGlobalVar" foreground="#cc9999"/>
+  <style name="QmlStateName" foreground="#f7d0a2"/>
   <style name="Binding" foreground="#e5dbd0" bold="true"/>
   <style name="DisabledCode" foreground="#998f85"/>
   <style name="AddedLine" foreground="#93b3a3" background="#454545"/>
@@ -69,7 +69,7 @@
   <style name="Error" underlineColor="#da7c72" underlineStyle="SingleUnderline"/>
   <style name="ErrorContext" underlineColor="#da7c72" underlineStyle="DotLine"/>
   <style name="Declaration" foreground="#9fb193"/>
-  <style name="OutputArgument" italic="true"/>
   <style name="FunctionDefinition" foreground="#9fb193"/>
+  <style name="OutputArgument" italic="true"/>
   <style name="LastStyleSentinel" foreground="#dfa883"/>
 </style-scheme>
