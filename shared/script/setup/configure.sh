@@ -204,7 +204,8 @@ package_installation_shared() {
     # https://virt-manager.org/
 
     if [ "${CONFIG_SETUP_WORK}" = "y" ] || [ "${CONFIG_SETUP_WORK}" = "Y" ]; then
-        packages="${packages} openvpn networkmanager-openvpn aws-cli"
+        packages="${packages} openvpn networkmanager-openvpn nm-connection-editor"
+        packages="${packages} aws-cli yasm patchelf"
     fi
 
     # container
@@ -216,7 +217,7 @@ package_installation_shared() {
     packages="${packages} mpd mpc"
 
     # cmdl
-    packages="${packages} alacritty tmux ranger tig htop"
+    packages="${packages} alacritty tmux neovim ranger tig htop"
     packages="${packages} fzf ripgrep fd exa jq codespell"
 
     # style
@@ -270,7 +271,7 @@ external_packages_shared() {
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="neovim,sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
+    local external_packages="sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
 
     for package in $external_packages; do
         cp -r "${CONFIG_SHARED_PATH}/pkgbuild/${package}" "./${package}"
