@@ -187,7 +187,7 @@ package_installation_shared() {
     packages="${packages} llvm clang lld lldb"
     # development
     packages="${packages} git cmake cppcheck doxygen graphviz tk"
-    packages="${packages} gdb ninja valgrind meld"
+    packages="${packages} gdb ninja valgrind meld lua-language-server"
     # Qt/QML development
     packages="${packages} qtcreator clazy qt5-base qt5-tools qt5-doc"
     packages="${packages} qt5-multimedia qt5-imageformats qt5-svg qt5-xmlpatterns"
@@ -271,7 +271,7 @@ external_packages_shared() {
 
     # iterate over custom packages
     # --------------------------------------
-    local external_packages="sumneko_lua_lsp,shellcheck,pop-gtk-theme,iwyu,md-toc"
+    local external_packages="shellcheck,pop-gtk-theme,iwyu,md-toc"
 
     for package in $external_packages; do
         cp -r "${CONFIG_SHARED_PATH}/pkgbuild/${package}" "./${package}"

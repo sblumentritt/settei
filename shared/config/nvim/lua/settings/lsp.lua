@@ -126,9 +126,7 @@ local function load_configurations()
     -- lua-language-server
     lspconfig.sumneko_lua.setup({
         cmd = {
-            "/usr/lib/lua-language-server/lua-language-server",
-            "-E",
-            "/usr/share/lua-language-server/main.lua"
+            "lua-language-server",
         },
         settings = {
             Lua = {
@@ -148,6 +146,9 @@ local function load_configurations()
                         [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                         [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
                     },
+                },
+                telemetry = {
+                    enable = false
                 },
             },
         },
